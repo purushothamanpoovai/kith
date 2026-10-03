@@ -15,11 +15,16 @@ import {
   countScopesByType,
   getScopeBySlug,
   listChildScopes,
+  listReligionTree,
   listScopeAncestors,
   listScopesByType,
+  listScopesByTypeWithCounts,
   searchScopes as searchScopesInRepo,
   type ScopeRecord,
+  type ScopeTreeNode,
 } from "@/repositories/scope-repository";
+
+export type { ScopeTreeNode };
 
 export type { ScopeRecord };
 
@@ -148,6 +153,20 @@ export function getScopeDescription(
   fallback = "en",
 ): string {
   return pickLocalized(scope.description, locale, fallback);
+}
+
+/**
+ * The real Religion → Tradition → Sacred Entity hierarchy (§ Explore
+ * redesign) — used to render Explore as a tree rather than card rails, which
+ * is the structure a researcher or journalist actually wants when scanning
+ * "what belongs under what" rather than browsing for something to read next.
+ */
+export async function getReligionTree(): Promise<ScopeTreeNode[]> {
+  return listReligionTree();
+}
+
+export async function getScopesWithCounts(type: ScopeType) {
+  return listScopesByTypeWithCounts(type);
 }
 
 export async function searchScopes(

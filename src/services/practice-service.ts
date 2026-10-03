@@ -35,8 +35,11 @@ export async function listTodayPractice(options: {
     const aLocal = region && a.scopeIds.includes(region) ? 1 : 0;
     const bLocal = region && b.scopeIds.includes(region) ? 1 : 0;
     if (bLocal !== aLocal) return bLocal - aLocal;
-    const aShort = (a.readingMinutes ?? 99) <= 8 || (a.durationSeconds ?? 9_999) <= 600 ? 1 : 0;
-    const bShort = (b.readingMinutes ?? 99) <= 8 || (b.durationSeconds ?? 9_999) <= 600 ? 1 : 0;
+    // Audio duration is no longer known to Kith — embedded audio plays
+    // through a third-party player, not a self-hosted file with a stored
+    // length — so "short" is judged by reading time alone now.
+    const aShort = (a.readingMinutes ?? 99) <= 8 ? 1 : 0;
+    const bShort = (b.readingMinutes ?? 99) <= 8 ? 1 : 0;
     return bShort - aShort;
   });
 

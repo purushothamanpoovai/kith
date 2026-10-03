@@ -63,9 +63,9 @@ model User {
   sessions             Session[]
   subscriptions        Subscription[]
   bookmarks            Bookmark[]
+  bookmarkFolders      BookmarkFolder[]
+  privateNotes         PrivateNote[]
   reactions            Reaction[]
-  comments             Comment[]
-  reposts              Repost[]
   feedSignals          FeedSignal[]
   organizedEvents      Event[]
   rsvps                Rsvp[]
@@ -285,7 +285,6 @@ model Scope {
   scopeModerators    ScopeModerator[]
   organizationScopes OrganizationScope[]
   reactions          Reaction[]
-  comments           Comment[]
 
   @@unique([type, slug])
   @@index([type])
@@ -445,6 +444,18 @@ enum FeedSignalKind {
   broader
 }
 
+/// Third-party platforms Kith embeds audio/video from. Deliberately closed —
+/// see src/lib/media/embed.ts, the single place a raw URL is ever resolved
+/// into one of these before anything is stored. No self-hosted media file is
+/// ever accepted or served (§ low-liability curated reader, Phase 5): the
+/// platform never stores, transcodes, or becomes responsible for media
+/// bytes, only a validated link to someone else's player.
+enum EmbedProvider {
+  youtube
+  spotify
+  soundcloud
+}
+
 model Content {
   id                  String            @id
   type                ContentType
@@ -468,8 +479,8 @@ model Content {
   originalLanguage    String
   coverImage          String?
   readingMinutes      Int?
-  mediaUrl            String?
-  durationSeconds     Int?
+  embedUrl            String?
+  embedProvider       EmbedProvider?
   transcript          Json?
   originalText        Json?
   transliteration     Json?
@@ -487,9 +498,8 @@ model Content {
   scopes              ContentScope[]
   tags                ContentTag[]
   reactions           Reaction[]
-  comments            Comment[]
   bookmarks           Bookmark[]
-  reposts             Repost[]
+  privateNotes        PrivateNote[]
   heritageLineage     HeritageLineage?
 
   @@index([type, status])
@@ -561,11 +571,45 @@ model Subscription {
 model Bookmark {
   userId    String
   contentId String
+  folderId  String?
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   Content         @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  folder    BookmarkFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  createdAt DateTime        @default(now())
+
+  @@id([userId, contentId])
+  @@index([folderId])
+}
+
+/// A user's own private grouping of bookmarks (e.g. "To read", "For Diwali").
+/// Single-user only — never shared, never visible to anyone else.
+model BookmarkFolder {
+  id        String     @id @default(cuid())
+  userId    String
+  name      String
+  sortOrder Int        @default(0)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookmarks Bookmark[]
+  createdAt DateTime   @default(now())
+
+  @@index([userId])
+}
+
+/// A private reflection a reader writes against a piece of content. Visible
+/// only to its author — this is the replacement for public Comment in the
+/// low-liability curated-reader model (never rendered to any other user).
+model PrivateNote {
+  id        String   @id @default(cuid())
+  userId    String
+  contentId String
+  body      String   @db.Text
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@id([userId, contentId])
+  @@unique([userId, contentId])
+  @@index([userId])
 }
 
 model Reaction {
@@ -588,34 +632,6 @@ model Reaction {
   @@unique([userId, scopeId])
   @@index([contentId])
   @@index([scopeId])
-}
-
-model Comment {
-  id         String              @id @default(cuid())
-  targetType CommunityTargetType @default(content)
-  contentId  String?
-  scopeId    String?
-  userId     String
-  body       String              @db.Text
-  parentId   String?
-  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  content    Content?            @relation(fields: [contentId], references: [id], onDelete: Cascade)
-  scope      Scope?              @relation(fields: [scopeId], references: [id], onDelete: Cascade)
-  createdAt  DateTime            @default(now())
-
-  @@index([contentId])
-  @@index([scopeId])
-}
-
-model Repost {
-  id        String   @id @default(cuid())
-  userId    String
-  contentId String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-
-  @@unique([userId, contentId])
 }
 
 model FeedSignal {

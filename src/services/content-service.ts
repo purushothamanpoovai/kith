@@ -7,6 +7,7 @@ export {
   listContentByType,
   listFeaturedContent,
   listUserBookmarks,
+  listUserBookmarksWithFolders,
   searchContent,
 } from "@/repositories/content-repository";
 export type { AuthorContentFilters } from "@/repositories/content-repository";

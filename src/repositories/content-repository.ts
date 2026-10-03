@@ -18,7 +18,7 @@ type ContentRow = Prisma.ContentGetPayload<{
     publishedBy: { select: { name: true } };
     ownerOrganization: { select: { slug: true; name: true } };
     scopes: { select: { scopeId: true } };
-    _count: { select: { reactions: true; comments: true } };
+    _count: { select: { reactions: true } };
   };
 }>;
 
@@ -39,8 +39,8 @@ function mapContent(row: ContentRow): ContentRecord {
     originalLanguage: row.originalLanguage,
     coverImage: row.coverImage,
     readingMinutes: row.readingMinutes,
-    mediaUrl: row.mediaUrl,
-    durationSeconds: row.durationSeconds,
+    embedUrl: row.embedUrl,
+    embedProvider: row.embedProvider,
     transcript: row.transcript ? asLocalized(row.transcript) : null,
     originalText: row.originalText ? asLocalized(row.originalText) : null,
     transliteration: row.transliteration ? asLocalized(row.transliteration) : null,
@@ -60,7 +60,6 @@ function mapContent(row: ContentRow): ContentRecord {
     updatedAt: row.updatedAt,
     scopeIds: row.scopes.map((s) => s.scopeId),
     reactionCount: row._count.reactions,
-    commentCount: row._count.comments,
   };
 }
 
@@ -69,7 +68,7 @@ const contentInclude = {
   publishedBy: { select: { name: true } },
   ownerOrganization: { select: { slug: true, name: true } },
   scopes: { select: { scopeId: true } },
-  _count: { select: { reactions: true, comments: true } },
+  _count: { select: { reactions: true } },
 } as const;
 
 export async function getContentBySlug(slug: string): Promise<ContentRecord | null> {
@@ -260,4 +259,15 @@ export async function listUserBookmarks(userId: string): Promise<ContentRecord[]
     orderBy: { createdAt: "desc" },
   });
   return rows.map((row) => mapContent(row.content));
+}
+
+export async function listUserBookmarksWithFolders(
+  userId: string,
+): Promise<Array<{ folderId: string | null; content: ContentRecord }>> {
+  const rows = await prisma.bookmark.findMany({
+    where: { userId },
+    include: { content: { include: contentInclude } },
+    orderBy: { createdAt: "desc" },
+  });
+  return rows.map((row) => ({ folderId: row.folderId, content: mapContent(row.content) }));
 }

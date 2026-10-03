@@ -4,6 +4,7 @@ import { ReportForm } from "@/components/moderation/report-form";
 import { ContentCover } from "@/components/graphics/content-cover";
 import { SignInWall } from "@/components/content/sign-in-wall";
 import { MediaSignInLock } from "@/components/content/media-sign-in-lock";
+import { MediaEmbed } from "@/components/media/media-embed";
 import { Badge } from "@/components/ui/badge";
 import {
   heritageSummary,
@@ -84,16 +85,13 @@ export async function HeritageView({
         />
       ) : null}
 
-      {item.mediaUrl ? (
+      {item.embedUrl && item.embedProvider ? (
         signedIn ? (
-          <div className="ds-heritage-player">
-            {/* A recording is the primary artefact here, so it keeps the native
-                transport rather than the shared player: an oral history is
-                listened to in place, not queued. */}
-            <audio controls preload="metadata" src={item.mediaUrl}>
-              <track kind="captions" />
-            </audio>
-          </div>
+          <MediaEmbed
+            embedUrl={item.embedUrl}
+            embedProvider={item.embedProvider}
+            title={title}
+          />
         ) : (
           <MediaSignInLock signInHref={signInHref} registerHref={registerHref} />
         )

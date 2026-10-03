@@ -21,18 +21,17 @@ import {
  *
  * Attaches to either a piece of content (`contentId`) or a scope's own page
  * (`scopeId`) — a religion, tradition, topic, region or language can be
- * appreciated and discussed the same way an article can. Saving stays
- * content-only, since there's no bookmark concept for a scope; the affordance
- * is simply omitted rather than shown wired to nothing. Reflect scrolls to
- * the discussion instead of inventing a second store, and Share copies the
- * link.
+ * appreciated the same way an article can. Saving stays content-only, since
+ * there's no bookmark concept for a scope; the affordance is simply omitted
+ * rather than shown wired to nothing. Reflect scrolls to a content page's
+ * private-notes editor (its own `anchorId`) rather than any shared store,
+ * so it's only ever passed where that editor exists.
  */
 export function ReactionBar({
   contentId,
   scopeId,
   anchorId,
   reactionCount = 0,
-  commentCount = 0,
   hasReacted = false,
   hasBookmarked = false,
   signedIn,
@@ -42,10 +41,10 @@ export function ReactionBar({
    *  bar is attached to when it isn't a piece of content. */
   contentId?: string;
   scopeId?: string;
-  /** Element id of the discussion, for the Reflect affordance. */
+  /** Element id of a content page's private-notes editor, for the Reflect
+   *  affordance. Omit on scope pages, which have no such section. */
   anchorId?: string;
   reactionCount?: number;
-  commentCount?: number;
   hasReacted?: boolean;
   hasBookmarked?: boolean;
   signedIn: boolean;
@@ -127,9 +126,6 @@ export function ReactionBar({
         <a className="ds-reaction" href={`#${anchorId}`}>
           <HandHeart size={13} strokeWidth={1.75} aria-hidden />
           <span className="ds-reaction__label">{t("reflect")}</span>
-          {commentCount > 0 ? (
-            <span className="ds-reaction__count">{commentCount}</span>
-          ) : null}
         </a>
       ) : null}
 

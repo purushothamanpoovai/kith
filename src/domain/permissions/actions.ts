@@ -5,11 +5,10 @@ export const PermissionAction = {
 
   // Community participant
   CONTENT_REACT: "content:react",
-  CONTENT_COMMENT: "content:comment",
   CONTENT_BOOKMARK: "content:bookmark",
-  CONTENT_REPOST: "content:repost",
+  PRIVATE_NOTE_WRITE: "content:private_note",
+  BOOKMARK_FOLDER_MANAGE: "bookmark_folder:manage",
   SCOPE_REACT: "scope:react",
-  SCOPE_COMMENT: "scope:comment",
   SCOPE_SUBSCRIBE: "scope:subscribe",
   ORGANIZATION_SUBSCRIBE: "organization:subscribe",
   EVENT_RSVP: "event:rsvp",

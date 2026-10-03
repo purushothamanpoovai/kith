@@ -20,17 +20,28 @@
       "authorId": "user_contrib_kavitha",
       "originalLanguage": "ta",
       "contentLabel": "archival",
-      "mediaUrl": "/media/audio/grandmothers-pongal-pot.mp3",
-      "durationSeconds": 287,
       "coverImage": "/media/covers/grandmothers-pongal-pot.jpg",
-      "scopeIds": ["hinduism", "topic-festivals", "topic-family", "topic-oral-history", "topic-heritage", "region-tamil-nadu", "lang-ta", "lang-en"],
-      "visibility": "public"
+      "scopeIds": [
+        "hinduism",
+        "topic-festivals",
+        "topic-family",
+        "topic-oral-history",
+        "topic-heritage",
+        "region-tamil-nadu",
+        "lang-ta",
+        "lang-en"
+      ],
+      "visibility": "public",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw",
+      "embedProvider": "youtube"
     },
     "lineage": {
       "id": "lineage_pongal_pot_grandmother",
       "recordedByName": "Kavitha Murugan",
       "originallyToldBy": "Rukmini Ammal (grandmother, b. 1932)",
-      "location": { "en": "Madurai, Tamil Nadu" },
+      "location": {
+        "en": "Madurai, Tamil Nadu"
+      },
       "approximatePeriod": "1960s–1980s",
       "sourceNote": "Recorded at family home during Pongal 2024. Grandmother's voice preserved from earlier cassette transfer.",
       "rights": "permission_granted",
@@ -59,14 +70,27 @@
       "originalLanguage": "en",
       "contentLabel": "archival",
       "coverImage": "/media/covers/rosary-across-three-generations.jpg",
-      "scopeIds": ["christianity", "catholicism", "mary", "topic-prayer", "topic-family", "topic-oral-history", "topic-heritage", "region-kerala", "lang-en", "lang-ml"],
+      "scopeIds": [
+        "christianity",
+        "catholicism",
+        "mary",
+        "topic-prayer",
+        "topic-family",
+        "topic-oral-history",
+        "topic-heritage",
+        "region-kerala",
+        "lang-en",
+        "lang-ml"
+      ],
       "visibility": "community"
     },
     "lineage": {
       "id": "lineage_rosary_across_generations",
       "recordedByName": "Maria Thomas",
       "originallyToldBy": "Aleyamma Thomas (mother, 1948–2019)",
-      "location": { "en": "Kochi, Kerala" },
+      "location": {
+        "en": "Kochi, Kerala"
+      },
       "approximatePeriod": "1970s–present",
       "sourceNote": "Written narrative based on oral interviews with mother and aunt, February 2025.",
       "rights": "contributor_created",
@@ -94,17 +118,30 @@
       "authorId": "user_contrib_fatima",
       "originalLanguage": "en",
       "contentLabel": "archival",
-      "mediaUrl": "/media/audio/sufi-dhikr-at-grandmothers-house.mp3",
-      "durationSeconds": 412,
       "coverImage": "/media/covers/sufi-dhikr-at-grandmothers-house.jpg",
-      "scopeIds": ["islam", "sufism", "rabia", "topic-devotion", "topic-music", "topic-family", "topic-oral-history", "region-tamil-nadu", "lang-en", "lang-ta"],
-      "visibility": "public"
+      "scopeIds": [
+        "islam",
+        "sufism",
+        "rabia",
+        "topic-devotion",
+        "topic-music",
+        "topic-family",
+        "topic-oral-history",
+        "region-tamil-nadu",
+        "lang-en",
+        "lang-ta"
+      ],
+      "visibility": "public",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw",
+      "embedProvider": "youtube"
     },
     "lineage": {
       "id": "lineage_sufi_dhikr_evening",
       "recordedByName": "Fatima Khan",
       "originallyToldBy": "Zohra Bi (grandmother) and aunts of Triplicane",
-      "location": { "en": "Triplicane, Chennai" },
+      "location": {
+        "en": "Triplicane, Chennai"
+      },
       "approximatePeriod": "1980s–1990s",
       "sourceNote": "Field recording from family gathering, with consent of all participants.",
       "rights": "permission_granted",
@@ -133,14 +170,26 @@
       "originalLanguage": "en",
       "contentLabel": "archival",
       "coverImage": "/media/covers/temple-bell-before-school.jpg",
-      "scopeIds": ["buddhism", "theravada", "buddha", "topic-meditation", "topic-compassion", "topic-oral-history", "region-sri-lanka", "lang-en", "lang-ta"],
+      "scopeIds": [
+        "buddhism",
+        "theravada",
+        "buddha",
+        "topic-meditation",
+        "topic-compassion",
+        "topic-oral-history",
+        "region-sri-lanka",
+        "lang-en",
+        "lang-ta"
+      ],
       "visibility": "public"
     },
     "lineage": {
       "id": "lineage_temple_bell_childhood",
       "recordedByName": "Ananda Perera",
       "originallyToldBy": "Venerable Sumedha Thero and childhood self-narration",
-      "location": { "en": "Colombo, Sri Lanka" },
+      "location": {
+        "en": "Colombo, Sri Lanka"
+      },
       "approximatePeriod": "early 1990s",
       "sourceNote": "Personal memoir submitted as oral history; corroborated by temple register of visiting monks.",
       "rights": "contributor_created",
@@ -170,17 +219,29 @@
       "authorId": "user_contrib_harpreet",
       "originalLanguage": "pa",
       "contentLabel": "archival",
-      "mediaUrl": "/media/audio/grandfathers-langar-lesson.mp3",
-      "durationSeconds": 356,
       "coverImage": "/media/covers/grandfathers-langar-lesson.jpg",
-      "scopeIds": ["sikhism", "guru-nanak", "topic-family", "topic-food", "topic-heritage", "topic-oral-history", "region-punjab", "lang-pa", "lang-en"],
-      "visibility": "community"
+      "scopeIds": [
+        "sikhism",
+        "guru-nanak",
+        "topic-family",
+        "topic-food",
+        "topic-heritage",
+        "topic-oral-history",
+        "region-punjab",
+        "lang-pa",
+        "lang-en"
+      ],
+      "visibility": "community",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw",
+      "embedProvider": "youtube"
     },
     "lineage": {
       "id": "lineage_langar_grandfather",
       "recordedByName": "Harpreet Singh",
       "originallyToldBy": "Gurbachan Singh (grandfather, 1925–2008)",
-      "location": { "en": "Amritsar, Punjab" },
+      "location": {
+        "en": "Amritsar, Punjab"
+      },
       "approximatePeriod": "1970s–2000s",
       "sourceNote": "Audio recorded at Golden Temple langar hall annexe, 2023 family reunion.",
       "rights": "permission_granted",
@@ -209,14 +270,25 @@
       "originalLanguage": "ml",
       "contentLabel": "archival",
       "coverImage": "/media/covers/mothers-onam-pookalam.jpg",
-      "scopeIds": ["hinduism", "topic-festivals", "topic-family", "topic-heritage", "topic-oral-history", "region-kerala", "lang-ml", "lang-en"],
+      "scopeIds": [
+        "hinduism",
+        "topic-festivals",
+        "topic-family",
+        "topic-heritage",
+        "topic-oral-history",
+        "region-kerala",
+        "lang-ml",
+        "lang-en"
+      ],
       "visibility": "public"
     },
     "lineage": {
       "id": "lineage_onam_pookalam_mother",
       "recordedByName": "Leela Nair",
       "originallyToldBy": "Lakshmi Nair (mother, b. 1955)",
-      "location": { "en": "Thrissur, Kerala" },
+      "location": {
+        "en": "Thrissur, Kerala"
+      },
       "approximatePeriod": "1980s–1990s",
       "sourceNote": "Transcribed from Malayalam voice memo, Onam 2025.",
       "rights": "contributor_created",
@@ -244,17 +316,30 @@
       "authorId": "user_member",
       "originalLanguage": "ta",
       "contentLabel": "archival",
-      "mediaUrl": "/media/audio/interfaith-dinner-table-rules.mp3",
-      "durationSeconds": 245,
       "coverImage": "/media/covers/interfaith-dinner-table-rules.jpg",
-      "scopeIds": ["hinduism", "christianity", "topic-family", "topic-festivals", "topic-heritage", "topic-oral-history", "region-tamil-nadu", "region-kerala", "lang-ta", "lang-en"],
-      "visibility": "family"
+      "scopeIds": [
+        "hinduism",
+        "christianity",
+        "topic-family",
+        "topic-festivals",
+        "topic-heritage",
+        "topic-oral-history",
+        "region-tamil-nadu",
+        "region-kerala",
+        "lang-ta",
+        "lang-en"
+      ],
+      "visibility": "family",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw",
+      "embedProvider": "youtube"
     },
     "lineage": {
       "id": "lineage_interfaith_dinner_table",
       "recordedByName": "Amara Devi",
       "originallyToldBy": "Amara Devi and spouse Thomas Varghese",
-      "location": { "en": "Chennai, Tamil Nadu" },
+      "location": {
+        "en": "Chennai, Tamil Nadu"
+      },
       "approximatePeriod": "2010s–present",
       "sourceNote": "Self-recorded for family archive; shared with community permission.",
       "rights": "contributor_created",
@@ -283,14 +368,26 @@
       "originalLanguage": "en",
       "contentLabel": "archival",
       "coverImage": "/media/covers/village-memorial-candle-tradition.jpg",
-      "scopeIds": ["christianity", "hinduism", "islam", "topic-grief", "topic-heritage", "topic-oral-history", "topic-family", "region-kerala", "lang-en"],
+      "scopeIds": [
+        "christianity",
+        "hinduism",
+        "islam",
+        "topic-grief",
+        "topic-heritage",
+        "topic-oral-history",
+        "topic-family",
+        "region-kerala",
+        "lang-en"
+      ],
       "visibility": "public"
     },
     "lineage": {
       "id": "lineage_village_memorial_candles",
       "recordedByName": "Platform Admin",
       "originallyToldBy": "Elder parishioners of Kumarakom (collective memory)",
-      "location": { "en": "Kumarakom, Kerala" },
+      "location": {
+        "en": "Kumarakom, Kerala"
+      },
       "approximatePeriod": "mid-20th century",
       "sourceNote": "Compiled from three oral interviews conducted during memorial service planning, 2025.",
       "rights": "traditional_knowledge",

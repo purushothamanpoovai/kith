@@ -82,14 +82,6 @@
   font-size: var(--ds-text-sm);
 }
 
-.ds-heritage-player {
-  margin-block: var(--ds-space-5);
-}
-
-.ds-heritage-player audio {
-  width: 100%;
-}
-
 .ds-report-form {
   margin-block-start: var(--ds-space-5);
   padding: var(--ds-space-4);

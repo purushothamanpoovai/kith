@@ -21,13 +21,6 @@ import { contentHref, contentSummary, contentTitle } from "@/services/feed-servi
 
 type Density = "default" | "lead" | "row" | "minimal";
 
-function formatDuration(seconds: number): string {
-  const total = Math.round(seconds);
-  const m = Math.floor(total / 60);
-  const s = total % 60;
-  return `${m}:${String(s).padStart(2, "0")}`;
-}
-
 /** Prose: articles and oral histories. */
 export async function ArticleCard({
   item,
@@ -130,11 +123,6 @@ export async function MediaCard({
             <Headphones size={14} strokeWidth={2} />
           )}
         </span>
-        {item.durationSeconds ? (
-          <span className="ds-media-card__duration">
-            {formatDuration(item.durationSeconds)}
-          </span>
-        ) : null}
       </div>
       <div className="ds-media-card__body">
         <span className="ds-kicker ds-caps">{typeLabel}</span>

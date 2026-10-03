@@ -9,7 +9,6 @@ import { ScopeKindChips, ScopeKindGrid } from "@/components/discovery/scope-kind
 import { ScopeSidebar } from "@/components/discovery/scope-sidebar";
 import { ScopeSubscribeButton } from "@/components/discovery/scope-subscribe-button";
 import { SetScopeLensButton } from "@/components/discovery/set-scope-lens-button";
-import { CommentThread } from "@/components/community/comment-thread";
 import { ReactionBar } from "@/components/community/reaction-bar";
 import { DecorativePattern, Ornament } from "@/components/graphics/decorative-pattern";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +19,6 @@ import { getActiveScopeId } from "@/lib/scope-context";
 import {
   countScopeReactions,
   getUserScopeReactionIds,
-  listScopeComments,
 } from "@/repositories/community-repository";
 import { getCurrentUser } from "@/services/auth-service";
 import {
@@ -56,13 +54,16 @@ function parseKindFilter(value: string | undefined): ScopeKindFilter {
  * emitted a row of non-interactive "module tabs" that looked like controls
  * but did nothing; those are gone.
  *
- * The scope itself can be reacted to and discussed, the same way a piece of
- * content can (`ReactionBar`/`CommentThread` with `scopeId` instead of
- * `contentId`) — appreciating "Arabic" or leaving a note on it is a genuine
- * response to the scope, not something that needs a piece of content to
- * attach to. The side rail is scope-specific too (`ScopeSidebar`): who
- * follows this scope, not a generic editorial rail borrowed from the home
- * feed that had nothing to do with the page it sat on.
+ * The scope itself can be reacted to, the same way a piece of content can
+ * (`ReactionBar` with `scopeId` instead of `contentId`) — appreciating
+ * "Arabic" is a genuine response to the scope, not something that needs a
+ * piece of content to attach to. Public discussion on a scope page is
+ * retired platform-wide along with content-page comments (§ low-liability
+ * curated reader) — private notes attach only to a specific piece of
+ * content, not to a scope as a whole, so there is no replacement slot here.
+ * The side rail is scope-specific too (`ScopeSidebar`): who follows this
+ * scope, not a generic editorial rail borrowed from the home feed that had
+ * nothing to do with the page it sat on.
  */
 export async function ScopeDetailPage({
   type,
@@ -97,7 +98,6 @@ export async function ScopeDetailPage({
     activeScopeId,
     subscribed,
     contentByModule,
-    comments,
     reacted,
     reactionCount,
     kindCounts,
@@ -108,7 +108,6 @@ export async function ScopeDetailPage({
     kind === "all"
       ? getScopeModuleContent(scope.id, moduleKeys)
       : Promise.resolve<Record<string, ContentRecord[]>>({}),
-    listScopeComments(scope.id),
     user
       ? getUserScopeReactionIds(user.id, [scope.id]).then((set) => set.has(scope.id))
       : Promise.resolve(false),
@@ -202,20 +201,9 @@ export async function ScopeDetailPage({
 
           <ReactionBar
             scopeId={scope.id}
-            anchorId="discussion"
             reactionCount={reactionCount}
-            commentCount={comments.length}
             hasReacted={reacted}
             signedIn={Boolean(user)}
-          />
-
-          <CommentThread
-            scopeId={scope.id}
-            comments={comments}
-            signedIn={Boolean(user)}
-            locale={locale}
-            userName={user?.name}
-            anchorId="discussion"
           />
         </div>
 

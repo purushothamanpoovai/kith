@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import { MediaPlayer } from "@/components/media/media-player";
-import type { Track } from "@/components/media/player-provider";
+import { MediaEmbed } from "@/components/media/media-embed";
 import { VerseReader } from "@/components/content/verse-reader";
 import { MediaSignInLock } from "@/components/content/media-sign-in-lock";
 import { ContentAttribution } from "@/components/content/content-attribution";
 import { ContentCard } from "@/components/content/content-card";
 import { ReactionBar } from "@/components/community/reaction-bar";
-import { CommentThread } from "@/components/community/comment-thread";
+import { PrivateNoteEditor } from "@/components/community/private-note-editor";
 import { ReportForm } from "@/components/moderation/report-form";
 import { MagazineSidebar } from "@/components/layout/magazine-sidebar";
 import { Badge } from "@/components/ui/badge";
@@ -17,14 +16,13 @@ import { getCurrentUser } from "@/services/auth-service";
 import { getContentBySlug } from "@/services/content-service";
 import { isPubliclyReadable } from "@/services/permission-service";
 import {
+  getPrivateNote,
   getUserBookmarkIds,
   getUserReactionIds,
-  listComments,
 } from "@/repositories/community-repository";
 import { listContentByScopes } from "@/repositories/content-repository";
 import { pickLocalized } from "@/lib/localized";
 import { sanitizeRedirectTarget } from "@/lib/redirect-target";
-import type { ContentRecord } from "@/domain/content/types";
 
 export async function generateMetadata({
   params,
@@ -40,21 +38,6 @@ export async function generateMetadata({
   };
 }
 
-/** Shapes a content record into a playable track for the shared player. */
-function toTrack(item: ContentRecord, locale: string): Track | null {
-  if (!item.mediaUrl) return null;
-  return {
-    id: item.id,
-    title: pickLocalized(item.title, locale),
-    subtitle: item.authorName,
-    src: item.mediaUrl,
-    coverSeed: item.id,
-    coverSrc: item.coverImage,
-    href: `/media/${item.slug}`,
-    durationSeconds: item.durationSeconds,
-  };
-}
-
 export default async function MediaDetailPage({
   params,
 }: {
@@ -64,7 +47,6 @@ export default async function MediaDetailPage({
   setRequestLocale(locale);
   const t = await getTranslations("content");
   const tReader = await getTranslations("reader");
-  const tCommon = await getTranslations("common");
 
   const item = await getContentBySlug(slug);
   if (!item || !["audio", "video", "poem"].includes(item.type)) {
@@ -72,8 +54,7 @@ export default async function MediaDetailPage({
   }
 
   const user = await getCurrentUser();
-  const [comments, reacted, bookmarked, related] = await Promise.all([
-    listComments(item.id),
+  const [reacted, bookmarked, related, note] = await Promise.all([
     user
       ? getUserReactionIds(user.id, [item.id]).then((set) => set.has(item.id))
       : Promise.resolve(false),
@@ -83,25 +64,14 @@ export default async function MediaDetailPage({
     item.scopeIds.length
       ? listContentByScopes(item.scopeIds, ["audio", "video", "poem"], 8)
       : Promise.resolve([]),
+    user ? getPrivateNote(user.id, item.id) : Promise.resolve(null),
   ]);
-
-  const track = toTrack(item, locale);
-  // The queue is other playable pieces in the same scopes, so "next" leads
-  // somewhere related rather than to an arbitrary record.
-  const queue = [
-    ...(track ? [track] : []),
-    ...related
-      .filter((row) => row.id !== item.id && row.mediaUrl && row.type !== "poem")
-      .map((row) => toTrack(row, locale))
-      .filter((row): row is Track => row !== null),
-  ];
 
   const reactions = (
     <ReactionBar
       contentId={item.id}
       anchorId="discussion"
       reactionCount={item.reactionCount}
-      commentCount={comments.length}
       hasReacted={reacted}
       hasBookmarked={bookmarked}
       signedIn={Boolean(user)}
@@ -153,28 +123,27 @@ export default async function MediaDetailPage({
                 <div className="ds-byline">
                   <div className="ds-byline__who">
                     <ContentAttribution item={item} locale={locale} />
-                    <div className="ds-byline__facts">
-                      {item.durationSeconds ? (
-                        <span>
-                          {tCommon("minutes", {
-                            count: Math.ceil(item.durationSeconds / 60),
-                          })}
-                        </span>
-                      ) : null}
-                    </div>
                   </div>
                   <div className="ds-byline__actions">{reactions}</div>
                 </div>
               </header>
 
-              {track ? (
+              {item.embedUrl && item.embedProvider ? (
                 user ? (
-                  <MediaPlayer
-                    track={track}
-                    kind={item.type === "video" ? "video" : "audio"}
-                    queue={queue}
-                    transcript={pickLocalized(item.transcript, locale) || null}
-                  />
+                  <>
+                    <MediaEmbed
+                      embedUrl={item.embedUrl}
+                      embedProvider={item.embedProvider}
+                      title={pickLocalized(item.title, locale)}
+                    />
+                    {pickLocalized(item.transcript, locale) ? (
+                      <div className="ds-transcript">
+                        <p className="ds-transcript__body">
+                          {pickLocalized(item.transcript, locale)}
+                        </p>
+                      </div>
+                    ) : null}
+                  </>
                 ) : (
                   <MediaSignInLock signInHref={signInHref} registerHref={registerHref} />
                 )
@@ -186,12 +155,10 @@ export default async function MediaDetailPage({
             {/* Discussion stays attached to the piece it is about, above the
                 exit ramp into other media — and Report sits quietly at the
                 end of its own row rather than floating alone on the page. */}
-            <CommentThread
+            <PrivateNoteEditor
               contentId={item.id}
-              comments={comments}
+              initialBody={note?.body ?? ""}
               signedIn={Boolean(user)}
-              locale={locale}
-              userName={user?.name}
               anchorId="discussion"
             />
 

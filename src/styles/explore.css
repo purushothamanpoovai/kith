@@ -229,3 +229,135 @@
 .ds-source-note a {
   color: var(--text-secondary);
 }
+
+/* ── Scope tree (§ Explore redesign) ───────────────────────────────────────
+   Religion → Tradition → Sacred Entity as a literal, collapsible outline,
+   for a researcher/journalist scanning structure rather than browsing
+   cards. Deliberately plain: no art, no colour-coding per level — the
+   indentation and the toggle are the only hierarchy cues, which is exactly
+   the point for a reference index covering sacred figures across several
+   traditions at once (see ExploreHub's note on sensitive handling). */
+
+.ds-scope-tree,
+.ds-scope-tree__children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-scope-tree__children {
+  margin-block-start: 0.1rem;
+}
+
+.ds-scope-tree__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding-inline-start: calc(var(--ds-tree-depth, 0) * 1.5rem);
+}
+
+.ds-scope-tree__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-scope-tree__toggle:hover {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.ds-scope-tree__toggle--leaf {
+  cursor: default;
+}
+
+.ds-scope-tree__link {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-scope-tree__row:last-child > .ds-scope-tree__link {
+  border-block-end: 0;
+}
+
+.ds-scope-tree__link:hover .ds-scope-tree__label {
+  color: var(--accent);
+}
+
+.ds-scope-tree__label {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-scope-tree__count {
+  flex-shrink: 0;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Scope outline list (flat dimensions: topics, regions, languages) ───── */
+
+.ds-scope-outline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 1;
+}
+
+@media (min-width: 40rem) {
+  .ds-scope-outline {
+    columns: 2;
+    column-gap: var(--ds-space-6);
+  }
+}
+
+.ds-scope-outline__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  break-inside: avoid;
+}
+
+.ds-scope-outline li:last-child .ds-scope-outline__row {
+  border-block-end: 0;
+}
+
+.ds-scope-outline__row:hover .ds-scope-outline__label {
+  color: var(--accent);
+}
+
+.ds-scope-outline__label {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-scope-outline__count {
+  flex-shrink: 0;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}

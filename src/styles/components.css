@@ -1540,3 +1540,29 @@
 .ds-account__trigger[aria-expanded="true"] .ds-avatar {
   box-shadow: 0 0 0 2px var(--accent-line);
 }
+
+/* ── Bookmark folders (§ low-liability curated reader, Phase 3) ──────────── */
+
+.ds-bookmark-folders__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-4);
+}
+
+.ds-bookmark-folders__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+
+.ds-bookmark-folders__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+
+.ds-bookmark-folders__select {
+  width: 100%;
+}

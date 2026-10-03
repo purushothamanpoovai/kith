@@ -5,13 +5,13 @@ import { ArticleReader } from "@/components/content/article-reader";
 import { QuietMoment } from "@/components/content/quiet-moment";
 import { ContentCard, ContentRow } from "@/components/content/content-card";
 import { ReactionBar } from "@/components/community/reaction-bar";
-import { CommentThread } from "@/components/community/comment-thread";
+import { PrivateNoteEditor } from "@/components/community/private-note-editor";
 import { ReportForm } from "@/components/moderation/report-form";
 import { MagazineSidebar } from "@/components/layout/magazine-sidebar";
 import { Section } from "@/components/ui/section";
 import { SectionDivider } from "@/components/graphics/decorative-pattern";
-import { listComments } from "@/repositories/community-repository";
 import {
+  getPrivateNote,
   getUserBookmarkIds,
   getUserReactionIds,
 } from "@/repositories/community-repository";
@@ -73,8 +73,7 @@ export default async function ArticlePage({
     notFound();
   }
 
-  const [comments, reacted, bookmarked, related] = await Promise.all([
-    listComments(item.id),
+  const [reacted, bookmarked, related, note] = await Promise.all([
     user
       ? getUserReactionIds(user.id, [item.id]).then((set) => set.has(item.id))
       : Promise.resolve(false),
@@ -86,6 +85,7 @@ export default async function ArticlePage({
     item.scopeIds.length
       ? listContentByScopes(item.scopeIds, ["article", "poem", "audio"], 7)
       : Promise.resolve([]),
+    user ? getPrivateNote(user.id, item.id) : Promise.resolve(null),
   ]);
 
   const returnPath = sanitizeRedirectTarget(`/${locale}/articles/${item.slug}`);
@@ -110,7 +110,6 @@ export default async function ArticlePage({
       contentId={item.id}
       anchorId="discussion"
       reactionCount={item.reactionCount}
-      commentCount={comments.length}
       hasReacted={reacted}
       hasBookmarked={bookmarked}
       signedIn={Boolean(user)}
@@ -159,12 +158,10 @@ export default async function ArticlePage({
                    directly under the reading/reacting flow, never after a
                    card grid of OTHER articles where it would read as
                    ambiguously attached to those instead. */}
-            <CommentThread
+            <PrivateNoteEditor
               contentId={item.id}
-              comments={comments}
+              initialBody={note?.body ?? ""}
               signedIn={Boolean(user)}
-              locale={locale}
-              userName={user?.name}
               anchorId="discussion"
             />
 

@@ -139,7 +139,8 @@
     "heritageTitle": "Living heritage",
     "heritageLede": "Oral histories and family memory, preserved with provenance.",
     "festivalsTitle": "Festivals & sacred time",
-    "seeAllIn": "All {name}"
+    "seeAllIn": "All {name}",
+    "religionTreeNote": "Shown as a structure — religion, its traditions, and the sacred figures within them — for reference and research use. Presented plainly and respectfully across traditions, not as devotional or trivia content."
   },
   "exploreAdmin": {
     "eyebrow": "Configuration",
@@ -926,5 +927,25 @@
     "pagination": "Pagination",
     "sectionNav": "Section navigation",
     "openInNew": "opens in a new tab"
+  },
+  "privateNotes": {
+    "title": "Your private reflection",
+    "lede": "Visible only to you.",
+    "placeholder": "Write a private note to yourself about this piece…",
+    "save": "Save note",
+    "saved": "Saved",
+    "saving": "Saving…",
+    "delete": "Delete note",
+    "signInToWrite": "Sign in to keep a private note on this piece."
+  },
+  "bookmarkFolders": {
+    "title": "Folders",
+    "createFolder": "New folder",
+    "untitledFolder": "Untitled folder",
+    "renameFolder": "Rename folder",
+    "deleteFolder": "Delete folder",
+    "moveToFolder": "Move to folder",
+    "noFolder": "No folder",
+    "folderNamePlaceholder": "Folder name"
   }
 }

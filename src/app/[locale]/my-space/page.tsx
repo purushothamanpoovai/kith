@@ -7,12 +7,13 @@ import { PageFrame } from "@/components/layout/page-frame";
 import { Section } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
 import { MySpaceFollowingPanel } from "@/components/my-space/following-panel";
-import { ContinueListening } from "@/components/my-space/continue-listening";
 import { StudioTab } from "@/components/my-space/studio-tab";
+import { BookmarkFolderPanel } from "@/components/my-space/bookmark-folder-panel";
 import { EventCard } from "@/components/events/event-row";
 import { canAccessSignedInArea } from "@/lib/permissions";
 import { getCurrentUser } from "@/services/auth-service";
-import { listUserBookmarks } from "@/services/content-service";
+import { listUserBookmarksWithFolders } from "@/services/content-service";
+import { listBookmarkFolders } from "@/repositories/community-repository";
 import { getUserSubscriptions } from "@/services/subscription-service";
 import { listFollowedEvents } from "@/services/event-service";
 
@@ -48,9 +49,10 @@ export default async function MySpacePage({
   const tStates = await getTranslations("states");
   const tEvents = await getTranslations("events");
 
-  const [subscriptions, bookmarks, rsvpEvents] = await Promise.all([
+  const [subscriptions, bookmarks, bookmarkFolders, rsvpEvents] = await Promise.all([
     getUserSubscriptions(user!.id),
-    listUserBookmarks(user!.id),
+    listUserBookmarksWithFolders(user!.id),
+    listBookmarkFolders(user!.id),
     listFollowedEvents(user!.id),
   ]);
 
@@ -70,8 +72,6 @@ export default async function MySpacePage({
     >
       <StudioTab user={user!} locale={locale} filters={filters} />
 
-      <ContinueListening />
-
       <Section title={t("saved")}>
         {bookmarks.length === 0 ? (
           <EmptyState
@@ -86,11 +86,18 @@ export default async function MySpacePage({
             inline
           />
         ) : (
-          <div className="ds-grid">
-            {bookmarks.map((item) => (
-              <ContentCard key={item.id} item={item} locale={locale} />
-            ))}
-          </div>
+          <BookmarkFolderPanel
+            folders={bookmarkFolders.map((f) => ({
+              id: f.id,
+              name: f.name,
+              bookmarkCount: f._count.bookmarks,
+            }))}
+            bookmarks={bookmarks.map(({ content, folderId }) => ({
+              contentId: content.id,
+              folderId,
+              card: <ContentCard key={content.id} item={content} locale={locale} />,
+            }))}
+          />
         )}
       </Section>
 

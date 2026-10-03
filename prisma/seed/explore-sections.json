@@ -35,13 +35,6 @@
     "sortOrder": 50
   },
   {
-    "id": "explore-section-languages",
-    "key": "languages",
-    "scopeType": "language",
-    "href": "/languages",
-    "sortOrder": 60
-  },
-  {
     "id": "explore-section-organizations",
     "key": "organizations",
     "scopeType": null,

@@ -276,20 +276,6 @@
   border-color: var(--accent);
 }
 
-.ds-media-card__duration {
-  position: absolute;
-  inset-block-end: var(--ds-space-3);
-  inset-inline-end: var(--ds-space-3);
-  z-index: 3;
-  padding: 0.1rem 0.4rem;
-  border-radius: var(--ds-radius-sm);
-  background: color-mix(in srgb, var(--scrim) 70%, transparent);
-  color: var(--scrim-ink);
-  font-size: var(--ds-text-2xs);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
 .ds-media-card__body {
   display: grid;
   gap: 0.1rem;

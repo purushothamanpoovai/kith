@@ -157,38 +157,13 @@ export async function can(
     PermissionAction.EVENT_MANAGE,
     PermissionAction.MEDIA_UPLOAD,
   ];
-  // Public comments/reposts are frozen for EVERYONE, including platform
-  // staff — there is no role for which this feature is still live, so it is
-  // excluded from the staff bypass the same way authoring is, rather than
-  // relying on a super admin never choosing to call it.
-  const FROZEN_UGC_ACTIONS: PermissionAction[] = [
-    PermissionAction.CONTENT_COMMENT,
-    PermissionAction.SCOPE_COMMENT,
-    PermissionAction.CONTENT_REPOST,
-  ];
-  if (
-    isPlatformStaff &&
-    !AUTHORING_ACTIONS.includes(action) &&
-    !FROZEN_UGC_ACTIONS.includes(action)
-  ) {
+  if (isPlatformStaff && !AUTHORING_ACTIONS.includes(action)) {
     return true;
   }
 
   const profile = await loadUserPermissionProfile(user);
 
   switch (action) {
-    // Public free-text UGC is frozen platform-wide (§ low-liability curated
-    // reader, Phase 1): no standard user, org member, or scope moderator can
-    // post a comment or repost, regardless of role. This is a deliberate,
-    // unconditional `false` — not removed from the switch — so the denial is
-    // visible right here rather than silently falling through to `default`.
-    // Comment/Repost are slated for full removal in Phase 4, once private
-    // notes (Phase 2–3) replace their UI slot.
-    case PermissionAction.CONTENT_COMMENT:
-    case PermissionAction.SCOPE_COMMENT:
-    case PermissionAction.CONTENT_REPOST:
-      return false;
-
     case PermissionAction.CONTENT_REACT:
     case PermissionAction.CONTENT_BOOKMARK:
     case PermissionAction.SCOPE_REACT:
@@ -196,6 +171,8 @@ export async function can(
     case PermissionAction.ORGANIZATION_SUBSCRIBE:
     case PermissionAction.EVENT_RSVP:
     case PermissionAction.INVITATION_CREATE:
+    case PermissionAction.PRIVATE_NOTE_WRITE:
+    case PermissionAction.BOOKMARK_FOLDER_MANAGE:
       return true;
 
     case PermissionAction.ORGANIZATION_CREATE:

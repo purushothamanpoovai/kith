@@ -1,24 +1,24 @@
-import { getTranslations } from "next-intl/server";
-import { MessageCircle } from "lucide-react";
 import type { ContentRecord } from "@/domain/content/types";
 import { Link } from "@/i18n/navigation";
 import { ReportForm } from "@/components/moderation/report-form";
 import { ReactionBar } from "@/components/community/reaction-bar";
-import { CommentThread } from "@/components/community/comment-thread";
+import { PrivateNoteEditor } from "@/components/community/private-note-editor";
 import { ContentAttribution } from "@/components/content/content-attribution";
 import { Avatar } from "@/components/ui/avatar";
 import { contentTitle } from "@/services/feed-service";
 import { pickLocalized } from "@/lib/localized";
 import { getCurrentUser } from "@/services/auth-service";
-import { listComments } from "@/repositories/community-repository";
+import { getPrivateNote } from "@/repositories/community-repository";
 
 /**
  * A community post (§18).
  *
- * On the community page the discussion is expanded inline, because the thread
- * *is* the content. In a mixed feed (`collapsedComments`) it collapses to a
- * count with a link — an eighteen-item river of fully expanded threads was
- * what made the home page unreadable.
+ * On the community page the private-notes editor is expanded inline, because
+ * it is the reader's own space on this piece. In a mixed feed
+ * (`collapsedComments`) it collapses away entirely — an eighteen-item river
+ * of fully expanded editors was what made the home page unreadable, and
+ * unlike the old public thread there's no count worth surfacing from a
+ * collapsed card, since a private note has no audience but its author.
  */
 export async function PostCard({
   item,
@@ -35,14 +35,10 @@ export async function PostCard({
   hasBookmarked?: boolean;
   collapsedComments?: boolean;
 }) {
-  const t = await getTranslations("community");
   const title = contentTitle(item, locale);
   const body = pickLocalized(item.body, locale);
-  const comments = collapsedComments ? [] : await listComments(item.id);
-  const commentCount = collapsedComments
-    ? (item.commentCount ?? 0)
-    : comments.length;
   const user = signedIn && !collapsedComments ? await getCurrentUser() : null;
+  const note = user && !collapsedComments ? await getPrivateNote(user.id, item.id) : null;
   const discussionId = `discuss-${item.slug}`;
 
   return (
@@ -89,18 +85,12 @@ export async function PostCard({
             contentId={item.id}
             anchorId={collapsedComments ? undefined : discussionId}
             reactionCount={item.reactionCount}
-            commentCount={commentCount}
             hasReacted={hasReacted}
             hasBookmarked={hasBookmarked}
             signedIn={signedIn}
             shareUrl={`/${locale}/community#${item.slug}`}
           />
-          {collapsedComments ? (
-            <Link className="ds-text-link" href={`/community#${item.slug}`}>
-              <MessageCircle size={13} strokeWidth={1.75} aria-hidden />
-              {t("commentsCount", { count: commentCount })}
-            </Link>
-          ) : (
+          {collapsedComments ? null : (
             <ReportForm
               targetType="content"
               targetId={item.id}
@@ -112,12 +102,10 @@ export async function PostCard({
       </div>
 
       {collapsedComments ? null : (
-        <CommentThread
+        <PrivateNoteEditor
           contentId={item.id}
-          comments={comments}
+          initialBody={note?.body ?? ""}
           signedIn={signedIn}
-          locale={locale}
-          userName={user?.name}
           anchorId={discussionId}
         />
       )}

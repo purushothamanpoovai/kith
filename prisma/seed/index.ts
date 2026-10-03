@@ -185,8 +185,8 @@ type SeedContent = {
   contentLabel?: ContentLabel;
   readingMinutes?: number;
   coverImage?: string;
-  mediaUrl?: string;
-  durationSeconds?: number;
+  embedUrl?: string;
+  embedProvider?: "youtube" | "spotify" | "soundcloud";
   transcript?: Localized;
   originalText?: Localized;
   transliteration?: Localized;
@@ -235,8 +235,8 @@ async function seedContent() {
         contentLabel: item.contentLabel ?? undefined,
         readingMinutes: item.readingMinutes ?? undefined,
         coverImage: item.coverImage ?? undefined,
-        mediaUrl: item.mediaUrl ?? undefined,
-        durationSeconds: item.durationSeconds ?? undefined,
+        embedUrl: item.embedUrl ?? undefined,
+        embedProvider: item.embedProvider ?? undefined,
         transcript: item.transcript ?? undefined,
         originalText: item.originalText ?? undefined,
         transliteration: item.transliteration ?? undefined,
@@ -261,8 +261,8 @@ async function seedContent() {
         contentLabel: item.contentLabel ?? undefined,
         readingMinutes: item.readingMinutes ?? undefined,
         coverImage: item.coverImage ?? undefined,
-        mediaUrl: item.mediaUrl ?? undefined,
-        durationSeconds: item.durationSeconds ?? undefined,
+        embedUrl: item.embedUrl ?? undefined,
+        embedProvider: item.embedProvider ?? undefined,
         transcript: item.transcript ?? undefined,
         originalText: item.originalText ?? undefined,
         transliteration: item.transliteration ?? undefined,
@@ -476,8 +476,8 @@ async function seedHeritage() {
         contentLabel: item.contentLabel ?? undefined,
         readingMinutes: item.readingMinutes ?? undefined,
         coverImage: item.coverImage ?? undefined,
-        mediaUrl: item.mediaUrl ?? undefined,
-        durationSeconds: item.durationSeconds ?? undefined,
+        embedUrl: item.embedUrl ?? undefined,
+        embedProvider: item.embedProvider ?? undefined,
         transcript: item.transcript ?? undefined,
         originalText: item.originalText ?? undefined,
         transliteration: item.transliteration ?? undefined,
@@ -495,8 +495,8 @@ async function seedHeritage() {
         originalLanguage: item.originalLanguage,
         contentLabel: item.contentLabel ?? undefined,
         coverImage: item.coverImage ?? undefined,
-        mediaUrl: item.mediaUrl ?? undefined,
-        durationSeconds: item.durationSeconds ?? undefined,
+        embedUrl: item.embedUrl ?? undefined,
+        embedProvider: item.embedProvider ?? undefined,
         transcript: item.transcript ?? undefined,
         visibility: item.visibility ?? "public",
       },

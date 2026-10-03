@@ -5,6 +5,7 @@ import type {
   ContentStatus,
   ContentType,
   ContentVisibility,
+  EmbedProvider,
 } from "@/generated/prisma/client";
 
 export type ContentBlock =
@@ -31,8 +32,10 @@ export type ContentRecord = {
   originalLanguage: string;
   coverImage?: string | null;
   readingMinutes?: number | null;
-  mediaUrl?: string | null;
-  durationSeconds?: number | null;
+  /** Always a validated third-party embed link (see src/lib/media/embed.ts)
+   *  — Kith never stores or serves a self-hosted media file. */
+  embedUrl?: string | null;
+  embedProvider?: EmbedProvider | null;
   transcript?: LocalizedString | null;
   originalText?: LocalizedString | null;
   transliteration?: LocalizedString | null;
@@ -50,7 +53,6 @@ export type ContentRecord = {
   updatedAt: Date;
   scopeIds: string[];
   reactionCount?: number;
-  commentCount?: number;
 };
 
 export type FeedItem = ContentRecord & {
@@ -70,8 +72,8 @@ export type SeedContent = {
   originalLanguage: string;
   coverImage?: string;
   readingMinutes?: number;
-  mediaUrl?: string;
-  durationSeconds?: number;
+  embedUrl?: string;
+  embedProvider?: EmbedProvider;
   transcript?: LocalizedString;
   originalText?: LocalizedString;
   transliteration?: LocalizedString;

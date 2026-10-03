@@ -1,231 +1,42 @@
 /* ==========================================================================
-   Media player (§20)
+   Media embeds (§ low-liability curated reader, Phase 5)
 
-   Two surfaces sharing one control vocabulary:
-
-     .ds-player       the full player on a media page
-     .ds-mini-player  a persistent bar that keeps playing across navigation
-
-   The player never dominates: the mini bar is one control row tall, sits
-   above the mobile navigation, and can be collapsed away entirely.
+   Kith never self-hosts audio/video. Every playable piece is a validated
+   third-party embed (YouTube/Spotify/SoundCloud) rendered as a plain
+   `<iframe>` inside `.ds-media-embed` — there is no shared transport, no
+   mini-bar, and no "continue listening" resume, because none of those can be
+   driven through a provider's own player chrome.
    ========================================================================== */
 
-/* ── Full player ────────────────────────────────────────────────────────── */
-
-.ds-player {
-  display: grid;
-  gap: var(--ds-space-4);
-  padding: var(--ds-space-5);
-  border: 1px solid var(--border);
-  border-radius: var(--ds-radius-xl);
-  background: var(--surface);
-}
-
-.ds-player__stage {
+.ds-media-embed {
   position: relative;
   overflow: hidden;
   border-radius: var(--ds-radius-lg);
   background: var(--surface-sunken);
-}
-
-/* Video keeps its frame; audio gets cover art at a portrait-friendly ratio
-   rather than a 500px-tall gradient, which is what the audit found. */
-.ds-player__stage--video {
-  aspect-ratio: 16 / 9;
-  background: var(--scrim);
-}
-
-.ds-player__stage--audio {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--ds-space-4);
-  align-items: center;
-  padding: var(--ds-space-4);
-  background: linear-gradient(140deg, var(--accent-soft), var(--surface) 70%);
   border: 1px solid var(--border);
 }
 
-.ds-player__art {
-  width: 5.5rem;
-  aspect-ratio: 1;
-  flex-shrink: 0;
-  border-radius: var(--ds-radius-md);
-  border: 1px solid var(--border);
-}
-
-@media (min-width: 48rem) {
-  .ds-player__art {
-    width: 8rem;
-  }
-}
-
-.ds-player__stage--video video {
+.ds-media-embed iframe {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  border: 0;
   display: block;
-  background: var(--scrim);
 }
 
-.ds-player__now {
-  display: grid;
-  gap: 0.2rem;
-  min-width: 0;
+/* Spotify/SoundCloud embeds are a fixed-height strip, not a 16:9 frame —
+   the component sets `height` inline for those and omits `aspect-ratio`,
+   so the iframe needs ordinary static positioning instead. */
+.ds-media-embed[data-provider="spotify"],
+.ds-media-embed[data-provider="soundcloud"] {
+  height: auto;
 }
 
-.ds-player__title {
-  margin: 0;
-  font-size: var(--ds-text-lg);
-  line-height: var(--ds-leading-snug);
-}
-
-/* ── Transport ──────────────────────────────────────────────────────────── */
-
-.ds-player__transport {
-  display: grid;
-  gap: var(--ds-space-3);
-}
-
-.ds-player__scrubber {
-  display: flex;
-  align-items: center;
-  gap: var(--ds-space-3);
-}
-
-.ds-player__time {
-  flex-shrink: 0;
-  min-width: 3rem;
-  font-size: var(--ds-text-2xs);
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.ds-player__time--end {
-  text-align: end;
-}
-
-/* A real range input, so keyboard and screen-reader seeking work for free. */
-.ds-range {
-  flex: 1;
-  min-width: 0;
-  height: 1.25rem;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.ds-range::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: var(--ds-radius-pill);
-  background: linear-gradient(
-    to right,
-    var(--accent) var(--ds-range-progress, 0%),
-    var(--border) var(--ds-range-progress, 0%)
-  );
-}
-
-.ds-range::-moz-range-track {
-  height: 4px;
-  border-radius: var(--ds-radius-pill);
-  background: var(--border);
-}
-
-.ds-range::-moz-range-progress {
-  height: 4px;
-  border-radius: var(--ds-radius-pill);
-  background: var(--accent);
-}
-
-.ds-range::-webkit-slider-thumb {
-  appearance: none;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin-block-start: -5px;
-  border: 2px solid var(--surface);
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: var(--ds-shadow-soft);
-}
-
-.ds-range::-moz-range-thumb {
-  width: 0.875rem;
-  height: 0.875rem;
-  border: 2px solid var(--surface);
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.ds-range:focus-visible {
-  outline: none;
-}
-
-.ds-range:focus-visible::-webkit-slider-thumb {
-  box-shadow: var(--ds-focus-ring);
-}
-
-.ds-player__controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--ds-space-2);
-}
-
-.ds-player__controls-main {
-  display: flex;
-  align-items: center;
-  gap: var(--ds-space-1);
-}
-
-.ds-player__controls-aux {
-  display: flex;
-  align-items: center;
-  gap: var(--ds-space-1);
-  margin-inline-start: auto;
-}
-
-.ds-player__play {
-  /* Matches --ds-control-height-lg; routed through the token so a future
-     scale change doesn't miss this one hardcoded control. */
-  width: var(--ds-control-height-lg);
-  height: var(--ds-control-height-lg);
-  border-radius: 50%;
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-
-.ds-player__play:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-  color: var(--accent-ink);
-}
-
-/* Playback rate as a small select rather than a cycling button, so the
-   current value is always readable. */
-.ds-player__rate {
-  min-height: var(--ds-control-height-sm);
-  padding: 0 1.6rem 0 0.5rem;
-  font-size: var(--ds-text-2xs);
-  font-weight: 600;
-  border-radius: var(--ds-radius);
-  background-position:
-    calc(100% - 0.85rem) calc(50% + 1px),
-    calc(100% - 0.6rem) calc(50% + 1px);
-  width: auto;
-}
-
-.ds-player__volume {
-  display: none;
-  align-items: center;
-  gap: var(--ds-space-2);
-  width: 6rem;
-}
-
-@media (min-width: 48rem) {
-  .ds-player__volume {
-    display: flex;
-  }
+.ds-media-embed[data-provider="spotify"] iframe,
+.ds-media-embed[data-provider="soundcloud"] iframe {
+  position: static;
+  height: 100%;
 }
 
 /* ── Transcript & captions ──────────────────────────────────────────────── */
@@ -266,132 +77,6 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   white-space: pre-wrap;
-}
-
-/* ── Queue ──────────────────────────────────────────────────────────────── */
-
-.ds-queue {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.ds-queue__item {
-  display: grid;
-  grid-template-columns: 1.5rem minmax(0, 1fr) auto;
-  gap: var(--ds-space-3);
-  align-items: center;
-  padding: var(--ds-space-2) var(--ds-space-1);
-  border-block-end: 1px solid var(--border);
-  font-size: var(--ds-text-sm);
-  text-decoration: none;
-  color: inherit;
-}
-
-.ds-queue__item:last-child {
-  border-block-end: 0;
-}
-
-.ds-queue__item:hover {
-  color: var(--accent);
-}
-
-.ds-queue__item[aria-current="true"] {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.ds-queue__index {
-  font-size: var(--ds-text-2xs);
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-}
-
-.ds-queue__duration {
-  font-size: var(--ds-text-2xs);
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── Mini player ────────────────────────────────────────────────────────── */
-
-.ds-mini-player {
-  position: fixed;
-  inset-inline: 0;
-  inset-block-end: 0;
-  z-index: 95;
-  border-block-start: 1px solid var(--border);
-  background: color-mix(in srgb, var(--surface) 96%, transparent);
-  backdrop-filter: blur(14px);
-}
-
-/* Sits above the mobile bar rather than covering it. */
-@media (max-width: 47.99rem) {
-  .ds-mini-player {
-    inset-block-end: calc(
-      var(--ds-mobile-nav-height) + env(safe-area-inset-bottom)
-    );
-  }
-}
-
-.ds-mini-player__progress {
-  height: 2px;
-  background: var(--border);
-}
-
-.ds-mini-player__progress-bar {
-  height: 100%;
-  background: var(--accent);
-}
-
-.ds-mini-player__row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: var(--ds-space-3);
-  align-items: center;
-  min-height: var(--ds-mini-player-height);
-  padding-block: var(--ds-space-2);
-}
-
-.ds-mini-player__art {
-  width: 2.25rem;
-  aspect-ratio: 1;
-  border-radius: var(--ds-radius-sm);
-  border: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.ds-mini-player__text {
-  display: grid;
-  gap: 0.05rem;
-  min-width: 0;
-}
-
-.ds-mini-player__title {
-  font-size: var(--ds-text-sm);
-  font-weight: 600;
-  color: var(--text-primary);
-  text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.ds-mini-player__sub {
-  font-size: var(--ds-text-2xs);
-  color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.ds-mini-player__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--ds-space-1);
 }
 
 /* ── Media page grid ────────────────────────────────────────────────────── */

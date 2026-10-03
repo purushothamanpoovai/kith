@@ -6,8 +6,6 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Container } from "@/components/ui/container";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { PlayerProvider } from "@/components/media/player-provider";
-import { MiniPlayer } from "@/components/media/mini-player";
 import { TimezoneSync } from "@/components/locality/timezone-sync";
 
 /**
@@ -30,20 +28,17 @@ export async function AppShell({
   return (
     <ThemeProvider>
       <TimezoneSync />
-      <PlayerProvider>
-        <AmbientBackground />
-        <div className="ds-shell">
-          <a className="ds-skip-link" href="#main">
-            {t("skip")}
-          </a>
-          <SiteHeader user={user} />
-          <main id="main" className="ds-main">
-            <Container>{children}</Container>
-          </main>
-        </div>
-        <MiniPlayer />
-        <MobileNav />
-      </PlayerProvider>
+      <AmbientBackground />
+      <div className="ds-shell">
+        <a className="ds-skip-link" href="#main">
+          {t("skip")}
+        </a>
+        <SiteHeader user={user} />
+        <main id="main" className="ds-main">
+          <Container>{children}</Container>
+        </main>
+      </div>
+      <MobileNav />
     </ThemeProvider>
   );
 }

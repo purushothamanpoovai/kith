@@ -31,21 +31,81 @@ export async function toggleBookmark(userId: string, contentId: string) {
   return { active: true };
 }
 
-export async function listBookmarks(userId: string) {
+export async function listBookmarks(userId: string, folderId?: string | null) {
   const rows = await prisma.bookmark.findMany({
-    where: { userId },
+    where: { userId, ...(folderId !== undefined ? { folderId } : {}) },
     include: {
       content: {
         include: {
           author: { select: { name: true, slug: true } },
           scopes: { select: { scopeId: true } },
-          _count: { select: { reactions: true, comments: true } },
+          _count: { select: { reactions: true } },
         },
       },
     },
     orderBy: { createdAt: "desc" },
   });
   return rows.map((r) => r.content);
+}
+
+export async function setBookmarkFolder(
+  userId: string,
+  contentId: string,
+  folderId: string | null,
+) {
+  await prisma.bookmark.update({
+    where: { userId_contentId: { userId, contentId } },
+    data: { folderId },
+  });
+}
+
+export async function listBookmarkFolders(userId: string) {
+  return prisma.bookmarkFolder.findMany({
+    where: { userId },
+    include: { _count: { select: { bookmarks: true } } },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+  });
+}
+
+export async function createBookmarkFolder(userId: string, name: string) {
+  const last = await prisma.bookmarkFolder.findFirst({
+    where: { userId },
+    orderBy: { sortOrder: "desc" },
+    select: { sortOrder: true },
+  });
+  return prisma.bookmarkFolder.create({
+    data: { userId, name: name.trim(), sortOrder: (last?.sortOrder ?? -1) + 1 },
+  });
+}
+
+export async function renameBookmarkFolder(userId: string, folderId: string, name: string) {
+  await prisma.bookmarkFolder.updateMany({
+    where: { id: folderId, userId },
+    data: { name: name.trim() },
+  });
+}
+
+export async function deleteBookmarkFolder(userId: string, folderId: string) {
+  await prisma.bookmarkFolder.deleteMany({ where: { id: folderId, userId } });
+}
+
+export async function getPrivateNote(userId: string, contentId: string) {
+  return prisma.privateNote.findUnique({
+    where: { userId_contentId: { userId, contentId } },
+  });
+}
+
+export async function upsertPrivateNote(userId: string, contentId: string, body: string) {
+  const trimmed = body.trim();
+  if (!trimmed) {
+    await prisma.privateNote.deleteMany({ where: { userId, contentId } });
+    return null;
+  }
+  return prisma.privateNote.upsert({
+    where: { userId_contentId: { userId, contentId } },
+    update: { body: trimmed },
+    create: { userId, contentId, body: trimmed },
+  });
 }
 
 export async function listReactions(userId: string) {
@@ -56,33 +116,13 @@ export async function listReactions(userId: string) {
         include: {
           author: { select: { name: true, slug: true } },
           scopes: { select: { scopeId: true } },
-          _count: { select: { reactions: true, comments: true } },
+          _count: { select: { reactions: true } },
         },
       },
     },
     orderBy: { createdAt: "desc" },
   });
   return rows.map((r) => r.content);
-}
-
-export async function listComments(contentId: string) {
-  return prisma.comment.findMany({
-    where: { contentId },
-    include: { user: { select: { name: true, slug: true } } },
-    orderBy: { createdAt: "asc" },
-  });
-}
-
-export async function addComment(
-  userId: string,
-  contentId: string,
-  body: string,
-  parentId?: string | null,
-) {
-  return prisma.comment.create({
-    data: { userId, contentId, body: body.trim(), parentId: parentId ?? null },
-    include: { user: { select: { name: true, slug: true } } },
-  });
 }
 
 export async function getUserReactionIds(userId: string, contentIds: string[]) {
@@ -104,10 +144,10 @@ export async function getUserBookmarkIds(userId: string, contentIds: string[]) {
 }
 
 /**
- * Scope-level reactions and comments (§24) — a scope's own discovery page
- * (a religion, tradition, topic, region or language) can be reacted to and
- * discussed the same way a piece of content can, using the same two models
- * with `targetType: "scope"` and `scopeId` set instead of `contentId`.
+ * Scope-level reactions (§24) — a scope's own discovery page (a religion,
+ * tradition, topic, region or language) can be reacted to the same way a
+ * piece of content can, using the same model with `targetType: "scope"` and
+ * `scopeId` set instead of `contentId`.
  */
 
 export async function toggleScopeReaction(
@@ -139,30 +179,4 @@ export async function getUserScopeReactionIds(userId: string, scopeIds: string[]
 
 export async function countScopeReactions(scopeId: string): Promise<number> {
   return prisma.reaction.count({ where: { scopeId } });
-}
-
-export async function listScopeComments(scopeId: string) {
-  return prisma.comment.findMany({
-    where: { scopeId },
-    include: { user: { select: { name: true, slug: true } } },
-    orderBy: { createdAt: "asc" },
-  });
-}
-
-export async function addScopeComment(
-  userId: string,
-  scopeId: string,
-  body: string,
-  parentId?: string | null,
-) {
-  return prisma.comment.create({
-    data: {
-      userId,
-      scopeId,
-      targetType: "scope",
-      body: body.trim(),
-      parentId: parentId ?? null,
-    },
-    include: { user: { select: { name: true, slug: true } } },
-  });
 }

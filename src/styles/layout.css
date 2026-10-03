@@ -18,12 +18,11 @@
   background: var(--background);
 }
 
-/* Room for the fixed mobile bar, plus the mini player when one is playing. */
+/* Room for the fixed mobile bar. */
 @media (max-width: 47.99rem) {
   .ds-shell {
     padding-block-end: calc(
-      var(--ds-mobile-nav-height) + env(safe-area-inset-bottom) +
-        var(--ds-player-inset, 0px)
+      var(--ds-mobile-nav-height) + env(safe-area-inset-bottom)
     );
   }
 }

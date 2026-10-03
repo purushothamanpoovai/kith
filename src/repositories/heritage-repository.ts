@@ -1,5 +1,6 @@
 import type {
   ContentVisibility,
+  EmbedProvider,
   HeritageArchiveTier,
   MediaRights,
   Prisma,
@@ -18,8 +19,8 @@ export type HeritageRecord = {
   authorName: string;
   originalLanguage: string;
   coverImage: string | null;
-  mediaUrl: string | null;
-  durationSeconds: number | null;
+  embedUrl: string | null;
+  embedProvider: EmbedProvider | null;
   visibility: ContentVisibility;
   scopeIds: string[];
   lineage: {
@@ -61,8 +62,8 @@ function mapHeritage(row: Row): HeritageRecord | null {
     authorName: row.author.name,
     originalLanguage: row.originalLanguage,
     coverImage: row.coverImage,
-    mediaUrl: row.mediaUrl,
-    durationSeconds: row.durationSeconds,
+    embedUrl: row.embedUrl,
+    embedProvider: row.embedProvider,
     visibility: row.visibility,
     scopeIds: row.scopes.map((s) => s.scopeId),
     lineage: {
