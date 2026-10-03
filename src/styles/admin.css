@@ -1,0 +1,279 @@
+/* ==========================================================================
+   Administrative & authoring surfaces (§17, §J)
+
+   These are the only screens in the product that may look like tools. They
+   still use the same tokens, controls and type scale — an admin page should
+   read as the same platform in a working mode, not as a bolted-on dashboard.
+   ========================================================================== */
+
+/* ── Data tables ────────────────────────────────────────────────────────── */
+
+.ds-table-wrap {
+  /* A wide table scrolls inside its own box; the page never does (§42). */
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+}
+
+.ds-table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-table th,
+.ds-table td {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  text-align: start;
+  vertical-align: middle;
+  border-block-end: 1px solid var(--border);
+}
+
+.ds-table th {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  white-space: nowrap;
+}
+
+.ds-table tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+.ds-table tbody tr:hover {
+  background: var(--surface-muted);
+}
+
+.ds-table__actions {
+  display: flex;
+  gap: var(--ds-space-2);
+  justify-content: flex-end;
+}
+
+/* ── Moderation queue ───────────────────────────────────────────────────── */
+
+.ds-queue-item {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  border-inline-start: 3px solid var(--warning);
+}
+
+.ds-queue-item__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+.ds-queue-item__reason {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.ds-queue-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+
+/* ── Manage-console list rows (§ organization manage console) ────────────
+   A CRUD row: label/meta on the start side, actions pinned to the end. Used
+   by product/service/ticket-tier managers, all of which are flat lists with
+   an inline add-form rather than a table (small field counts, no sorting). */
+.ds-manage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+
+.ds-manage-row__title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Studio organization/scope cards (§ Studio tab) ────────────────────────
+   Row layout so a crest, name+role badge, and the manage link all sit on one
+   line — matches the manage-row rhythm above rather than inventing a new
+   card face for what is structurally the same "one thing I manage" row. */
+.ds-studio-org-card {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+
+.ds-studio-org-card__body {
+  display: grid;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Report form ────────────────────────────────────────────────────────── */
+
+.ds-report {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface-muted);
+}
+
+/* ── Composer (§17) ─────────────────────────────────────────────────────── */
+
+/* The publishing form is presented as ordered steps so a long form feels
+   progressive rather than overwhelming. */
+.ds-composer {
+  display: grid;
+  gap: var(--ds-space-6);
+}
+
+@media (min-width: 64rem) {
+  .ds-composer {
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    gap: var(--ds-space-8);
+    align-items: start;
+  }
+
+  .ds-composer__side {
+    position: sticky;
+    inset-block-start: calc(var(--ds-header-height) + var(--ds-space-5));
+  }
+}
+
+.ds-composer__main,
+.ds-composer__side {
+  display: grid;
+  gap: var(--ds-space-5);
+  min-width: 0;
+}
+
+.ds-step {
+  display: grid;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+}
+
+.ds-step__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-3);
+  padding-block-end: var(--ds-space-3);
+  border-block-end: 1px solid var(--border);
+}
+
+.ds-step__number {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-step__title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+}
+
+.ds-step__hint {
+  margin: 0;
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}
+
+/* ── Stat tiles ─────────────────────────────────────────────────────────── */
+
+.ds-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--ds-space-3);
+}
+
+.ds-stat {
+  display: grid;
+  gap: 0.15rem;
+  padding: var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+}
+
+.ds-stat__value {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.ds-stat__label {
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Settings ───────────────────────────────────────────────────────────── */
+
+.ds-settings {
+  display: grid;
+  gap: var(--ds-space-7);
+  max-width: 40rem;
+}
+
+.ds-settings__group {
+  display: grid;
+  gap: var(--ds-space-4);
+  padding-block-end: var(--ds-space-6);
+  border-block-end: 1px solid var(--border);
+}
+
+.ds-settings__group:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.ds-settings__group-title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+}
+
+.ds-settings__group-hint {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.ds-settings__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}

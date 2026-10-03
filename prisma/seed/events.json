@@ -1,0 +1,627 @@
+[
+  {
+    "id": "event_pongal_gathering_2026",
+    "slug": "pongal-community-gathering-madurai",
+    "kind": "festival",
+    "title": {
+      "en": "Pongal Community Gathering — Madurai",
+      "ta": "பொங்கல் சமூக கூட்டம் — மதுரை",
+      "hi": "पोंगल सामुदायिक समारोह — मदुरै"
+    },
+    "description": {
+      "en": "Pongal is a multi-day Hindu harvest festival celebrated by Tamils. The festival is celebrated over three or four consecutive days, which are named Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal, beginning on the last day of the Tamil calendar month of Margazhi. Thai Pongal is observed on the first day of the Tamil calendar month of Thai and usually falls on 14 or 15… This overview incorporates factual material from Wikipedia contributors, \"Pongal (festival),\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Pongal_(festival)",
+      "ta": "கோலம், இனிப்பு பொங்கல் சமையல், அறுவடை நன்றி கதைகள் — அக்கம்பக்கம் பொங்கல் விழா.",
+      "hi": "कोलम, मीठा पोंगल और फसल कृतज्ञता की कहानियों के साथ पड़ोसी पोंगल उत्सव।"
+    },
+    "startsAt": "2026-01-14T06:30:00+05:30",
+    "endsAt": "2026-01-14T11:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Meenakshi Amman Temple Community Hall"
+    },
+    "venueAddress": {
+      "en": "Chithirai Street, Madurai, Tamil Nadu 625001"
+    },
+    "language": "ta",
+    "organizerId": "user_contrib_kavitha",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "hinduism",
+      "topic-festivals",
+      "topic-family",
+      "topic-food",
+      "region-tamil-nadu",
+      "lang-ta",
+      "lang-en"
+    ],
+    "invitation": {
+      "id": "inv_pongal_gathering_2026",
+      "slug": "pongal-gathering-invite",
+      "hostName": "Kavitha Murugan",
+      "message": {
+        "en": "Bring a small dish to share if you wish. Children welcome. All faiths invited to witness and participate respectfully."
+      },
+      "visibility": "public",
+      "shareToken": "pongal-madurai-2026"
+    }
+  },
+  {
+    "id": "event_easter_sunrise_service",
+    "slug": "easter-sunrise-service-kochi",
+    "kind": "prayer",
+    "title": {
+      "en": "Easter Sunrise Service",
+      "ta": "ஈஸ்டர் சூரிய உதய ஆராதனை",
+      "hi": "ईस्टर सूर्योदय प्रार्थना सेवा"
+    },
+    "description": {
+      "en": "Easter, also called Pasch or Pascha or Resurrection Sunday, is a Christian festival and cultural holiday commemorating the resurrection of Jesus from the dead, described in the Bible's New Testament as having occurred on the third day of his burial following his crucifixion by the Romans at Calvary c. 30 AD. It is the culmination of the Passion of Jesus, preceded by Lent, a… This overview incorporates factual material from Wikipedia contributors, \"Easter,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Easter",
+      "ta": "கடற்கரையில் அதிகாலை Mass, பின்னர் fellowship காலை உணவு. மலയாளம் மற்றும் லத்தீன் பாடல்கள்.",
+      "hi": "समुद्र तट पर भोर की मिसा और साझा नाश्ता। कोयर मलयालम और लैटिन भजन गाता है।"
+    },
+    "startsAt": "2026-04-05T05:45:00+05:30",
+    "endsAt": "2026-04-05T08:30:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Fort Kochi Beach Promenade Chapel"
+    },
+    "venueAddress": {
+      "en": "Beach Road, Fort Kochi, Kerala 682001"
+    },
+    "language": "en",
+    "organizerId": "user_contrib_maria",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "christianity",
+      "catholicism",
+      "jesus",
+      "topic-prayer",
+      "topic-festivals",
+      "region-kerala",
+      "lang-en",
+      "lang-ml"
+    ]
+  },
+  {
+    "id": "event_eid_community_meal",
+    "slug": "eid-community-meal-chennai",
+    "kind": "gathering",
+    "title": {
+      "en": "Eid Community Meal",
+      "ta": "ஈத் சமூக விருந்து",
+      "hi": "ईद सामुदायिक भोज"
+    },
+    "description": {
+      "en": "Eid al-Fitr is the first of the two main festivals in Islam, the other being Eid al-Adha. The holiday falls on the first day of Shawwal, the tenth month of the Islamic calendar. One of the most important Islamic celebrations, Eid al-Fitr is celebrated by Muslims worldwide as it marks the end of the month-long, dawn-to-dusk fasting (sawm) during Ramadan. The holiday is known… This overview incorporates factual material from Wikipedia contributors, \"Eid al-Fitr,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Eid_al-Fitr",
+      "ta": "திரிப்ளிகேன் முஸ்லிம் கலாச்சார சங்கம் ஏற்பாடு செய்யும் திறந்த வீட்டு ஈத் மதிய உணவு.",
+      "hi": "त्रिप्लिकेन मुस्लिम सांस्कृतिक संघ द्वारा आयोजित खुला ईद दोपहर का भोज।"
+    },
+    "startsAt": "2026-06-06T12:00:00+05:30",
+    "endsAt": "2026-06-06T16:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Triplicane Community Centre"
+    },
+    "venueAddress": {
+      "en": "Big Street, Triplicane, Chennai, Tamil Nadu 600005"
+    },
+    "language": "en",
+    "organizerId": "user_contrib_fatima",
+    "visibility": "community",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "islam",
+      "topic-festivals",
+      "topic-food",
+      "topic-family",
+      "region-tamil-nadu",
+      "lang-en",
+      "lang-ta"
+    ]
+  },
+  {
+    "id": "event_gurpurab_kirtan",
+    "slug": "gurpurab-kirtan-amritsar",
+    "kind": "music",
+    "title": {
+      "en": "Gurpurab Kirtan Evening",
+      "ta": "குர்புரப் கீர்த்தன மாலை",
+      "hi": "गुरपुरब कीर्तन संध्या"
+    },
+    "description": {
+      "en": "Gurū Nānak, also known as Bābā Nānak, was an Indian spiritual teacher, mystic and poet, who is regarded as the founder of Sikhism and is the first of the ten Sikh Gurus. This overview incorporates factual material from Wikipedia contributors, \"Guru Nanak,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Guru_Nanak",
+      "ta": "குரு நானக்கின் பிறந்த நாள் நினைவில் கீர்த்தனம், கதா, லங்கார் — அமர்ந்து கேட்க அனைவரும் வரவேற்கப்படுகிறார்கள்.",
+      "hi": "गुरु नानक की जयंती पर कीर्तन, कथा और लंगर की संध्या। सभी को बैठकर सुनने के लिए आमंत्रित।"
+    },
+    "startsAt": "2026-11-23T18:00:00+05:30",
+    "endsAt": "2026-11-23T22:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Guru Nanak Darbar Gurdwara"
+    },
+    "venueAddress": {
+      "en": "Hall Bazaar Road, Amritsar, Punjab 143006"
+    },
+    "language": "pa",
+    "organizerId": "user_contrib_harpreet",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "sikhism",
+      "sikh-khalsa",
+      "guru-nanak",
+      "topic-music",
+      "topic-festivals",
+      "topic-devotion",
+      "region-punjab",
+      "lang-pa",
+      "lang-en"
+    ]
+  },
+  {
+    "id": "event_buddhist_meditation_retreat",
+    "slug": "buddhist-meditation-retreat-kandy",
+    "kind": "gathering",
+    "title": {
+      "en": "Weekend Buddhist Meditation Retreat",
+      "ta": "வார இறுதி பௌத்த தியான முகாம்",
+      "hi": "सप्ताहांत बौद्ध ध्यान शिविर"
+    },
+    "description": {
+      "en": "Buddhist meditation is the practice of meditation in Buddhism. The closest words for meditation in the classical languages of Buddhism are bhāvanā and jhāna/dhyāna. This overview incorporates factual material from Wikipedia contributors, \"Buddhist meditation,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Buddhist_meditation",
+      "ta": "இரண்டு நாள் அமைதி முகாம் — மெத்தா, சுவாச தியானம், தர்ம உரை, நடைப்பயிற்சி.",
+      "hi": "दो दिन का मौन शिविर: मेत्ता और श्वास ध्यान, धर्म प्रवचन, और चलते हुए अभ्यास।"
+    },
+    "startsAt": "2026-12-12T07:00:00+05:30",
+    "endsAt": "2026-12-14T12:00:00+05:30",
+    "timezone": "Asia/Colombo",
+    "venueName": {
+      "en": "Nilambe Meditation Centre"
+    },
+    "venueAddress": {
+      "en": "Nilambe Road, Galaha, Kandy District, Sri Lanka"
+    },
+    "language": "en",
+    "organizerId": "user_contrib_ananda",
+    "visibility": "public",
+    "rsvpMode": "invite_only",
+    "cancelled": false,
+    "scopeIds": [
+      "buddhism",
+      "theravada",
+      "buddha",
+      "topic-meditation",
+      "topic-devotion",
+      "region-sri-lanka",
+      "lang-en",
+      "lang-ta"
+    ]
+  },
+  {
+    "id": "event_onam_sadya",
+    "slug": "onam-sadya-thrissur",
+    "kind": "festival",
+    "title": {
+      "en": "Onam Sadya — Community Feast",
+      "ta": "ஓணம் சாத்ய — சமூக விருந்து",
+      "hi": "ओणम साध्य — सामुदायिक भोज"
+    },
+    "description": {
+      "en": "Onam, the national festival of Keralam, is an annual harvest and Hindu cultural festival celebrated mostly by the people of Kerala and is traditionally associated with the legend of the benevolent Asura King Mahabali, who once ruled Kerala, returning each year to visit his people. A major annual event for Malayalis, it is the official festival of the state and includes a… This overview incorporates factual material from Wikipedia contributors, \"Onam,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Onam",
+      "ta": "வாழை இலையில் பாரம்பரிய ஓணம் சாத்யம், பூக்கலம், திருவாதிர நடனம், குழந்தைகள் விளையாட்டுகள்.",
+      "hi": "केले के पत्ते पर पारंपरिक ओणम साध्य, पूकलम, थिरुवाथिरा नृत्य और बच्चों के खेल।"
+    },
+    "startsAt": "2026-08-28T11:30:00+05:30",
+    "endsAt": "2026-08-28T15:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Thrissur Town Hall Grounds"
+    },
+    "venueAddress": {
+      "en": "Round South, Thrissur, Kerala 680001"
+    },
+    "language": "ml",
+    "organizerId": "user_contrib_leela",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "hinduism",
+      "topic-festivals",
+      "topic-food",
+      "topic-family",
+      "region-kerala",
+      "lang-ml",
+      "lang-en"
+    ]
+  },
+  {
+    "id": "event_online_quran_study",
+    "slug": "online-quran-study-circle",
+    "kind": "online",
+    "title": {
+      "en": "Online Quran Study Circle",
+      "ta": "ஆன்லைன் குர்ஆன் படிப்பு வட்டம்",
+      "hi": "ऑनलाइन क़ुरआन अध्ययन मंडली"
+    },
+    "description": {
+      "en": "The Quran, also romanized Qur'an or Koran, is the central religious text of Islam, believed by Muslims to be a revelation directly from God (Allāh). It is organized in 114 chapters which consist of individual verses. Besides its religious significance, it is widely regarded as the finest work in Arabic literature and has significantly influenced the Arabic language. This overview incorporates factual material from Wikipedia contributors, \"Quran,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Quran",
+      "ta": "தேர்ந்தெடுக்கப்பட்ட சூராக்களின் வாராந்திர ஆன்லைன் படிப்பு — கருணை, நீதி, சமூக நெறிமுறைகள்.",
+      "hi": "चयनित सूरों का साप्ताहिक ऑनलाइन अध्ययन — करुणा, न्याय और सामुदायिक नैतिकता पर चर्चा।"
+    },
+    "startsAt": "2026-09-10T19:00:00+04:00",
+    "endsAt": "2026-09-10T20:30:00+04:00",
+    "timezone": "Asia/Dubai",
+    "venueName": {
+      "en": "Virtual — Zoom"
+    },
+    "onlineUrl": "https://meet.example.org/quran-study-circle",
+    "language": "en",
+    "organizerId": "user_contrib_fatima",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "islam",
+      "sufism",
+      "topic-prayer",
+      "topic-devotion",
+      "lang-en",
+      "lang-ar"
+    ]
+  },
+  {
+    "id": "event_temple_chariot_festival",
+    "slug": "temple-chariot-festival-thanjavur",
+    "kind": "festival",
+    "title": {
+      "en": "Temple Chariot Festival — Brihadeeswarar",
+      "ta": "கோவில் தேரோட்டம் — பிரகதீஸ்வரர்",
+      "hi": "मंदिर रथ उत्सव — बृहदीश्वर"
+    },
+    "description": {
+      "en": "Brihadisvara Temple, called Rajarajesvaram by its builder, and known locally as Thanjai Periya Kovil and Peruvudaiyar Kovil, is a Shaivite Hindu temple built in a Chola architectural style located on the south bank of the Cauvery river in Thanjavur, Tamil Nadu, India. It is one of the largest Hindu temples and an exemplar of Tamil architecture. It is also called Dakshina Meru.… This overview incorporates factual material from Wikipedia contributors, \"Brihadisvara Temple,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Brihadisvara_Temple",
+      "ta": "அலங்கரிக்கப்பட்ட தேர், நாதஸ்வரம், ஆயிரக்கணக்கான பக்தர்கள் கயிறு இழுக்கும் வருடாந்திர தேரோட்டம்.",
+      "hi": "सजे हुए रथ, नादस्वरम और हजारों भक्तों द्वारा रस्सी खींचने का वार्षिक थेरोत्तम जुलूस।"
+    },
+    "startsAt": "2026-09-20T06:00:00+05:30",
+    "endsAt": "2026-09-20T14:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Brihadeeswarar Temple"
+    },
+    "venueAddress": {
+      "en": "Membalam Road, Thanjavur, Tamil Nadu 613007"
+    },
+    "language": "ta",
+    "organizerId": "user_contrib_kavitha",
+    "visibility": "public",
+    "rsvpMode": "closed",
+    "cancelled": false,
+    "scopeIds": [
+      "shaivism",
+      "shiva",
+      "hinduism",
+      "topic-festivals",
+      "topic-devotion",
+      "region-tamil-nadu",
+      "lang-ta"
+    ]
+  },
+  {
+    "id": "event_memorial_prayer",
+    "slug": "memorial-prayer-village-chapel",
+    "kind": "memorial",
+    "title": {
+      "en": "Memorial Prayer for Departed Elders",
+      "ta": "காலமான மூத்தோருக்கான நினைவு ஜெபம்",
+      "hi": "स्वर्गवासी बुजुर्गों के लिए स्मरण प्रार्थना"
+    },
+    "description": {
+      "en": "A funeral is a ceremony connected with the final disposition of a corpse, such as a burial, entombment or cremation with the attendant observances. Funerary customs comprise the complex of beliefs and practices used by a culture to remember and respect the dead, from interment, to various monuments, prayers, and rituals undertaken in their honour. Customs vary between cultures… This overview incorporates factual material from Wikipedia contributors, \"Funeral,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Funeral",
+      "ta": "கிராமத்தை வடிவமைத்த மூத்தோரை நினைவுகூரும் சமயங்கள் கடந்த நினைவு ஆராதனை. மெழுகுவர்த்தி, பகிர்வு வாசிப்புகள்.",
+      "hi": "गाँव को आकार देने वाले बुजुर्गों की स्मृति में सर्वसमावेशी स्मरण सेवा। दीप प्रज्वलन और साझा पाठ।"
+    },
+    "startsAt": "2026-10-02T17:00:00+05:30",
+    "endsAt": "2026-10-02T18:30:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "St. Mary's Village Chapel"
+    },
+    "venueAddress": {
+      "en": "Kumarakom, Kottayam, Kerala 686563"
+    },
+    "language": "en",
+    "organizerId": "user_contrib_maria",
+    "visibility": "community",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "christianity",
+      "topic-grief",
+      "topic-prayer",
+      "topic-family",
+      "region-kerala",
+      "lang-en"
+    ],
+    "invitation": {
+      "id": "inv_memorial_prayer_2026",
+      "slug": "memorial-prayer-invite",
+      "hostName": "Maria Thomas",
+      "message": {
+        "en": "Please bring a name or memory of an elder you wish to honour. All traditions welcome in respectful silence."
+      },
+      "visibility": "community"
+    }
+  },
+  {
+    "id": "event_charity_iftar",
+    "slug": "charity-iftar-dubai",
+    "kind": "charity",
+    "title": {
+      "en": "Charity Community Iftar",
+      "ta": "தொண்டு சமூக இஃப்தார்",
+      "hi": "दान सामुदायिक इफ्तार"
+    },
+    "description": {
+      "en": "Iftar is the fast-breaking evening meal of Muslims in Ramadan at the time of adhan of the Maghrib prayer. This overview incorporates factual material from Wikipedia contributors, \"Iftar,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Iftar",
+      "ta": "அகதி குடும்பங்களுக்கு உதவும் நிதி திரட்டல் இஃப்தார். திறந்த இருக்கைகள், சைவ விருப்பங்கள், ஜகாத் பற்றிய சுருக்க நிகழ்ச்சி.",
+      "hi": "शरणार्थी परिवारों के समर्थन में धन जुटाने वाला इफ्तार। खुली बैठक, शाकाहारी विकल्प और ज़कात पर संक्षिप्त कार्यक्रम।"
+    },
+    "startsAt": "2027-03-18T18:15:00+04:00",
+    "endsAt": "2027-03-18T21:00:00+04:00",
+    "timezone": "Asia/Dubai",
+    "venueName": {
+      "en": "Al Manar Community Hall"
+    },
+    "venueAddress": {
+      "en": "Al Karama, Dubai, United Arab Emirates"
+    },
+    "language": "en",
+    "organizerId": "user_admin",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "islam",
+      "sufism",
+      "topic-compassion",
+      "topic-food",
+      "topic-festivals",
+      "lang-en",
+      "lang-ar"
+    ],
+    "invitation": {
+      "id": "inv_charity_iftar_2027",
+      "slug": "charity-iftar-dubai-invite",
+      "hostName": "Platform Admin",
+      "message": {
+        "en": "Suggested donation at the door. All proceeds go to refugee meal programmes. Neighbours of every faith are warmly invited."
+      },
+      "visibility": "public",
+      "shareToken": "iftar-dubai-2027"
+    }
+  },
+  {
+    "id": "event_velankanni_feast_2026",
+    "slug": "velankanni-feast-2026",
+    "kind": "festival",
+    "title": {
+      "en": "Feast of Our Lady of Good Health",
+      "ta": "வேளாங்கண்ணி அன்னை திருவிழா"
+    },
+    "description": {
+      "en": "Annual feast at the Basilica of Our Lady of Good Health in Velankanni, Tamil Nadu."
+    },
+    "startsAt": "2026-09-08T06:00:00+05:30",
+    "endsAt": "2026-09-08T21:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Basilica of Our Lady of Good Health",
+      "ta": "வேளாங்கண்ணி ஆலயம்"
+    },
+    "venueAddress": {
+      "en": "Velankanni, Nagapattinam, Tamil Nadu 611111"
+    },
+    "language": "ta",
+    "organizerId": "user_org_velankanni_admin",
+    "organizationId": "org_velankanni_basilica",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "christianity",
+      "catholicism",
+      "mary",
+      "topic-festivals",
+      "region-tamil-nadu",
+      "lang-ta"
+    ],
+    "ticketTiers": [
+      {
+        "id": "tier_velankanni_general",
+        "name": {
+          "en": "General Darshan",
+          "ta": "பொது தரிசனம்"
+        },
+        "description": {
+          "en": "Standard queue access to the feast procession and shrine.",
+          "ta": "திருவிழா ஊர்வலம் மற்றும் ஆலயத்திற்கு நேரடி வரிசை அணுகல்."
+        },
+        "capacity": null,
+        "sortOrder": 0
+      },
+      {
+        "id": "tier_velankanni_priority",
+        "name": {
+          "en": "Priority Darshan",
+          "ta": "முன்னுரிமை தரிசனம்"
+        },
+        "description": {
+          "en": "Shorter queue, closer viewing of the procession route.",
+          "ta": "குறுகிய வரிசை, ஊர்வலப் பாதைக்கு அருகில் காணும் வசதி."
+        },
+        "capacity": 500,
+        "sortOrder": 1
+      },
+      {
+        "id": "tier_velankanni_family_pavilion",
+        "name": {
+          "en": "Family Pavilion",
+          "ta": "குடும்ப பெவிலியன்"
+        },
+        "description": {
+          "en": "Seated pavilion area suitable for elderly visitors and families with small children.",
+          "ta": "முதியோர் மற்றும் சிறு குழந்தைகளுடன் வரும் குடும்பங்களுக்கு ஏற்ற இருக்கை பகுதி."
+        },
+        "capacity": 150,
+        "sortOrder": 2
+      }
+    ]
+  },
+  {
+    "id": "event_ramana_karthigai_2026",
+    "slug": "karthigai-deepam-ramanashram",
+    "kind": "festival",
+    "title": {
+      "en": "Karthigai Deepam at the ashram",
+      "ta": "ஆசிரமத்தில் கார்த்திகை தீபம்"
+    },
+    "description": {
+      "en": "Lamps on Arunachala and a quiet evening sitting at Sri Ramanasramam."
+    },
+    "startsAt": "2026-11-24T17:30:00+05:30",
+    "endsAt": "2026-11-24T21:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Sri Ramanasramam",
+      "ta": "ஸ்ரீ ரமணாஸ்ரமம்"
+    },
+    "venueAddress": {
+      "en": "Chengam Road, Tiruvannamalai, Tamil Nadu 606603"
+    },
+    "language": "ta",
+    "organizerId": "user_contrib_kavitha",
+    "organizationId": "org_ramana_ashram",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "hinduism",
+      "shaivism",
+      "topic-festivals",
+      "topic-meditation",
+      "region-tamil-nadu",
+      "lang-ta"
+    ]
+  },
+  {
+    "id": "event_nagore_urs_2026",
+    "slug": "nagore-kanduri-urs-2026",
+    "kind": "festival",
+    "title": {
+      "en": "Nagore Kanduri urs",
+      "ta": "நாகூர் கந்தூரி உருஸ்"
+    },
+    "description": {
+      "en": "The annual urs at Nagore Dargah, with shared meals and qawwali in the courtyard."
+    },
+    "startsAt": "2026-10-18T18:00:00+05:30",
+    "endsAt": "2026-10-18T22:30:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Nagore Dargah"
+    },
+    "venueAddress": {
+      "en": "Nagore, Nagapattinam, Tamil Nadu 611002"
+    },
+    "language": "ta",
+    "organizerId": "user_contrib_fatima",
+    "organizationId": "org_nagore_dargah",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "islam",
+      "sufism",
+      "topic-festivals",
+      "region-tamil-nadu",
+      "lang-ta",
+      "lang-en"
+    ]
+  },
+  {
+    "id": "event_harmandir_gurpurab_2026",
+    "slug": "guru-nanak-gurpurab-amritsar-2026",
+    "kind": "festival",
+    "title": {
+      "en": "Guru Nanak Gurpurab",
+      "hi": "गुरु नानक गुरपुरब"
+    },
+    "description": {
+      "en": "Gurpurab gatherings at Harmandir Sahib, with kirtan and langar through the night."
+    },
+    "startsAt": "2026-11-05T04:00:00+05:30",
+    "endsAt": "2026-11-05T22:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Harmandir Sahib"
+    },
+    "venueAddress": {
+      "en": "Amritsar, Punjab 143006"
+    },
+    "language": "pa",
+    "organizerId": "user_contrib_harpreet",
+    "organizationId": "org_harmandir_sahib",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "sikhism",
+      "topic-festivals",
+      "topic-music",
+      "region-punjab",
+      "lang-pa",
+      "lang-hi"
+    ]
+  },
+  {
+    "id": "event_sarnath_retreat_2026",
+    "slug": "sarnath-weekend-sitting-december",
+    "kind": "gathering",
+    "title": {
+      "en": "Weekend sitting at Sarnath",
+      "hi": "सारनाथ सप्ताहांत बैठक"
+    },
+    "description": {
+      "en": "A quiet weekend of walking meditation and sitting in the deer park."
+    },
+    "startsAt": "2026-12-12T06:00:00+05:30",
+    "endsAt": "2026-12-13T16:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "venueName": {
+      "en": "Mulagandha Kuti Vihara"
+    },
+    "venueAddress": {
+      "en": "Sarnath, Varanasi, Uttar Pradesh 221007"
+    },
+    "language": "en",
+    "organizerId": "user_contrib_ananda",
+    "organizationId": "org_mulagandha_kuti",
+    "visibility": "public",
+    "rsvpMode": "open",
+    "cancelled": false,
+    "scopeIds": [
+      "buddhism",
+      "topic-meditation",
+      "topic-yoga",
+      "lang-en"
+    ]
+  }
+]

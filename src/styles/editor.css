@@ -1,0 +1,759 @@
+/* ==========================================================================
+   Composer & rich-text editor (§publishing)
+
+   A compact writing tool, not a settings screen: title and summary are single
+   lines with no visible label (the placeholder carries that), so the writing
+   surface below starts almost immediately. Every control is drawn from the
+   existing button/field scales rather than the editor library's own chrome.
+   ========================================================================== */
+
+/* Always the full container width: publishing-as-organization moved into a
+   single field inside the publish-preview dialog (asked once, right before
+   the writer confirms), so the editor no longer shares this column with a
+   side rail that most writers never saw anyway. */
+.ds-composer {
+  display: grid;
+  gap: var(--ds-space-4);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.ds-composer__main {
+  display: grid;
+  gap: var(--ds-space-3);
+  min-width: 0;
+}
+
+/* The title is the loudest thing on the page, as it will be when published —
+   but at a compact control height, since the visible label is gone and the
+   placeholder itself sets the tone. */
+.ds-composer__title {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-lg);
+  font-weight: 600;
+  min-height: var(--ds-control-height);
+}
+
+.ds-composer__summary {
+  min-height: 0;
+  field-sizing: content;
+  max-height: 4.5rem;
+  resize: none;
+}
+
+.ds-composer__actions {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding-block-start: var(--ds-space-4);
+  border-block-start: 1px solid var(--border);
+}
+
+.ds-composer__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+}
+
+/* ── Editor shell ───────────────────────────────────────────────────────── */
+
+.ds-editor {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease),
+    box-shadow var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-editor:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ds-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  background: var(--surface-muted);
+  /* Stays reachable while writing a long piece. */
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+}
+
+.ds-editor__group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ds-editor__divider {
+  width: 1px;
+  align-self: stretch;
+  margin-inline: var(--ds-space-1);
+  background: var(--border);
+}
+
+.ds-editor__tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-control-height-sm);
+  height: var(--ds-control-height-sm);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease),
+    color var(--ds-duration-fast) var(--ds-ease),
+    transform var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-editor__tool:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.ds-editor__tool:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.ds-editor__tool[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  color: var(--accent);
+}
+
+.ds-editor__picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-inline: var(--ds-space-2);
+  height: var(--ds-control-height-sm);
+  border-radius: var(--ds-radius);
+  color: var(--text-secondary);
+}
+
+.ds-editor__picker:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.ds-editor__select {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 6.5rem;
+}
+
+/* ── Background picker (a custom listbox, not a native <select>) ─────────── */
+
+.ds-bg-select {
+  position: relative;
+}
+
+.ds-bg-select__trigger {
+  border: 0;
+  background: transparent;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ds-bg-select__value {
+  max-width: 6.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-bg-select__thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 1.5rem;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xs);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.ds-bg-select__menu {
+  position: absolute;
+  z-index: 5;
+  inset-block-start: calc(100% + var(--ds-space-1));
+  inset-inline-start: 0;
+  list-style: none;
+  margin: 0;
+  padding: var(--ds-space-1);
+  min-width: 11rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface);
+  box-shadow: var(--ds-shadow-soft);
+}
+
+.ds-bg-select__option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  width: 100%;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+
+.ds-bg-select__option:hover {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.ds-bg-select__option[aria-selected="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.ds-bg-select__option .ds-bg-select__thumb {
+  width: 2rem;
+}
+
+/* ── Writing surface ────────────────────────────────────────────────────── */
+
+.ds-editor__surface {
+  position: relative;
+}
+
+.ds-editor__input {
+  /* The editable element also carries .ds-prose, so published articles and
+     the editor share the same reading rhythm — but .ds-prose caps its own
+     width at the 40rem reading measure. Nothing in the editor's own frame
+     matched that width, so the cap showed up as a bare vertical edge
+     part-way across the box instead of an intentional page margin. The
+     writing surface is a tool, not the published page, so it takes the
+     full width of its frame here. */
+  max-width: none;
+  min-height: 34rem;
+  padding: var(--ds-space-5) var(--ds-space-5);
+  outline: none;
+}
+
+.ds-editor__placeholder {
+  position: absolute;
+  inset-block-start: var(--ds-space-5);
+  inset-inline-start: var(--ds-space-5);
+  color: var(--text-muted);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Editor content echoes the published article's rhythm. */
+.ds-editor__paragraph {
+  margin: 0 0 var(--ds-space-4);
+}
+
+.ds-editor__h2,
+.ds-editor__h3,
+.ds-editor__h4 {
+  font-family: var(--ds-font-display);
+  line-height: var(--ds-leading-snug);
+  margin: var(--ds-space-5) 0 var(--ds-space-3);
+}
+
+.ds-editor__h2 {
+  font-size: var(--ds-text-xl);
+}
+
+.ds-editor__h3 {
+  font-size: var(--ds-text-lg);
+}
+
+.ds-editor__quote {
+  margin: var(--ds-space-4) 0;
+  padding-inline-start: var(--ds-space-4);
+  border-inline-start: 2px solid var(--accent);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.ds-editor__ul,
+.ds-editor__ol {
+  margin: 0 0 var(--ds-space-4);
+  padding-inline-start: var(--ds-space-6);
+}
+
+.ds-editor__li {
+  margin-block-end: var(--ds-space-2);
+}
+
+.ds-editor__link {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.ds-editor__bold {
+  font-weight: 700;
+}
+.ds-editor__italic {
+  font-style: italic;
+}
+.ds-editor__underline {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.ds-editor__strike {
+  text-decoration: line-through;
+}
+.ds-editor__code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: var(--ds-radius-xs);
+  background: var(--surface-muted);
+}
+
+/* A `#tag` typed in the body becomes a pill in place, the moment it's closed
+   by a space or punctuation — this is the only tag "input" the writer sees. */
+.ds-editor__hashtag {
+  padding: 0.05em 0.45em;
+  border-radius: var(--ds-radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-editor__tool {
+    transition: none;
+  }
+}
+
+.ds-spin {
+  animation: ds-spin 1s linear infinite;
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Cover (compact — a confirmation row, not a preview) ─────────────────── */
+
+/* A confirmation strip, not a preview: a small thumbnail and two icon
+   actions on one line, so choosing it costs a row of the writing page rather
+   than a couple of hundred pixels of height. */
+.ds-composer__media-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface-muted);
+}
+
+.ds-composer__media-thumb {
+  width: 2.75rem;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ds-composer__media-label {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The full-size look, shown only on request inside the shared Dialog. */
+.ds-composer__media-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ds-radius-md);
+}
+
+/* ── Inline figures inside the editor ───────────────────────────────────── */
+
+.ds-editor__figure-host {
+  /* No automatic vertical spacing: an inserted figure sits flush against
+     whatever is next to it, exactly like a paragraph does. A writer who
+     wants a gap above or below adds a blank line the same way they would
+     around any other block — the editor doesn't impose one.
+
+     Horizontally, a default (unaligned) image simply fills the column at the
+     writing surface's normal text inset, the same as the published article —
+     an earlier version tried to bleed it past that padding with negative
+     margins, but that fought the contentEditable element's own layout sizing
+     and could blow an unresized image (no explicit width) up to its full
+     natural pixel size instead of constraining it. Not worth the risk for a
+     look the published page doesn't even have. */
+  margin-block: 0;
+}
+
+.ds-editor .ds-figure {
+  /* The published article gives `.ds-figure` its own margin-block (§editorial)
+     for the rhythm of a long read; stacked with the host wrapper's own
+     margin above, a figure in the editor got roughly double that gap. The
+     editor is a denser tool, not the published page, so its margin comes
+     only from the host wrapper. */
+  position: relative;
+  margin-block: 0;
+}
+
+/* Left/right alignment floats a smaller copy of the figure so body text
+   wraps around the opposite side, the way a word processor's "square" image
+   layout works. Centre keeps the smaller size but doesn't float, so it
+   simply interrupts the text column rather than sitting beside it. */
+.ds-editor .ds-figure--align-left,
+.ds-editor .ds-figure--align-right {
+  width: min(45%, 22rem);
+  margin-block: 0 var(--ds-space-3);
+}
+
+.ds-editor .ds-figure--align-left {
+  float: inline-start;
+  margin-inline-end: var(--ds-space-4);
+}
+
+.ds-editor .ds-figure--align-right {
+  float: inline-end;
+  margin-inline-start: var(--ds-space-4);
+}
+
+.ds-editor .ds-figure--align-center {
+  width: min(60%, 26rem);
+  margin-inline: auto;
+}
+
+/* A float narrower than this is cramped against wrapped text on a phone —
+   drop back to a normal full-width block instead of a tiny floated image. */
+@media (max-width: 34rem) {
+  .ds-editor .ds-figure--align-left,
+  .ds-editor .ds-figure--align-right {
+    float: none;
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* Figure controls sit over the image and stay out of the text flow, so the
+   caret never lands inside them. Wraps onto a second row on a narrow
+   (left/right-aligned) figure rather than squeezing every button into one
+   cramped line, which is what made them illegible and hard to click
+   individually on a floated image. */
+.ds-editor__figure-tools {
+  position: absolute;
+  inset-block-start: var(--ds-space-2);
+  inset-inline-end: var(--ds-space-2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 3px;
+  max-width: calc(100% - var(--ds-space-4));
+  padding: 3px;
+  border-radius: var(--ds-radius-md);
+  background: color-mix(in srgb, var(--scrim) 72%, transparent);
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-editor .ds-figure:hover .ds-editor__figure-tools,
+.ds-editor__figure-tools:focus-within {
+  opacity: 1;
+}
+
+.ds-editor__figure-tools .ds-editor__tool {
+  flex-shrink: 0;
+  color: var(--scrim-ink);
+}
+
+.ds-editor__figure-tools .ds-editor__tool:hover {
+  background: rgb(255 255 255 / 0.18);
+  color: var(--scrim-ink);
+}
+
+.ds-editor__figure-tools .ds-editor__tool[aria-pressed="true"] {
+  background: rgb(255 255 255 / 0.3);
+  color: var(--scrim-ink);
+}
+
+/* The resize handle: a small grip in the figure's bottom-right corner,
+   dragged to set a real pixel width and height (§freestyle resize). Shown
+   with the rest of the figure tools on hover, via the same opacity rule. */
+.ds-editor__figure-resize {
+  position: absolute;
+  inset-block-end: var(--ds-space-2);
+  inset-inline-end: var(--ds-space-2);
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--ds-radius-sm);
+  background: color-mix(in srgb, var(--scrim) 72%, transparent);
+  cursor: nwse-resize;
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-ease);
+  touch-action: none;
+}
+
+[dir="rtl"] .ds-editor__figure-resize {
+  cursor: nesw-resize;
+}
+
+.ds-editor .ds-figure:hover .ds-editor__figure-resize {
+  opacity: 1;
+}
+
+.ds-editor__figure-resize::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-inline-end: 2px solid var(--scrim-ink);
+  border-block-end: 2px solid var(--scrim-ink);
+}
+
+.ds-editor__toolbar-error {
+  flex-basis: 100%;
+  padding-inline: var(--ds-space-2);
+  font-size: var(--ds-text-2xs);
+  color: var(--danger);
+}
+
+/* ── Crop dialog ────────────────────────────────────────────────────────── */
+
+.ds-cropper {
+  position: relative;
+  margin-block-start: var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+  background: var(--surface-sunken);
+  /* Bounded so a tall portrait source cannot push the actions off-screen. */
+  max-height: 52dvh;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  user-select: none;
+}
+
+.ds-cropper--loading {
+  min-height: 14rem;
+}
+
+.ds-cropper__image {
+  display: block;
+  max-width: 100%;
+  max-height: 52dvh;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Darkens everything; the crop box punches back through with a shadow. */
+.ds-cropper__shade {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--scrim) 55%, transparent);
+  pointer-events: none;
+}
+
+.ds-cropper__box {
+  position: absolute;
+  border: 2px solid var(--surface);
+  /* The spread shadow is what makes the selection read as "cut out". */
+  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--scrim) 55%, transparent);
+  cursor: move;
+}
+
+.ds-cropper__box:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* A rule of thirds guide, which is how most people judge a crop. */
+.ds-cropper__box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, transparent 33.33%, rgb(255 255 255 / 0.35) 33.33%, rgb(255 255 255 / 0.35) calc(33.33% + 1px), transparent calc(33.33% + 1px)),
+    linear-gradient(to right, transparent 66.66%, rgb(255 255 255 / 0.35) 66.66%, rgb(255 255 255 / 0.35) calc(66.66% + 1px), transparent calc(66.66% + 1px)),
+    linear-gradient(to bottom, transparent 33.33%, rgb(255 255 255 / 0.35) 33.33%, rgb(255 255 255 / 0.35) calc(33.33% + 1px), transparent calc(33.33% + 1px)),
+    linear-gradient(to bottom, transparent 66.66%, rgb(255 255 255 / 0.35) 66.66%, rgb(255 255 255 / 0.35) calc(66.66% + 1px), transparent calc(66.66% + 1px));
+}
+
+/* The crop shape picker: which preset (free, original, square, banner,
+   wide) the current inline image is being cropped to. Only shown for inline
+   images — a cover always uses its own fixed shape. */
+.ds-cropper-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-3);
+}
+
+.ds-cropper-presets__option {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-pill);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease),
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-cropper-presets__option:hover {
+  border-color: var(--accent-line);
+  color: var(--text-primary);
+}
+
+.ds-cropper-presets__option[aria-checked="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ds-cropper__handle {
+  position: absolute;
+  inset-block-end: -7px;
+  inset-inline-end: -7px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--surface);
+  border-radius: var(--ds-radius-sm);
+  background: var(--accent);
+  cursor: nwse-resize;
+}
+
+[dir="rtl"] .ds-cropper__handle {
+  cursor: nesw-resize;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ds-spin {
+    animation: ds-spin 620ms linear infinite;
+  }
+}
+
+/* ── Preview overlay ────────────────────────────────────────────────────── */
+
+/* A full-screen stand-in for the published page, shown before the writer
+   commits to publishing. Fixed above the whole app shell rather than a
+   dialog sized for a short confirmation — the point is to see the piece the
+   way a reader will, at full width and scroll. */
+.ds-preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  overflow-y: auto;
+}
+
+.ds-preview-overlay__bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  border-block-end: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.ds-preview-overlay__label {
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* "Back to editing" + "Publish" (both nowrap ds-btn) can outgrow a ~360px
+   phone alongside the label with no wrap — the label is the least essential
+   item here, same reasoning as .ds-brand__tagline hiding narrow. */
+@media (max-width: 25rem) {
+  .ds-preview-overlay__label {
+    display: none;
+  }
+}
+
+.ds-preview-overlay__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+}
+
+.ds-preview-overlay__body {
+  flex: 1 1 auto;
+  padding: var(--ds-space-7) var(--ds-gutter) var(--ds-space-9);
+}
+
+/* Asked once, right before publishing, rather than as a permanent side rail
+   most writers (those in no organization) never needed to see at all. A
+   compact inline control, not a full-width field: this is one small choice
+   among many on the page, not the main event. */
+.ds-preview-overlay__publish-as {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-gutter);
+  border-block-end: 1px solid var(--border);
+  background: var(--surface-muted);
+  font-size: var(--ds-text-xs);
+}
+
+.ds-preview-overlay__publish-as label {
+  white-space: nowrap;
+}
+
+.ds-preview-overlay__publish-as .ds-select {
+  width: auto;
+  /* A long organization name must not push the row past the viewport —
+     it can wrap onto its own line under the label instead (flex-wrap above). */
+  max-width: 100%;
+  min-height: var(--ds-control-height-sm);
+  padding-block: 0.25rem;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-article-preview {
+  position: relative;
+  max-width: var(--ds-content-wide);
+  margin-inline: auto;
+}

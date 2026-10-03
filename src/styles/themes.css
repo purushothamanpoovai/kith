@@ -1,0 +1,272 @@
+/* ==========================================================================
+   Theme system (§5, §44)
+
+   Three layers, all of which only ever touch the *accent* tokens — never
+   surfaces, type scale, spacing or layout. The application must stay
+   recognisably the same product under any theme.
+
+     [data-mode]    light | dark              — set by the viewer
+     [data-theme]   the viewer's accent choice, applied to <html>
+     [data-accent]  a contextual accent applied to a *region* (a religion,
+                    tradition or topic page), resolved from data through
+                    domain/theme/theme-config.ts. Never hard-coded in a
+                    generic component.
+
+   An organization instead sets `--accent`/`--accent-soft` inline on its own
+   wrapper (see OrganizationTheme), which is the same mechanism with a value
+   the platform does not need to enumerate.
+   ========================================================================== */
+
+/* ── Accent palettes ─────────────────────────────────────────────────────
+   `.ds-accent-*` classes hold the values; the selectors below just apply
+   them, so a palette is defined once and reachable from every layer.      */
+
+[data-theme="universal"],
+[data-accent="universal"],
+[data-theme="clay"],
+[data-accent="clay"] {
+  --accent: #8a3f24;
+  --accent-hover: #a04d2d;
+  --accent-soft: #f7eee8;
+  --accent-ink: #ffffff;
+  --accent-line: #d9c4b7;
+  --editorial: #7d5a2e;
+  --editorial-soft: #f5efe2;
+  --ambient-wash: #b9a988;
+  --ambient-line: #a08e6d;
+}
+
+[data-mode="dark"] [data-accent="universal"],
+[data-mode="dark"] [data-accent="clay"],
+:root[data-mode="dark"][data-theme="universal"],
+:root[data-mode="dark"][data-theme="clay"] {
+  --accent: #e08b62;
+  --accent-hover: #eda078;
+  --accent-soft: #2e1e15;
+  --accent-ink: #1a0f08;
+  --accent-line: #4a3225;
+  --editorial: #cba871;
+  --editorial-soft: #241d10;
+  --ambient-wash: #6f6146;
+  --ambient-line: #8a7a58;
+}
+
+[data-theme="indigo"],
+[data-accent="indigo"] {
+  --accent: #3a3d8f;
+  --accent-hover: #4a4dab;
+  --accent-soft: #eeeef8;
+  --accent-ink: #ffffff;
+  --accent-line: #c2c3e2;
+  --editorial: #5b5a8c;
+  --editorial-soft: #f0f0f7;
+  --ambient-wash: #9a9cc4;
+  --ambient-line: #7b7db0;
+}
+
+[data-mode="dark"] [data-accent="indigo"],
+:root[data-mode="dark"][data-theme="indigo"] {
+  --accent: #9ba0e8;
+  --accent-hover: #b3b7f0;
+  --accent-soft: #1b1c3a;
+  --accent-ink: #0d0e22;
+  --accent-line: #333670;
+  --editorial: #a9a7d4;
+  --editorial-soft: #1a1a30;
+  --ambient-wash: #4c4e86;
+  --ambient-line: #6b6da8;
+}
+
+[data-theme="pine"],
+[data-accent="pine"] {
+  --accent: #2a5546;
+  --accent-hover: #366b58;
+  --accent-soft: #eaf1ee;
+  --accent-ink: #ffffff;
+  --accent-line: #bdd2c9;
+  --editorial: #4d6b52;
+  --editorial-soft: #eef3ee;
+  --ambient-wash: #93b0a4;
+  --ambient-line: #6f9384;
+}
+
+[data-mode="dark"] [data-accent="pine"],
+:root[data-mode="dark"][data-theme="pine"] {
+  --accent: #79bda6;
+  --accent-hover: #94cdb9;
+  --accent-soft: #142521;
+  --accent-ink: #071410;
+  --accent-line: #2b4a3f;
+  --editorial: #9dbfa4;
+  --editorial-soft: #16231a;
+  --ambient-wash: #3f6355;
+  --ambient-line: #5b8474;
+}
+
+[data-theme="plum"],
+[data-accent="plum"] {
+  --accent: #6d2c4a;
+  --accent-hover: #85385c;
+  --accent-soft: #f8ecf1;
+  --accent-ink: #ffffff;
+  --accent-line: #dcbdca;
+  --editorial: #7d4a5e;
+  --editorial-soft: #f7eff2;
+  --ambient-wash: #bb9aa8;
+  --ambient-line: #9c7686;
+}
+
+[data-mode="dark"] [data-accent="plum"],
+:root[data-mode="dark"][data-theme="plum"] {
+  --accent: #d891ac;
+  --accent-hover: #e6a8bf;
+  --accent-soft: #2b1620;
+  --accent-ink: #1a080f;
+  --accent-line: #4b2635;
+  --editorial: #c99cad;
+  --editorial-soft: #241520;
+  --ambient-wash: #6d4354;
+  --ambient-line: #8d6272;
+}
+
+[data-theme="bronze"],
+[data-accent="bronze"] {
+  --accent: #7a5c1e;
+  --accent-hover: #927029;
+  --accent-soft: #f7f1e0;
+  --accent-ink: #ffffff;
+  --accent-line: #d9cba3;
+  --editorial: #8a6a26;
+  --editorial-soft: #f6f0df;
+  --ambient-wash: #bfae82;
+  --ambient-line: #a09067;
+}
+
+[data-mode="dark"] [data-accent="bronze"],
+:root[data-mode="dark"][data-theme="bronze"] {
+  --accent: #d8b467;
+  --accent-hover: #e5c684;
+  --accent-soft: #271f0e;
+  --accent-ink: #171104;
+  --accent-line: #4a3d1c;
+  --editorial: #d0b478;
+  --editorial-soft: #221b0d;
+  --ambient-wash: #6d5c31;
+  --ambient-line: #8d7a49;
+}
+
+[data-theme="teal"],
+[data-accent="teal"] {
+  --accent: #1d5a63;
+  --accent-hover: #26717c;
+  --accent-soft: #e8f2f3;
+  --accent-ink: #ffffff;
+  --accent-line: #b6d3d7;
+  --editorial: #3f6b70;
+  --editorial-soft: #edf3f4;
+  --ambient-wash: #8fb4b9;
+  --ambient-line: #6a969c;
+}
+
+[data-mode="dark"] [data-accent="teal"],
+:root[data-mode="dark"][data-theme="teal"] {
+  --accent: #6fc0cb;
+  --accent-hover: #8ed2db;
+  --accent-soft: #10262a;
+  --accent-ink: #05171a;
+  --accent-line: #244c53;
+  --editorial: #93bfc4;
+  --editorial-soft: #132528;
+  --ambient-wash: #35666e;
+  --ambient-line: #54868e;
+}
+
+[data-theme="slate"],
+[data-accent="slate"] {
+  --accent: #3d4a57;
+  --accent-hover: #4d5d6c;
+  --accent-soft: #eef0f2;
+  --accent-ink: #ffffff;
+  --accent-line: #c4ccd3;
+  --editorial: #5a6672;
+  --editorial-soft: #f0f2f4;
+  --ambient-wash: #a3adb6;
+  --ambient-line: #808c97;
+}
+
+[data-mode="dark"] [data-accent="slate"],
+:root[data-mode="dark"][data-theme="slate"] {
+  --accent: #a8b8c6;
+  --accent-hover: #bfccd7;
+  --accent-soft: #1c2228;
+  --accent-ink: #0c1014;
+  --accent-line: #384450;
+  --editorial: #aab5c0;
+  --editorial-soft: #1b2126;
+  --ambient-wash: #4a5661;
+  --ambient-line: #67737e;
+}
+
+/* ── Re-derived aliases ─────────────────────────────────────────────────
+   html[data-theme] and any [data-accent] region both re-bind the legacy
+   --ds-color-* names (and cover-art tokens) so every stylesheet that still
+   reads those names follows the active palette.                          */
+
+html[data-theme],
+[data-accent] {
+  --ds-color-accent: var(--accent);
+  --ds-color-accent-bright: var(--accent-hover);
+  --ds-color-accent-soft: var(--accent-soft);
+  --ds-color-accent-ink: var(--accent-ink);
+  --ds-color-kicker: var(--editorial);
+  --ds-color-meta: var(--editorial);
+  --ds-color-gold: var(--editorial);
+  --ds-color-gold-soft: var(--editorial-soft);
+  --ds-color-saffron: var(--accent);
+  --ds-color-saffron-soft: var(--accent-soft);
+  --ds-color-green: var(--calm);
+  --ds-color-green-soft: var(--calm-soft);
+  --ds-shadow-header: 0 1px 0 var(--border);
+  --ds-focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);
+
+  /* Generated cover art reads these, so a palette swap recasts every card. */
+  --cover-base: color-mix(in srgb, var(--text-primary) 78%, var(--accent));
+  --cover-figure: var(--accent);
+  --cover-light: color-mix(in srgb, var(--accent-soft) 45%, var(--accent-ink));
+}
+
+/* ── Visual styles ──────────────────────────────────────────────────────
+   The one place a theme may change more than colour: how hero and frame
+   surfaces are treated. Still structural-neutral — padding and grid are
+   untouched.                                                              */
+
+[data-visual="archival"] {
+  --ds-radius-lg: 4px;
+  --ds-radius-md: 3px;
+  --ds-radius: 2px;
+}
+
+[data-visual="luminous"] {
+  --ds-shadow-card: 0 1px 2px rgba(28, 26, 22, 0.04),
+    0 6px 20px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Cover-art tint recipes — hashed onto the SVG so a grid is not eight
+   identical pictures, while every recipe still tracks the active accent. */
+.ds-cover__art[data-tint="0"] {
+  --cover-base: color-mix(in srgb, var(--text-primary) 82%, var(--accent));
+  --cover-figure: var(--accent);
+  --cover-light: color-mix(in srgb, var(--accent-ink) 35%, var(--accent-soft));
+}
+
+.ds-cover__art[data-tint="1"] {
+  --cover-base: color-mix(in srgb, var(--accent) 48%, var(--text-primary));
+  --cover-figure: color-mix(in srgb, var(--accent) 70%, var(--editorial));
+  --cover-light: var(--accent-soft);
+}
+
+.ds-cover__art[data-tint="2"] {
+  --cover-base: color-mix(in srgb, var(--text-primary) 70%, var(--editorial));
+  --cover-figure: var(--editorial);
+  --cover-light: color-mix(in srgb, var(--editorial-soft) 40%, var(--accent-ink));
+}

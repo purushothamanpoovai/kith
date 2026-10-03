@@ -1,0 +1,438 @@
+[
+  {
+    "id": "org_shirdi_sai_temple",
+    "slug": "shirdi-sai-baba-temple",
+    "name": {
+      "en": "Shirdi Sai Baba Temple",
+      "ta": "சிர்டி சாய் பாபா கோயில்",
+      "hi": "शिरडी साई बाबा मंदिर"
+    },
+    "description": {
+      "en": "Shirdi is a town and pilgrimage site in the Indian state of Maharashtra, well known as the home of the 19th-century Indian saint Sai Baba. This overview incorporates factual material from Wikipedia contributors, \"Shirdi,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Shirdi",
+      "hi": "आधिकारिक उत्सव कार्यक्रम, शिक्षाओं और सामुदायिक सभाओं को साझा करने वाला सत्यापित भक्ति समुदाय।"
+    },
+    "kind": "temple",
+    "status": "verified",
+    "publishMode": "admin_approval",
+    "website": "https://en.wikipedia.org/wiki/Shirdi",
+    "location": {
+      "en": "Shirdi, Maharashtra",
+      "hi": "शिरडी, महाराष्ट्र"
+    },
+    "scopeIds": [
+      "hinduism",
+      "lang-hi",
+      "lang-en"
+    ],
+    "members": [
+      {
+        "userId": "user_ravi_kumar",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_priya_sharma",
+        "role": "content_moderator"
+      },
+      {
+        "userId": "user_dummy_shirdi_sai_baba_temple_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_shirdi_sai_baba_temple_mod",
+        "role": "content_moderator"
+      }
+    ],
+    "services": [
+      {
+        "id": "orgsvc_shirdi_kakad_arti",
+        "name": {
+          "en": "Kakad Aarti",
+          "hi": "काकड़ आरती",
+          "ta": "காகட் ஆரத்தி"
+        },
+        "language": "hi",
+        "dayOfWeek": null,
+        "startTime": "05:15",
+        "endTime": "05:45",
+        "sortOrder": 0
+      },
+      {
+        "id": "orgsvc_shirdi_madhyan_arti",
+        "name": {
+          "en": "Madhyan Aarti",
+          "hi": "मध्यान आरती",
+          "ta": "மத்யான் ஆரத்தி"
+        },
+        "language": "hi",
+        "dayOfWeek": null,
+        "startTime": "12:00",
+        "endTime": "12:30",
+        "sortOrder": 1
+      },
+      {
+        "id": "orgsvc_shirdi_shej_arti",
+        "name": {
+          "en": "Shej Aarti",
+          "hi": "शेज आरती",
+          "ta": "ஷேஜ் ஆரத்தி"
+        },
+        "language": "hi",
+        "dayOfWeek": null,
+        "startTime": "22:00",
+        "endTime": "22:30",
+        "note": {
+          "en": "Temple closes to visitors after this aarti.",
+          "hi": "इस आरती के बाद मंदिर आगंतुकों के लिए बंद हो जाता है।"
+        },
+        "sortOrder": 2
+      }
+    ]
+  },
+  {
+    "id": "org_ramana_ashram",
+    "slug": "sri-ramanasramam",
+    "name": {
+      "en": "Sri Ramanasramam",
+      "ta": "ஸ்ரீ ரமணாஸ்ரமம்",
+      "hi": "श्री रमणाश्रम"
+    },
+    "description": {
+      "en": "Sri Ramana Ashram, also known as Sri Ramanasramam, is the ashram which was home to modern sage and Advaita Vedanta master Ramana Maharshi from 1922 until his death in 1950. It is situated at the foot of the holy Arunachala hill, to the west of Tiruvannamalai, Tamil Nadu. This overview incorporates factual material from Wikipedia contributors, \"Sri Ramana Ashram,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Sri_Ramana_Ashram"
+    },
+    "kind": "ashram",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Sri_Ramana_Ashram",
+    "location": {
+      "en": "Tiruvannamalai, Tamil Nadu",
+      "ta": "திருவண்ணாமலை, தமிழ்நாடு"
+    },
+    "scopeIds": [
+      "hinduism",
+      "shaivism",
+      "topic-meditation",
+      "region-tamil-nadu",
+      "lang-ta",
+      "lang-en"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_kavitha",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_ravi_kumar",
+        "role": "event_manager"
+      },
+      {
+        "userId": "user_dummy_sri_ramanasramam_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_sri_ramanasramam_mod",
+        "role": "content_moderator"
+      }
+    ]
+  },
+  {
+    "id": "org_velankanni_basilica",
+    "slug": "velankanni-basilica",
+    "name": {
+      "en": "Basilica of Our Lady of Good Health, Velankanni",
+      "ta": "வேளாங்கண்ணி அன்னை ஆலயம்",
+      "hi": "वेलांकन्नी बेसिलिका"
+    },
+    "description": {
+      "en": "The Basilica of Our Lady of Good Health, also known as Sanctuary of Our Lady of Velankanni, is a Marian shrine located in the town of Velankanni in Tamil Nadu, India. This overview incorporates factual material from Wikipedia contributors, \"Basilica of Our Lady of Good Health,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Basilica_of_Our_Lady_of_Good_Health"
+    },
+    "kind": "church",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Basilica_of_Our_Lady_of_Good_Health",
+    "location": {
+      "en": "Velankanni, Tamil Nadu",
+      "ta": "வேளாங்கண்ணி, தமிழ்நாடு"
+    },
+    "scopeIds": [
+      "christianity",
+      "catholicism",
+      "mary",
+      "region-tamil-nadu",
+      "lang-ta",
+      "lang-en"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_maria",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_org_velankanni_admin",
+        "role": "event_manager"
+      },
+      {
+        "userId": "user_contrib_james",
+        "role": "content_moderator"
+      },
+      {
+        "userId": "user_dummy_velankanni_basilica_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_velankanni_basilica_mod",
+        "role": "content_moderator"
+      }
+    ],
+    "services": [
+      {
+        "id": "orgsvc_velankanni_mass_ta",
+        "name": {
+          "en": "Holy Mass (Tamil)",
+          "ta": "திருப்பலி (தமிழ்)",
+          "hi": "पवित्र मिस्सा (तमिल)"
+        },
+        "language": "ta",
+        "dayOfWeek": null,
+        "startTime": "06:00",
+        "endTime": "07:00",
+        "sortOrder": 0
+      },
+      {
+        "id": "orgsvc_velankanni_mass_en",
+        "name": {
+          "en": "Holy Mass (English)",
+          "ta": "திருப்பலி (ஆங்கிலம்)",
+          "hi": "पवित्र मिस्सा (अंग्रेज़ी)"
+        },
+        "language": "en",
+        "dayOfWeek": 0,
+        "startTime": "09:00",
+        "endTime": "10:00",
+        "sortOrder": 1
+      },
+      {
+        "id": "orgsvc_velankanni_novena",
+        "name": {
+          "en": "Novena Service",
+          "ta": "நொவேனா வழிபாடு",
+          "hi": "नोवेना सेवा"
+        },
+        "language": "ta",
+        "dayOfWeek": 2,
+        "startTime": "17:30",
+        "endTime": "18:30",
+        "note": {
+          "en": "Especially crowded on Tuesdays.",
+          "ta": "செவ்வாய்க்கிழமைகளில் அதிக கூட்டம்."
+        },
+        "sortOrder": 2
+      }
+    ]
+  },
+  {
+    "id": "org_nagore_dargah",
+    "slug": "nagore-dargah",
+    "name": {
+      "en": "Nagore Dargah",
+      "ta": "நாகூர் தர்கா",
+      "hi": "नागौर दरगाह"
+    },
+    "description": {
+      "en": "Nagore Dargah is a dargah built over the tomb of the Sufi saint Shahul Hamid. It is located in Nagore, a coastal town in Tamil Nadu, India. This overview incorporates factual material from Wikipedia contributors, \"Nagore Dargah,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Nagore_Dargah"
+    },
+    "kind": "mosque",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Nagore_Dargah",
+    "location": {
+      "en": "Nagore, Tamil Nadu",
+      "ta": "நாகூர், தமிழ்நாடு"
+    },
+    "scopeIds": [
+      "islam",
+      "sufism",
+      "region-tamil-nadu",
+      "lang-ta",
+      "lang-en",
+      "lang-ar"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_fatima",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_nagore_dargah_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_nagore_dargah_mod",
+        "role": "content_moderator"
+      }
+    ],
+    "services": [
+      {
+        "id": "orgsvc_nagore_fajr",
+        "name": {
+          "en": "Fajr Namaz",
+          "ta": "ஃபஜர் தொழுகை",
+          "hi": "फ़ज्र नमाज़"
+        },
+        "language": "ta",
+        "dayOfWeek": null,
+        "startTime": "05:00",
+        "endTime": "05:30",
+        "sortOrder": 0
+      },
+      {
+        "id": "orgsvc_nagore_jummah",
+        "name": {
+          "en": "Jummah Prayer",
+          "ta": "ஜும்மா தொழுகை",
+          "hi": "जुमा नमाज़"
+        },
+        "language": "ta",
+        "dayOfWeek": 5,
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "note": {
+          "en": "Main congregational prayer of the week.",
+          "ta": "வாரத்தின் முக்கிய கூட்டுத் தொழுகை."
+        },
+        "sortOrder": 1
+      },
+      {
+        "id": "orgsvc_nagore_isha",
+        "name": {
+          "en": "Isha Namaz",
+          "ta": "இஷா தொழுகை",
+          "hi": "ईशा नमाज़"
+        },
+        "language": "ta",
+        "dayOfWeek": null,
+        "startTime": "19:45",
+        "endTime": "20:15",
+        "sortOrder": 2
+      }
+    ]
+  },
+  {
+    "id": "org_harmandir_sahib",
+    "slug": "harmandir-sahib",
+    "name": {
+      "en": "Harmandir Sahib",
+      "ta": "ஹர்மந்திர் சாஹிப்",
+      "hi": "हरमंदिर साहिब",
+      "pa": "ਹਰਿਮੰਦਰ ਸਾਹਿਬ"
+    },
+    "description": {
+      "en": "The Golden Temple is a gurdwara located in Amritsar, Punjab, India. It is the pre-eminent spiritual site of Sikhism. This overview incorporates factual material from Wikipedia contributors, \"Golden Temple,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Golden_Temple"
+    },
+    "kind": "pilgrimage_org",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Golden_Temple",
+    "location": {
+      "en": "Amritsar, Punjab",
+      "hi": "अमृतसर, पंजाब"
+    },
+    "scopeIds": [
+      "sikhism",
+      "topic-devotion",
+      "region-punjab",
+      "lang-pa",
+      "lang-hi",
+      "lang-en"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_harpreet",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_harmandir_sahib_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_harmandir_sahib_mod",
+        "role": "content_moderator"
+      }
+    ]
+  },
+  {
+    "id": "org_mulagandha_kuti",
+    "slug": "mulagandha-kuti-vihara",
+    "name": {
+      "en": "Mulagandha Kuti Vihara, Sarnath",
+      "ta": "மூலகந்த குடி விகாரை, சாரநாத்",
+      "hi": "मूलगंध कुटी विहार, सारनाथ"
+    },
+    "description": {
+      "en": "Sarnath is a place located 10 kilometres north-east of Varanasi near the confluence of the Ganges and the Varuna rivers in Uttar Pradesh, India. The deer park in Sarnath is where Gautama Buddha first taught the Dharma. This overview incorporates factual material from Wikipedia contributors, \"Sarnath,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Sarnath"
+    },
+    "kind": "monastery",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Sarnath",
+    "location": {
+      "en": "Sarnath, Uttar Pradesh",
+      "hi": "सारनाथ, उत्तर प्रदेश"
+    },
+    "scopeIds": [
+      "buddhism",
+      "theravada",
+      "topic-meditation",
+      "lang-en",
+      "lang-hi"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_ananda",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_mulagandha_kuti_vihara_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_mulagandha_kuti_vihara_mod",
+        "role": "content_moderator"
+      }
+    ]
+  },
+  {
+    "id": "org_paradesi_synagogue",
+    "slug": "paradesi-synagogue",
+    "name": {
+      "en": "Paradesi Synagogue",
+      "ta": "பரதேசி ஜெப ஆலயம்",
+      "ml": "പരദേശി സിനഗോഗ്"
+    },
+    "description": {
+      "en": "The Paradesi Synagogue is the oldest active synagogue in the Commonwealth of Nations, located in Kochi, Kerala, in South India. This overview incorporates factual material from Wikipedia contributors, \"Paradesi Synagogue,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Paradesi_Synagogue"
+    },
+    "kind": "heritage_org",
+    "status": "verified",
+    "website": "https://en.wikipedia.org/wiki/Paradesi_Synagogue",
+    "location": {
+      "en": "Kochi, Kerala",
+      "ml": "കൊച്ചി, കേരളം"
+    },
+    "scopeIds": [
+      "judaism",
+      "topic-heritage",
+      "region-kerala",
+      "lang-en",
+      "lang-ml"
+    ],
+    "members": [
+      {
+        "userId": "user_contrib_leela",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_paradesi_synagogue_admin",
+        "role": "org_admin"
+      },
+      {
+        "userId": "user_dummy_paradesi_synagogue_mod",
+        "role": "content_moderator"
+      }
+    ]
+  }
+]

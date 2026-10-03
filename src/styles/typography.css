@@ -1,0 +1,335 @@
+/* ==========================================================================
+   Typography
+
+   1. Script-aware stacks. Every script gets a deliberately chosen face for
+      display, reading and UI — Latin typography is never assumed to work for
+      Indic or Arabic text (§12). Selection happens through `:lang()`, so it
+      follows the *content* language, not only the UI locale: a Tamil poem on
+      an English page still sets in a Tamil face.
+   2. Named roles: display / heading / subheading / body / caption / metadata
+      / button / nav.
+   3. Long-form reading styles for articles and poetry.
+   ========================================================================== */
+
+/* ── 1. Script-aware stacks ─────────────────────────────────────────────── */
+
+:root {
+  /* Latin is the default; each :lang() block below swaps these three. */
+  --font-script-sans: "Noto Sans";
+  --font-script-serif: "Noto Serif";
+  --font-script-display: "Noto Serif";
+}
+
+:lang(ta) {
+  --font-latin-sans: var(--font-noto-sans-tamil);
+  --font-latin-serif: var(--font-noto-serif-tamil);
+  --font-latin-display: var(--font-noto-serif-tamil);
+  --font-script-sans: "Noto Sans Tamil", "Latha";
+  --font-script-serif: "Noto Serif Tamil", "Latha";
+  --font-script-display: "Noto Serif Tamil", "Latha";
+  /* Tamil has a large apparent x-height and needs more leading than Latin. */
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+  --ds-tracking-caps: 0.05em;
+}
+
+:lang(hi),
+:lang(mr) {
+  --font-latin-sans: var(--font-noto-sans-devanagari);
+  --font-latin-serif: var(--font-noto-serif-devanagari);
+  --font-latin-display: var(--font-noto-serif-devanagari);
+  --font-script-sans: "Noto Sans Devanagari", "Nirmala UI";
+  --font-script-serif: "Noto Serif Devanagari", "Nirmala UI";
+  --font-script-display: "Noto Serif Devanagari", "Nirmala UI";
+  /* Devanagari's shirorekha needs room above; tight tracking damages it. */
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+  --ds-tracking-caps: 0.04em;
+}
+
+:lang(ml) {
+  --font-latin-sans: var(--font-noto-sans-malayalam);
+  --font-latin-serif: var(--font-noto-serif-malayalam);
+  --font-latin-display: var(--font-noto-serif-malayalam);
+  --font-script-sans: "Noto Sans Malayalam";
+  --font-script-serif: "Noto Serif Malayalam";
+  --font-script-display: "Noto Serif Malayalam";
+  --ds-read-leading: 1.95;
+  --ds-tracking-tight: 0;
+  --ds-tracking-caps: 0.04em;
+}
+
+:lang(ur),
+:lang(ar),
+:lang(fa) {
+  --font-latin-sans: var(--font-noto-naskh-arabic);
+  --font-latin-serif: var(--font-noto-naskh-arabic);
+  --font-latin-display: var(--font-noto-naskh-arabic);
+  --font-script-sans: "Noto Naskh Arabic", "Noto Sans Arabic";
+  --font-script-serif: "Noto Naskh Arabic";
+  --font-script-display: "Noto Naskh Arabic";
+  --ds-read-leading: 2;
+  --ds-tracking-tight: 0;
+  --ds-tracking-caps: 0;
+}
+
+/* Scripts without a bundled webfont still get an intentional system stack
+   rather than silently inheriting a Latin face. */
+:lang(te) {
+  --font-script-sans: "Noto Sans Telugu", "Gautami";
+  --font-script-serif: "Noto Serif Telugu", "Gautami";
+  --font-script-display: "Noto Serif Telugu", "Gautami";
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+}
+
+:lang(kn) {
+  --font-script-sans: "Noto Sans Kannada", "Tunga";
+  --font-script-serif: "Noto Serif Kannada", "Tunga";
+  --font-script-display: "Noto Serif Kannada", "Tunga";
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+}
+
+:lang(bn) {
+  --font-script-sans: "Noto Sans Bengali", "Vrinda";
+  --font-script-serif: "Noto Serif Bengali", "Vrinda";
+  --font-script-display: "Noto Serif Bengali", "Vrinda";
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+}
+
+:lang(pa) {
+  --font-script-sans: "Noto Sans Gurmukhi", "Raavi";
+  --font-script-serif: "Noto Serif Gurmukhi", "Raavi";
+  --font-script-display: "Noto Serif Gurmukhi", "Raavi";
+  --ds-read-leading: 1.9;
+  --ds-tracking-tight: 0;
+}
+
+/* Uppercasing is a Latin convention. It is meaningless for Indic and Arabic
+   scripts and actively harms Nastaliq/Naskh, so caps roles opt out. */
+:lang(ta) .ds-caps,
+:lang(hi) .ds-caps,
+:lang(mr) .ds-caps,
+:lang(ml) .ds-caps,
+:lang(te) .ds-caps,
+:lang(kn) .ds-caps,
+:lang(bn) .ds-caps,
+:lang(pa) .ds-caps,
+:lang(ur) .ds-caps,
+:lang(ar) .ds-caps {
+  text-transform: none;
+  font-weight: 600;
+}
+
+/* ── 2. Named roles ─────────────────────────────────────────────────────── */
+
+.ds-display,
+.ds-display-lg {
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  line-height: var(--ds-leading-tight);
+  letter-spacing: var(--ds-tracking-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+
+.ds-display-lg {
+  font-size: var(--ds-text-5xl);
+}
+
+.ds-display {
+  font-size: var(--ds-text-4xl);
+}
+
+.ds-heading-1,
+.ds-heading-2,
+.ds-heading-3,
+.ds-title-1,
+.ds-title-2,
+.ds-title-3 {
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+  letter-spacing: var(--ds-tracking-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* `.ds-title-*` is an alias for `.ds-heading-*` — several page components
+   were written against that name; kept in sync here rather than renamed
+   throughout the app. */
+.ds-heading-1,
+.ds-title-1 {
+  font-size: var(--ds-text-3xl);
+}
+
+.ds-heading-2,
+.ds-title-2 {
+  font-size: var(--ds-text-2xl);
+}
+
+.ds-heading-3,
+.ds-title-3 {
+  font-size: var(--ds-text-xl);
+}
+
+.ds-subheading {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-lg);
+  font-weight: 400;
+  line-height: var(--ds-leading-normal);
+  color: var(--text-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.ds-body {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* `.ds-hint` is an alias for `.ds-caption` — kept in sync here rather than
+   renamed throughout the app. */
+.ds-caption,
+.ds-hint {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.ds-metadata {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: 500;
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+/* Kicker / eyebrow — the one place small caps earn their keep. */
+.ds-kicker {
+  display: block;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--editorial);
+  margin: 0 0 var(--ds-space-2);
+}
+
+.ds-eyebrow {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--ds-space-2);
+}
+
+/* Numerals and dates read better lining + tabular across all scripts. */
+time,
+.ds-tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 3. Long-form reading ───────────────────────────────────────────────── */
+
+.ds-prose {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-read-size);
+  line-height: var(--ds-read-leading);
+  color: var(--text-primary);
+  max-width: var(--ds-read-measure);
+}
+
+.ds-prose > * + * {
+  margin-block-start: var(--ds-space-5);
+}
+
+.ds-prose p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.ds-prose h2,
+.ds-prose h3 {
+  font-family: var(--ds-font-display);
+  line-height: var(--ds-leading-snug);
+  letter-spacing: var(--ds-tracking-tight);
+}
+
+.ds-prose h2 {
+  font-size: var(--ds-text-2xl);
+  margin-block-start: var(--ds-space-8);
+}
+
+.ds-prose h3 {
+  font-size: var(--ds-text-xl);
+  margin-block-start: var(--ds-space-7);
+}
+
+.ds-prose h2 + *,
+.ds-prose h3 + * {
+  margin-block-start: var(--ds-space-3);
+}
+
+.ds-prose a {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-color: var(--accent-line);
+}
+
+.ds-prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.ds-prose strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-prose ul,
+.ds-prose ol {
+  padding-inline-start: 1.5em;
+}
+
+.ds-prose li + li {
+  margin-block-start: var(--ds-space-2);
+}
+
+/* Verse: preserve the poet's line breaks and give each line room. */
+.ds-verse {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-xl);
+  line-height: 1.95;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  text-wrap: initial;
+}
+
+/* Reduce the reading size a step on the smallest phones so the measure stays
+   at a comfortable character count rather than 4 words per line. */
+@media (max-width: 25rem) {
+  :root {
+    --ds-read-size: 1rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --ds-read-size: 1.125rem;
+  }
+}

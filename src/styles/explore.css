@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Explore & search (§23, §33)
+
+   Explore was six identical pale boxes above 450px of empty page. It is now a
+   set of bands — one per dimension — each showing real entries rather than
+   only a count, so the page is dense with things to open.
+   ========================================================================== */
+
+.ds-explore {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-8);
+}
+
+/* The dimension index at the top: a proper card grid, not a compact strip —
+   each dimension gets its own symbol, not just a label and a count. */
+.ds-dimension-index {
+  display: grid;
+  /* Wide enough that a two-word label ("Sacred entities", "Sacred Places")
+     fits on one line at the label's own font size — narrower than this and
+     nowrap would either clip the label or force every tile wider than it
+     needs to be just to fit the longest one. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  /* Every tile in the same row stretches to the row's tallest item — the
+     `min-height` below alone doesn't do this, since each grid item still
+     sizes to its own content unless told to fill the row. */
+  align-items: stretch;
+  gap: var(--ds-space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-dimension-index li {
+  display: flex;
+}
+
+.ds-dimension {
+  position: relative;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--ds-space-2);
+  min-height: 8rem;
+  width: 100%;
+  padding: var(--ds-space-4);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--ds-radius-lg);
+  /* Each dimension carries its own accent, the same way the larger scope
+     cards below do, so the index row reads as seven distinct doors rather
+     than seven identical white boxes with a barely-visible texture. */
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--accent) 16%, var(--surface)) 0%,
+    var(--surface) 75%
+  );
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+/* Hover marks the target without moving it: the lift-and-shadow made a whole
+   row of tiles jump as the pointer crossed them, which reads as noise on a
+   page whose job is calm browsing. */
+.ds-dimension:hover,
+.ds-dimension:focus-visible {
+  border-color: var(--accent);
+}
+
+.ds-dimension > *:not(.ds-pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+/* The symbol badge — a small tinted circle so the glyph reads as a mark, not
+   as loose linework floating on the card. */
+.ds-dimension__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--ds-radius-pill);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: var(--accent);
+}
+
+.ds-dimension__label {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-lg);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+  white-space: nowrap;
+}
+
+.ds-dimension__count {
+  margin-block-start: auto;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── A dimension with admin-supplied card art ───────────────────────────────
+   The art becomes the tile, with the label beneath it rather than floating on
+   top: text over an arbitrary uploaded photograph can't be guaranteed legible,
+   and a scrim heavy enough to guarantee it would bury the picture. So the
+   image takes the upper block and the label sits on plain surface below —
+   which also keeps the tile the same height as its unadorned neighbours in the
+   same row. No hover lift or shadow here, deliberately: `.ds-dimension` marks
+   its hover with a border alone, and art must not reintroduce movement. */
+.ds-dimension--art {
+  /* Art sizes to its own aspect ratio, label and count take what they need,
+     and the spare row absorbs any extra height a taller sibling forces on
+     this tile — so nothing stretches the picture. */
+  grid-template-rows: auto auto auto 1fr;
+  align-content: stretch;
+  justify-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+
+.ds-dimension__art {
+  display: block;
+  width: 100%;
+  /* Same proportion as the plain tile's upper block, so a row mixing art and
+     glyph tiles keeps one baseline for its labels. */
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.ds-dimension__art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Art is decorative: a tile whose image fails to load falls back to the
+     tinted block above rather than an alt-text box. */
+  color: transparent;
+}
+
+.ds-dimension--art .ds-dimension__label,
+.ds-dimension--art .ds-dimension__count {
+  padding-inline: var(--ds-space-4);
+}
+
+.ds-dimension--art .ds-dimension__label {
+  padding-block-start: var(--ds-space-3);
+}
+
+.ds-dimension--art .ds-dimension__count {
+  margin-block-start: 0;
+  padding-block-end: var(--ds-space-4);
+}
+
+/* ── Search (§33) ───────────────────────────────────────────────────────── */
+
+.ds-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-6);
+}
+
+.ds-search__form {
+  display: flex;
+  gap: var(--ds-space-3);
+  align-items: center;
+}
+
+.ds-search__form .ds-search-input {
+  flex: 1;
+  min-height: var(--ds-control-height-lg);
+}
+
+.ds-search__summary {
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+}
+
+.ds-search__summary strong {
+  color: var(--text-primary);
+}
+
+/* Results grouped by kind, each group keeping its own card pattern so a
+   person, an organization and an article don't all look the same (§33). */
+.ds-result-group + .ds-result-group {
+  margin-block-start: var(--ds-space-7);
+}
+
+/* ── Scope detail ───────────────────────────────────────────────────────── */
+
+.ds-scope-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+
+.ds-scope-about {
+  max-width: 68ch;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-read-size);
+  line-height: var(--ds-read-leading);
+  color: var(--text-primary);
+}
+
+.ds-scope-about p {
+  margin: 0 0 var(--ds-space-4);
+}
+
+.ds-scope-about p:last-child {
+  margin-block-end: 0;
+}
+
+/* Source attribution for seeded encyclopaedic text. */
+.ds-source-note {
+  margin-block-start: var(--ds-space-4);
+  padding-block-start: var(--ds-space-3);
+  border-block-start: 1px solid var(--border);
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  overflow-wrap: break-word;
+}
+
+.ds-source-note a {
+  color: var(--text-secondary);
+}

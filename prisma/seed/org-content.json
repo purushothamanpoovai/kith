@@ -1,0 +1,132 @@
+[
+  {
+    "id": "article_guru_purnima_temple_2026",
+    "type": "article",
+    "slug": "annual-guru-purnima-celebration-2026",
+    "origin": "official",
+    "title": {
+      "en": "Annual Guru Purnima Celebration",
+      "hi": "वार्षिक गुरु पूर्णिमा समारोह"
+    },
+    "summary": {
+      "en": "Official schedule for Guru Purnima programs, satsang, and community seva at the temple.",
+      "hi": "मंदिर में गुरु पूर्णिमा कार्यक्रम, सत्संग और सामुदायिक सेवा का आधिकारिक कार्यक्रम।"
+    },
+    "authorId": "user_priya_sharma",
+    "publishedById": "user_priya_sharma",
+    "ownerOrganizationId": "org_shirdi_sai_temple",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 5,
+    "coverImage": "/media/covers/shiva-morning-lamp.jpg",
+    "trendingScore": 88,
+    "scopeIds": ["hinduism", "lang-hi", "lang-en"]
+  },
+  {
+    "id": "post_ramana_silence",
+    "type": "post",
+    "slug": "evening-silence-at-the-ashram",
+    "origin": "official",
+    "title": {
+      "en": "Evening silence at the ashram",
+      "ta": "ஆசிரமத்தில் மாலை அமைதி"
+    },
+    "summary": {
+      "en": "Visitors are welcome to sit in the old hall after 6pm. No photography during silence.",
+      "ta": "மாலை 6க்குப் பின் பழைய மண்டபத்தில் அமரலாம். அமைதியில் புகைப்படம் இல்லை."
+    },
+    "authorId": "user_contrib_kavitha",
+    "publishedById": "user_contrib_kavitha",
+    "ownerOrganizationId": "org_ramana_ashram",
+    "originalLanguage": "ta",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 2,
+    "trendingScore": 70,
+    "scopeIds": ["hinduism", "topic-meditation", "region-tamil-nadu", "lang-ta", "lang-en"]
+  },
+  {
+    "id": "post_velankanni_feast_notice",
+    "type": "post",
+    "slug": "feast-of-our-lady-procession-notice",
+    "origin": "official",
+    "title": {
+      "en": "Feast procession this week",
+      "ta": "இந்த வாரம் திருவிழா ஊர்வலம்"
+    },
+    "summary": {
+      "en": "The annual feast of Our Lady of Good Health includes a flag hoisting and a beach procession. Arrive early; footwear stays outside the shrine.",
+      "ta": "வேளாங்கண்ணி ஆண்டுத் திருவிழாவில் கொடி ஏற்றம் மற்றும் கடற்கரை ஊர்வலம். முன்னதாக வாருங்கள்."
+    },
+    "authorId": "user_org_velankanni_admin",
+    "publishedById": "user_contrib_maria",
+    "ownerOrganizationId": "org_velankanni_basilica",
+    "originalLanguage": "ta",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 2,
+    "trendingScore": 82,
+    "scopeIds": ["christianity", "catholicism", "mary", "topic-festivals", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "post_nagore_kanduri",
+    "type": "post",
+    "slug": "kanduri-urs-welcome",
+    "origin": "official",
+    "title": {
+      "en": "Kanduri urs: all are welcome",
+      "ta": "கந்தூரி உருஸ்: அனைவரும் வரவேற்கப்படுகிறீர்கள்"
+    },
+    "summary": {
+      "en": "The annual urs at Nagore Dargah is open across communities. Food is shared; modest dress is requested.",
+      "ta": "நாகூர் உருஸ் எல்லா சமூகங்களுக்கும் திறந்தது. உணவு பகிரப்படும்."
+    },
+    "authorId": "user_contrib_fatima",
+    "ownerOrganizationId": "org_nagore_dargah",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 2,
+    "trendingScore": 74,
+    "scopeIds": ["islam", "sufism", "topic-festivals", "region-tamil-nadu", "lang-en", "lang-ta"]
+  },
+  {
+    "id": "post_harmandir_langar",
+    "type": "post",
+    "slug": "langar-hours-this-month",
+    "origin": "official",
+    "title": {
+      "en": "Langar continues through the night",
+      "hi": "लंगर रात भर जारी"
+    },
+    "summary": {
+      "en": "The community kitchen remains open. Volunteers may join vegetable seva after evening kirtan.",
+      "hi": "सामुदायिक रसोई खुली रहती है। संध्या कीर्तन के बाद सब्जी सेवा में जुड़ सकते हैं।"
+    },
+    "authorId": "user_contrib_harpreet",
+    "ownerOrganizationId": "org_harmandir_sahib",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 2,
+    "trendingScore": 80,
+    "scopeIds": ["sikhism", "topic-food", "topic-devotion", "region-punjab", "lang-en", "lang-hi"]
+  },
+  {
+    "id": "post_sarnath_walking",
+    "type": "post",
+    "slug": "deer-park-walking-meditation",
+    "origin": "official",
+    "title": {
+      "en": "Walking meditation in the deer park",
+      "hi": "मृगदाव में चलते ध्यान"
+    },
+    "summary": {
+      "en": "A short guided walk is offered at dawn. Silence after the first bell.",
+      "hi": "भोर में संक्षिप्त निर्देशित चलना। पहली घंटी के बाद मौन।"
+    },
+    "authorId": "user_contrib_ananda",
+    "ownerOrganizationId": "org_mulagandha_kuti",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 2,
+    "trendingScore": 68,
+    "scopeIds": ["buddhism", "topic-meditation", "topic-yoga", "lang-en"]
+  }
+]

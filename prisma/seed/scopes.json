@@ -1,0 +1,916 @@
+[
+  {
+    "id": "hinduism",
+    "type": "religion",
+    "slug": "hinduism",
+    "parentId": null,
+    "sortOrder": 10,
+    "title": {
+      "en": "Hinduism",
+      "ta": "இந்து சமயம்",
+      "hi": "हिन्दू धर्म"
+    },
+    "description": {
+      "en": "Hinduism is an umbrella term for a range of Indian religious and spiritual traditions (sampradayas) that are unified by adherence to Dharma, a cosmic order maintained by its followers through rituals and righteous living, as expounded in the Vedas. The word Hindu originated as an exonym, and while Hinduism has been called the oldest surviving religion in the world, it is also described since the 19th century by the…"
+    }
+  },
+  {
+    "id": "christianity",
+    "type": "religion",
+    "slug": "christianity",
+    "parentId": null,
+    "sortOrder": 20,
+    "title": {
+      "en": "Christianity",
+      "ta": "கிறித்தவம்",
+      "hi": "ईसाई धर्म"
+    },
+    "description": {
+      "en": "Christianity is an Abrahamic monotheistic religion based on the Bible and the teachings of Jesus. The Gospels state that Jesus is the Son of God and rose from the dead after his crucifixion, whose coming as the messiah (Christ) was prophesied in the Old Testament and chronicled in the New Testament. It is the world's largest and most widespread religion with over 2.3 billion followers, comprising around 28.8% of the…"
+    }
+  },
+  {
+    "id": "islam",
+    "type": "religion",
+    "slug": "islam",
+    "parentId": null,
+    "sortOrder": 30,
+    "title": {
+      "en": "Islam",
+      "ta": "இஸ்லாம்",
+      "hi": "इस्लाम"
+    },
+    "description": {
+      "en": "Islam is an Abrahamic religion based on the Quran and the teachings of Muhammad. The monotheistic religion has an estimated 2 billion worldwide adherents, called Muslims. Islam is the world's second-largest religious population after Christianity."
+    }
+  },
+  {
+    "id": "buddhism",
+    "type": "religion",
+    "slug": "buddhism",
+    "parentId": null,
+    "sortOrder": 40,
+    "title": {
+      "en": "Buddhism",
+      "ta": "பௌத்தம்",
+      "hi": "बौद्ध धर्म"
+    },
+    "description": {
+      "en": "Buddhism, also known as Buddhadharma and Dharmavinaya, is an Indian religion and philosophy based on teachings attributed to the Buddha, a South Asian wandering ascetic and religious teacher who lived in the 6th or 5th century BCE. It is the world's fourth-largest religion, with about 320 million followers, known as Buddhists, who comprise 4.1% of the global population. It originated in the eastern Gangetic plain as…"
+    }
+  },
+  {
+    "id": "sikhism",
+    "type": "religion",
+    "slug": "sikhism",
+    "parentId": null,
+    "sortOrder": 50,
+    "title": {
+      "en": "Sikhism",
+      "ta": "சீக்கியம்",
+      "hi": "सिख धर्म"
+    },
+    "description": {
+      "en": "Sikhism, also known as Sikhi, is an Indian religion and philosophy that originated in the Punjab region of the Indian subcontinent around the end of the 15th century CE. It is one of the most recently founded major religions and is followed by 25–30 million adherents, known as Sikhs."
+    }
+  },
+  {
+    "id": "judaism",
+    "type": "religion",
+    "slug": "judaism",
+    "parentId": null,
+    "sortOrder": 60,
+    "title": {
+      "en": "Judaism",
+      "ta": "யூதம்",
+      "hi": "यहूदी धर्म"
+    },
+    "description": {
+      "en": "Judaism is an Abrahamic, monotheistic, ethnic religion that comprises the collective spiritual, cultural, and legal traditions of the Jewish people. Religious Jews regard Judaism as their means of observing the Mosaic covenant, which they believe was established between God and the Jewish people. The religion is considered one of the earliest monotheistic religions."
+    }
+  },
+  {
+    "id": "shaivism",
+    "type": "tradition",
+    "slug": "shaivism",
+    "parentId": "hinduism",
+    "sortOrder": 11,
+    "title": {
+      "en": "Shaivism",
+      "ta": "சைவம்",
+      "hi": "शैव संप्रदाय"
+    },
+    "description": {
+      "en": "Shaivism is an umbrella-term for a number of Hindu religious traditions, which worship Shiva as the supreme being. The followers of Shaivism are called Shaivas or Shaivites, numbering about 385 million people, across South Asia predominantly in India, Sri Lanka, and Nepal."
+    }
+  },
+  {
+    "id": "catholicism",
+    "type": "tradition",
+    "slug": "catholicism",
+    "parentId": "christianity",
+    "sortOrder": 21,
+    "title": {
+      "en": "Catholicism",
+      "ta": "கத்தோலிக்கம்",
+      "hi": "कैथोलिक परंपरा"
+    },
+    "description": {
+      "en": "The Catholic Church, also called the Roman Catholic Church, is the largest Christian church, with an estimated 1.28 to 1.41 billion baptized members worldwide as of 2026. It consists of 24 autonomous churches. The largest one of these churches is the Latin Church. Besides it, there are 23 smaller Eastern Catholic Churches. Together, the Latin Church and Eastern Catholic churches are organized into nearly 3,500…"
+    }
+  },
+  {
+    "id": "theravada",
+    "type": "tradition",
+    "slug": "theravada",
+    "parentId": "buddhism",
+    "sortOrder": 41,
+    "title": {
+      "en": "Theravada",
+      "ta": "தேரவாதம்",
+      "hi": "थेरवाद"
+    },
+    "description": {
+      "en": "Theravāda is Buddhism's oldest existing school. The school's adherents, termed Theravādins, have preserved their version of the Buddha's teaching or Dhamma in the Pāli Canon for over two millennia. As of 2010, Theravāda is the second largest branch of Buddhism, with 36% of Buddhists belonging to Theravāda, compared to 53% to Mahāyāna."
+    }
+  },
+  {
+    "id": "sufism",
+    "type": "tradition",
+    "slug": "sufism",
+    "parentId": "islam",
+    "sortOrder": 31,
+    "title": {
+      "en": "Sufism",
+      "ta": "சூஃபிசம்",
+      "hi": "सूफ़ी परंपरा"
+    },
+    "description": {
+      "en": "Sufism or Sufi Islam whose practitioners are known as \"Sufis\", is a mystic body of religious practices within Islam that is characterized by a focus on purification, spirituality, ritualism, and asceticism. Sufism has been variously defined as \"Islamic mysticism\", \"the mystical expression of faith\", \"the inward dimension of Islam\", \"the phenomenon of mysticism\", the \"main manifestation and the most important and…"
+    }
+  },
+  {
+    "id": "sikh-khalsa",
+    "type": "tradition",
+    "slug": "khalsa",
+    "parentId": "sikhism",
+    "sortOrder": 51,
+    "title": {
+      "en": "Khalsa tradition",
+      "ta": "கால்சா மரபு",
+      "hi": "खालसा परंपरा"
+    },
+    "description": {
+      "en": "The term Khālsā refers to both a community that follows Sikhism as its religion, as well as a special group of initiated Sikhs. The Khalsa tradition was initiated in 1699 by the Tenth Guru of Sikhism, Guru Gobind Singh. Its formation was a key event in the history of Sikhism. The founding of Khalsa is celebrated by Sikhs during the festival of Vaisakhi."
+    }
+  },
+  {
+    "id": "sephardi",
+    "type": "tradition",
+    "slug": "sephardi",
+    "parentId": "judaism",
+    "sortOrder": 61,
+    "title": {
+      "en": "Sephardi",
+      "ta": "செபார்தி",
+      "hi": "सेफार्दी"
+    },
+    "description": {
+      "en": "Jewish traditions with roots in Iberia and the Mediterranean."
+    }
+  },
+  {
+    "id": "eastern-orthodox",
+    "type": "tradition",
+    "slug": "eastern-orthodox",
+    "parentId": "christianity",
+    "sortOrder": 22,
+    "title": {
+      "en": "Eastern Orthodoxy",
+      "ta": "கிழக்கு மரபுவழி திருச்சபை",
+      "hi": "पूर्वी रूढ़िवादी परंपरा"
+    },
+    "description": {
+      "en": "The Eastern Orthodox Church, officially the Orthodox Catholic Church, also known as the Greek Orthodox Church is the second-largest Christian body in the world after the Roman Catholic Church, and one of the three major doctrinal and jurisdictional groups of Christianity."
+    }
+  },
+  {
+    "id": "mahayana",
+    "type": "tradition",
+    "slug": "mahayana",
+    "parentId": "buddhism",
+    "sortOrder": 42,
+    "title": {
+      "en": "Mahayana",
+      "ta": "மகாயானம்",
+      "hi": "महायान"
+    },
+    "description": {
+      "en": "Mahāyāna is the largest branch of Buddhism, followed by the older branch Theravada. It is a broad group of Buddhist traditions, texts, philosophies, and practices that developed in various regions and Buddhist communities of ancient India. Mahāyāna Buddhism accepts the main scriptures and teachings of early Buddhism but also recognizes various scriptures that are not accepted by Theravāda Buddhism as canonical.…"
+    }
+  },
+  {
+    "id": "shiva",
+    "type": "sacred_entity",
+    "slug": "shiva",
+    "parentId": "shaivism",
+    "sortOrder": 12,
+    "title": {
+      "en": "Shiva",
+      "ta": "சிவன்",
+      "hi": "शिव"
+    },
+    "description": {
+      "en": "Shiva, also known as Mahadeva and Hara, is one of the principal deities of Hinduism. He is the Supreme Being in Shaivism, one of the major traditions within Hinduism."
+    },
+    "modules": [
+      "overview",
+      "stories",
+      "articles",
+      "poetry",
+      "audio"
+    ]
+  },
+  {
+    "id": "mary",
+    "type": "sacred_entity",
+    "slug": "mary",
+    "parentId": "catholicism",
+    "sortOrder": 23,
+    "title": {
+      "en": "Mary",
+      "ta": "மரியாள்",
+      "hi": "मरियम"
+    },
+    "description": {
+      "en": "Mary was a first-century Jewish woman of Nazareth, the wife of Joseph and the mother of Jesus. She is an important figure of Christianity, venerated under various titles such as virgin or queen, many of which are mentioned in the Litany of Loreto. The Eastern and Oriental Orthodox, Catholic, Evangelical Lutheran, Reformed, Anglican, and Methodist churches believe that Mary, as mother of Jesus, is the Mother of God.…"
+    },
+    "modules": [
+      "overview",
+      "stories",
+      "articles",
+      "poetry"
+    ]
+  },
+  {
+    "id": "buddha",
+    "type": "sacred_entity",
+    "slug": "buddha",
+    "parentId": "theravada",
+    "sortOrder": 43,
+    "title": {
+      "en": "Buddha",
+      "ta": "புத்தர்",
+      "hi": "बुद्ध"
+    },
+    "description": {
+      "en": "Siddhartha Gautama, most commonly referred to as the Buddha, was a wandering religious teacher who lived in the eastern Indo-Gangetic Plains during the 6th or 5th century BCE and founded Buddhism. According to Buddhist legends, he was born in Lumbini, in what is now Nepal, to royal parents of the Shakya clan, but renounced his home life to live as a wandering ascetic. After leading a life of mendicancy, asceticism,…"
+    },
+    "modules": [
+      "overview",
+      "stories",
+      "articles"
+    ]
+  },
+  {
+    "id": "guru-nanak",
+    "type": "sacred_entity",
+    "slug": "guru-nanak",
+    "parentId": "sikhism",
+    "sortOrder": 52,
+    "title": {
+      "en": "Guru Nanak",
+      "ta": "குரு நானக்",
+      "hi": "गुरु नानक"
+    },
+    "description": {
+      "en": "Gurū Nānak, also known as Bābā Nānak, was an Indian spiritual teacher, mystic and poet, who is regarded as the founder of Sikhism and is the first of the ten Sikh Gurus."
+    },
+    "modules": [
+      "overview",
+      "stories",
+      "articles"
+    ]
+  },
+  {
+    "id": "jesus",
+    "type": "sacred_entity",
+    "slug": "jesus",
+    "parentId": "christianity",
+    "sortOrder": 24,
+    "title": {
+      "en": "Jesus",
+      "ta": "இயேசு",
+      "hi": "ईसा"
+    },
+    "description": {
+      "en": "Jesus, also known as Jesus Christ, Jesus of Nazareth, and by various other names and titles, was a 1st-century Jewish preacher and religious leader in the Roman province of Judaea. He is the central figure of Christianity, the world's largest religion. Most branches of Christianity consider Jesus the incarnation of God the Son and the awaited Messiah or Christ. Accounts of Jesus's life are contained in the Gospels,…"
+    },
+    "modules": [
+      "overview",
+      "stories",
+      "articles"
+    ]
+  },
+  {
+    "id": "guanyin",
+    "type": "sacred_entity",
+    "slug": "guanyin",
+    "parentId": "mahayana",
+    "sortOrder": 44,
+    "title": {
+      "en": "Guanyin",
+      "ta": "குவான்யின்",
+      "hi": "गुआनयिन"
+    },
+    "description": {
+      "en": "The bodhisattva of compassion in East Asian Buddhism."
+    },
+    "modules": [
+      "overview",
+      "stories"
+    ]
+  },
+  {
+    "id": "moses",
+    "type": "sacred_entity",
+    "slug": "moses",
+    "parentId": "judaism",
+    "sortOrder": 62,
+    "title": {
+      "en": "Moses",
+      "ta": "மோசே",
+      "hi": "मूसा"
+    },
+    "description": {
+      "en": "In Abrahamic religions, Moses was the Hebrew prophet who led the Israelites out of slavery in the Exodus from Egypt. He is considered the most important prophet in Judaism and Samaritanism, and one of the most important prophets in Christianity, Islam, the Baháʼí Faith, and other Abrahamic religions. According to the Abrahamic scriptures, God dictated the Mosaic Law to Moses, which he wrote down and which formed…"
+    },
+    "modules": [
+      "overview",
+      "stories"
+    ]
+  },
+  {
+    "id": "rabia",
+    "type": "sacred_entity",
+    "slug": "rabia",
+    "parentId": "sufism",
+    "sortOrder": 32,
+    "title": {
+      "en": "Rabi'a al-Adawiyya",
+      "ta": "ராபியா அல்-அதவிய்யா",
+      "hi": "राबिया अल-अदविया"
+    },
+    "description": {
+      "en": "Rābiʼa al-ʼAdawiyya al-Qaysiyya or Rabia Basri was a poet, one of the earliest Sufi mystics and an influential religious figure from Basra. Her full name is said to be Rābiʿa bint Ismāʿīl; her kunya was Umm ʿAmr, her wilāya was al-ʿAtakiyyah, and her nisba was al-ʿAdawiyya or al-Qaysīyya because she was a freed slave of the tribe of Qays ibn ʿAdī. She is regarded as one of the three preeminent Qalandars of the world."
+    },
+    "modules": [
+      "overview",
+      "poetry"
+    ]
+  },
+  {
+    "id": "fatimah",
+    "type": "sacred_entity",
+    "slug": "fatimah",
+    "parentId": "islam",
+    "sortOrder": 33,
+    "title": {
+      "en": "Fatimah",
+      "ta": "பாத்திமா",
+      "hi": "फ़ातिमा"
+    },
+    "description": {
+      "en": "Fatimah bint Muhammad, honored across Muslim communities."
+    },
+    "modules": [
+      "overview",
+      "stories"
+    ]
+  },
+  {
+    "id": "tiruvalluvar",
+    "type": "sacred_entity",
+    "slug": "tiruvalluvar",
+    "parentId": null,
+    "sortOrder": 90,
+    "title": {
+      "en": "Tiruvalluvar",
+      "ta": "திருவள்ளுவர்",
+      "hi": "तिरुवल्लुवर"
+    },
+    "description": {
+      "en": "The poet of the Tirukkural, read across religious and ethical traditions."
+    },
+    "modules": [
+      "overview",
+      "poetry"
+    ]
+  },
+  {
+    "id": "topic-devotion",
+    "type": "topic",
+    "slug": "devotion",
+    "parentId": null,
+    "sortOrder": 100,
+    "title": {
+      "en": "Devotion",
+      "ta": "பக்தி",
+      "hi": "भक्ति"
+    },
+    "description": {
+      "en": "Devotion or Devotions may refer to:"
+    }
+  },
+  {
+    "id": "topic-meditation",
+    "type": "topic",
+    "slug": "meditation",
+    "parentId": null,
+    "sortOrder": 101,
+    "title": {
+      "en": "Meditation",
+      "ta": "தியானம்",
+      "hi": "ध्यान"
+    },
+    "description": {
+      "en": "Meditation is a practice in which an individual uses a technique or combination of techniques to train attention and awareness and detach from \"discursive, ruminating thought\", achieving a mentally clear and emotionally calm and stable state, while not intending to analyze the effects, to judge its outcomes, or to create any expectation with regard to the process."
+    }
+  },
+  {
+    "id": "topic-prayer",
+    "type": "topic",
+    "slug": "prayer",
+    "parentId": null,
+    "sortOrder": 102,
+    "title": {
+      "en": "Prayer",
+      "ta": "ஜெபம்",
+      "hi": "प्रार्थना"
+    },
+    "description": {
+      "en": "Prayer is an invocation or act that seeks to activate a rapport with an object of worship through deliberate communication. In the narrow sense, the term refers to an act of supplication or intercession directed towards a deity or a deified ancestor. More generally, prayer can also have the purpose of giving thanks or praise, and in comparative religion is closely associated with more abstract forms of meditation…"
+    }
+  },
+  {
+    "id": "topic-poetry",
+    "type": "topic",
+    "slug": "poetry",
+    "parentId": null,
+    "sortOrder": 103,
+    "title": {
+      "en": "Sacred poetry",
+      "ta": "அருட் கவிதை",
+      "hi": "पवित्र कविता"
+    }
+  },
+  {
+    "id": "topic-music",
+    "type": "topic",
+    "slug": "music",
+    "parentId": null,
+    "sortOrder": 104,
+    "title": {
+      "en": "Sacred music",
+      "ta": "அருட் இசை",
+      "hi": "पवित्र संगीत"
+    }
+  },
+  {
+    "id": "topic-family",
+    "type": "topic",
+    "slug": "family",
+    "parentId": null,
+    "sortOrder": 105,
+    "title": {
+      "en": "Family",
+      "ta": "குடும்பம்",
+      "hi": "परिवार"
+    }
+  },
+  {
+    "id": "topic-festivals",
+    "type": "topic",
+    "slug": "festivals",
+    "parentId": null,
+    "sortOrder": 106,
+    "title": {
+      "en": "Festivals",
+      "ta": "விழாக்கள்",
+      "hi": "त्योहार"
+    },
+    "description": {
+      "en": "A religious festival is a time of special importance marked by adherents to that religion. Religious festivals are commonly celebrated on recurring cycles in a calendar year or lunar calendar. The science of religious rites and festivals is known as heortology."
+    }
+  },
+  {
+    "id": "topic-heritage",
+    "type": "topic",
+    "slug": "heritage",
+    "parentId": null,
+    "sortOrder": 107,
+    "title": {
+      "en": "Heritage",
+      "ta": "மரபு",
+      "hi": "विरासत"
+    },
+    "description": {
+      "en": "Cultural heritage is the tangible and intangible legacy of a group or society that is inherited from past generations. Not all legacies of past generations are \"heritage\". Rather, heritage is a product of selection by society."
+    }
+  },
+  {
+    "id": "topic-compassion",
+    "type": "topic",
+    "slug": "compassion",
+    "parentId": null,
+    "sortOrder": 108,
+    "title": {
+      "en": "Compassion",
+      "ta": "கருணை",
+      "hi": "करुणा"
+    }
+  },
+  {
+    "id": "topic-grief",
+    "type": "topic",
+    "slug": "grief",
+    "parentId": null,
+    "sortOrder": 109,
+    "title": {
+      "en": "Grief",
+      "ta": "துக்கம்",
+      "hi": "शोक"
+    }
+  },
+  {
+    "id": "topic-gratitude",
+    "type": "topic",
+    "slug": "gratitude",
+    "parentId": null,
+    "sortOrder": 110,
+    "title": {
+      "en": "Gratitude",
+      "ta": "நன்றி",
+      "hi": "कृतज्ञता"
+    }
+  },
+  {
+    "id": "topic-philosophy",
+    "type": "topic",
+    "slug": "philosophy",
+    "parentId": null,
+    "sortOrder": 111,
+    "title": {
+      "en": "Philosophy",
+      "ta": "தத்துவம்",
+      "hi": "दर्शन"
+    }
+  },
+  {
+    "id": "topic-food",
+    "type": "topic",
+    "slug": "food",
+    "parentId": null,
+    "sortOrder": 112,
+    "title": {
+      "en": "Foodways",
+      "ta": "உணவு மரபு",
+      "hi": "भोजन परंपरा"
+    },
+    "description": {
+      "en": "Prasāda, prasad or prasadam is a religious offering in Hinduism. Most often prasada is vegetarian food especially cooked for devotees after praise and thanksgiving to a god. Mahaprasada is the consecrated food offered to the deity in a Hindu temple which is then distributed and partaken by all the devotees regardless of any orientation.",
+      "ta": "உணவு மரபு",
+      "hi": "भोजन परंपरा"
+    }
+  },
+  {
+    "id": "topic-pilgrimage",
+    "type": "topic",
+    "slug": "pilgrimage",
+    "parentId": null,
+    "sortOrder": 113,
+    "title": {
+      "en": "Pilgrimage",
+      "ta": "யாத்திரை",
+      "hi": "तीर्थयात्रा"
+    },
+    "description": {
+      "en": "A pilgrimage is a journey to a holy place, which can lead to a personal transformation, after which the pilgrim returns to their daily life. A pilgrim is a traveler who is on a journey to a holy place. Typically, this is a physical journey to some place of special significance to the adherent of a particular religious belief system."
+    }
+  },
+  {
+    "id": "topic-oral-history",
+    "type": "topic",
+    "slug": "oral-history",
+    "parentId": null,
+    "sortOrder": 114,
+    "title": {
+      "en": "Oral history",
+      "ta": "வாய்மொழி வரலாறு",
+      "hi": "मौखिक इतिहास"
+    }
+  },
+  {
+    "id": "topic-yoga",
+    "type": "topic",
+    "slug": "yoga",
+    "parentId": null,
+    "sortOrder": 115,
+    "title": {
+      "en": "Yoga",
+      "ta": "யோகா",
+      "hi": "योग"
+    },
+    "description": {
+      "en": "Yoga is a group of physical, mental, and spiritual practices or disciplines that originated in ancient India, aimed at controlling body and mind to attain various salvation goals, as practiced in the Hindu, Jain, and Buddhist traditions."
+    }
+  },
+  {
+    "id": "topic-dance",
+    "type": "topic",
+    "slug": "dance",
+    "parentId": null,
+    "sortOrder": 116,
+    "title": {
+      "en": "Sacred dance",
+      "ta": "அருட் நடனம்",
+      "hi": "पवित्र नृत्य"
+    },
+    "description": {
+      "en": "Classical and devotional dance forms such as Bharatanatyam, Kathak, Odissi, and Kuchipudi, historically performed as an offering in temple ritual and as a living art passed from teacher to student."
+    }
+  },
+  {
+    "id": "topic-crafts",
+    "type": "topic",
+    "slug": "crafts",
+    "parentId": null,
+    "sortOrder": 117,
+    "title": {
+      "en": "Sacred arts & crafts",
+      "ta": "அருட் கைவினைகள்",
+      "hi": "पवित्र शिल्प कला"
+    },
+    "description": {
+      "en": "Traditional crafts made in service of devotion — temple sculpture and bronze casting, kolam and rangoli floor art, iconography, textile and garland work — skills often kept within families and guilds for generations."
+    }
+  },
+  {
+    "id": "region-tamil-nadu",
+    "type": "region",
+    "slug": "tamil-nadu",
+    "parentId": null,
+    "sortOrder": 200,
+    "title": {
+      "en": "Tamil Nadu",
+      "ta": "தமிழ்நாடு",
+      "hi": "तमिलनाडु"
+    },
+    "description": {
+      "en": "Tamil Nadu is the southernmost state of India. The tenth largest Indian state by area and the sixth largest by population, it is the home of the Tamils, who speak the Tamil language, the state's official language and the first to be recognised as a classical language in India. Chennai is the state's largest city and capital."
+    }
+  },
+  {
+    "id": "region-kerala",
+    "type": "region",
+    "slug": "kerala",
+    "parentId": null,
+    "sortOrder": 201,
+    "title": {
+      "en": "Kerala",
+      "ta": "கேரளம்",
+      "hi": "केरल"
+    },
+    "description": {
+      "en": "Kerala, officially Keralam, is a state on the Malabar Coast of southern India. It was formed on 1 November 1956 under the States Reorganisation Act, which unified the country's Malayalam-speaking regions into a single state. Covering 38,863 km2 (15,005 sq mi), Kerala is primarily a strip of coastal plains sandwiched by the Western Ghats and the Laccadive Sea, bound by Karnataka to the northeast, Tamil Nadu to the…"
+    }
+  },
+  {
+    "id": "region-karnataka",
+    "type": "region",
+    "slug": "karnataka",
+    "parentId": null,
+    "sortOrder": 202,
+    "title": {
+      "en": "Karnataka",
+      "ta": "கர்நாடகம்",
+      "hi": "कर्नाटक"
+    },
+    "description": {
+      "en": "Karnataka is a state on the southwestern coast of India. It was formed as Mysore State on 1 November 1956, with the passage of the States Reorganisation Act, and renamed Karnataka in 1973. The state is bordered by the Lakshadweep Sea to the west, Goa to the northwest, Maharashtra to the north, Telangana to the northeast, Andhra Pradesh to the east, Tamil Nadu to the southeast, and Kerala to the southwest. With…"
+    }
+  },
+  {
+    "id": "region-west-bengal",
+    "type": "region",
+    "slug": "west-bengal",
+    "parentId": null,
+    "sortOrder": 203,
+    "title": {
+      "en": "West Bengal",
+      "ta": "மேற்கு வங்காளம்",
+      "hi": "पश्चिम बंगाल"
+    },
+    "description": {
+      "en": "West Bengal is a state in the eastern part of India. It is situated along the Bay of Bengal. In 2011, its population was around 91 million in an area of 88,752 km2 (34,267 sq mi), while the population estimate as of 2026 is 100.6 million. West Bengal is the fourth-most populous and thirteenth-largest state by area in India, as well as the eighth-most populous country subdivision of the world. As a part of the Bengal…"
+    }
+  },
+  {
+    "id": "region-punjab",
+    "type": "region",
+    "slug": "punjab",
+    "parentId": null,
+    "sortOrder": 204,
+    "title": {
+      "en": "Punjab",
+      "ta": "பஞ்சாப்",
+      "hi": "पंजाब"
+    },
+    "description": {
+      "en": "Punjab is a state in northwestern India. Forming part of the larger Punjab region of the Indian subcontinent, the state is bordered by the Indian states and union territories of Himachal Pradesh to the north and northeast, Haryana to the south and southeast, Rajasthan to the southwest, Jammu and Kashmir to the north. To the west, it shares an international border with the identically named Pakistani province of…"
+    }
+  },
+  {
+    "id": "region-sri-lanka",
+    "type": "region",
+    "slug": "sri-lanka",
+    "parentId": null,
+    "sortOrder": 205,
+    "title": {
+      "en": "Sri Lanka",
+      "ta": "இலங்கை",
+      "hi": "श्रीलंका"
+    },
+    "description": {
+      "en": "Sri Lanka, officially the Democratic Socialist Republic of Sri Lanka, formerly known as Ceylon, is an island country in South Asia. It is located in the Indian Ocean, southwest of the Bay of Bengal, and is separated from India by the Gulf of Mannar and the Palk Strait. Sri Lanka shares a maritime border with the Maldives to the southwest and India to the northwest, and lies across the Bay of Bengal from Bangladesh…"
+    }
+  },
+  {
+    "id": "region-kyoto",
+    "type": "region",
+    "slug": "kyoto",
+    "parentId": null,
+    "sortOrder": 206,
+    "title": {
+      "en": "Kyoto",
+      "ta": "கியோத்தோ",
+      "hi": "क्योटो"
+    }
+  },
+  {
+    "id": "region-andalusia",
+    "type": "region",
+    "slug": "andalusia",
+    "parentId": null,
+    "sortOrder": 207,
+    "title": {
+      "en": "Andalusia",
+      "ta": "அந்தலூசியா",
+      "hi": "अंडालूसिया"
+    }
+  },
+  {
+    "id": "region-tigray",
+    "type": "region",
+    "slug": "tigray",
+    "parentId": null,
+    "sortOrder": 208,
+    "title": {
+      "en": "Tigray",
+      "ta": "திக்ராய்",
+      "hi": "तिग्राय"
+    }
+  },
+  {
+    "id": "region-quezon",
+    "type": "region",
+    "slug": "quezon",
+    "parentId": null,
+    "sortOrder": 209,
+    "title": {
+      "en": "Quezon",
+      "ta": "கேசோன்",
+      "hi": "क्वेज़ोन"
+    }
+  },
+  {
+    "id": "lang-en",
+    "type": "language",
+    "slug": "en",
+    "parentId": null,
+    "sortOrder": 300,
+    "title": {
+      "en": "English",
+      "ta": "ஆங்கிலம்",
+      "hi": "अंग्रेज़ी"
+    }
+  },
+  {
+    "id": "lang-ta",
+    "type": "language",
+    "slug": "ta",
+    "parentId": null,
+    "sortOrder": 301,
+    "title": {
+      "en": "Tamil",
+      "ta": "தமிழ்",
+      "hi": "तमिल"
+    }
+  },
+  {
+    "id": "lang-hi",
+    "type": "language",
+    "slug": "hi",
+    "parentId": null,
+    "sortOrder": 302,
+    "title": {
+      "en": "Hindi",
+      "ta": "இந்தி",
+      "hi": "हिन्दी"
+    }
+  },
+  {
+    "id": "lang-ml",
+    "type": "language",
+    "slug": "ml",
+    "parentId": null,
+    "sortOrder": 303,
+    "title": {
+      "en": "Malayalam",
+      "ta": "மலையாளம்",
+      "hi": "मलयालम"
+    }
+  },
+  {
+    "id": "lang-te",
+    "type": "language",
+    "slug": "te",
+    "parentId": null,
+    "sortOrder": 304,
+    "title": {
+      "en": "Telugu",
+      "ta": "தெலுங்கு",
+      "hi": "तेलुगु"
+    }
+  },
+  {
+    "id": "lang-kn",
+    "type": "language",
+    "slug": "kn",
+    "parentId": null,
+    "sortOrder": 305,
+    "title": {
+      "en": "Kannada",
+      "ta": "கன்னடம்",
+      "hi": "कन्नड़"
+    }
+  },
+  {
+    "id": "lang-bn",
+    "type": "language",
+    "slug": "bn",
+    "parentId": null,
+    "sortOrder": 306,
+    "title": {
+      "en": "Bengali",
+      "ta": "வங்காளம்",
+      "hi": "বাংলা"
+    }
+  },
+  {
+    "id": "lang-mr",
+    "type": "language",
+    "slug": "mr",
+    "parentId": null,
+    "sortOrder": 307,
+    "title": {
+      "en": "Marathi",
+      "ta": "மராத்தி",
+      "hi": "मराठी"
+    }
+  },
+  {
+    "id": "lang-pa",
+    "type": "language",
+    "slug": "pa",
+    "parentId": null,
+    "sortOrder": 308,
+    "title": {
+      "en": "Punjabi",
+      "ta": "பஞ்சாபி",
+      "hi": "पंजाबी"
+    }
+  },
+  {
+    "id": "lang-ar",
+    "type": "language",
+    "slug": "ar",
+    "parentId": null,
+    "sortOrder": 309,
+    "title": {
+      "en": "Arabic",
+      "ta": "அரபு",
+      "hi": "अरबी"
+    }
+  }
+]

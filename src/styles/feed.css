@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Community (§18, §19)
+
+   A respectful discussion surface, not a chat app. Comments are separated by
+   a thread line and generous leading rather than by nested boxes, so a reply
+   five levels deep still reads as prose. Reactions are named verbs, not emoji.
+   ========================================================================== */
+
+/* ── Response row (§19) ─────────────────────────────────────────────────── */
+
+.ds-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* Same value as before (2px), in rem to match every other gap in this
+     file instead of being the one stray px figure. */
+  gap: 0.125rem;
+}
+
+.ds-reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 1.6rem;
+  padding-inline: var(--ds-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color var(--ds-duration-fast) var(--ds-ease),
+    background-color var(--ds-duration-fast) var(--ds-ease),
+    transform var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-reaction:hover:not(:disabled) {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.ds-reaction:active:not(:disabled) {
+  transform: translateY(0) scale(0.96);
+}
+
+.ds-reaction[data-active] {
+  color: var(--accent);
+}
+
+.ds-reaction__icon--filled {
+  fill: currentColor;
+  animation: ds-reaction-pop var(--ds-duration-slow) var(--ds-ease-out);
+}
+
+@keyframes ds-reaction-pop {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-reaction__icon--filled {
+    animation: none;
+  }
+}
+
+.ds-reaction__count {
+  font-size: var(--ds-text-2xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-reaction[data-active] .ds-reaction__count {
+  color: inherit;
+}
+
+.ds-reaction:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Labels are hidden on the narrowest phones, where four labelled buttons
+   would wrap; the accessible name comes from the label element itself. */
+@media (max-width: 25rem) {
+  .ds-reaction__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+.ds-reactions__hint {
+  flex: 1 1 100%;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+/* The Share icon button is the one control in this row that isn't a
+   `.ds-reaction` (it has no label, just an icon) — sized down to match its
+   compact siblings rather than the shared IconButton's normal "sm" size,
+   which reads oversized and square next to these small pill buttons. */
+.ds-reactions .ds-icon-btn {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* ── Discussion (§18) ───────────────────────────────────────────────────── */
+
+.ds-discussion {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3);
+  border-block-start: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.ds-discussion__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+}
+
+/* This was a hand-rolled copy of .ds-kicker's caps-tracked micro-label
+   recipe (§3, consistency); now composes it (see comment-thread.tsx) and
+   only overrides the bottom margin .ds-kicker assumes for a gap-less
+   layout — this title sits in .ds-discussion__head's flex gap instead. */
+.ds-discussion__title {
+  margin: 0;
+}
+
+.ds-discussion__signin {
+  margin: 0;
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}
+
+/* The "no reflections yet" empty state reuses the shared EmptyState
+   component, but at its normal size it read as oversized against this now
+   much more compact discussion box — scoped down here rather than shrinking
+   EmptyState everywhere it's used. */
+.ds-discussion .ds-empty--inline {
+  padding: var(--ds-space-4) var(--ds-space-3);
+}
+
+.ds-discussion .ds-empty__title {
+  font-size: var(--ds-text-sm);
+}
+
+.ds-discussion .ds-empty__body {
+  font-size: var(--ds-text-xs);
+}
+
+/* ── Comment tree ───────────────────────────────────────────────────────── */
+
+/* No nested cards. A hairline in the accent traces the thread, replies indent
+   by one avatar width, and the comment itself is plain text on the ground. */
+.ds-comments {
+  --comment-avatar: 1.5rem;
+  --thread-indent: 1.25rem;
+  --thread-line: color-mix(in srgb, var(--accent) 28%, var(--border));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.ds-comments__branch {
+  list-style: none;
+  position: relative;
+  margin: var(--ds-space-3) 0 0;
+  padding: 0;
+  padding-inline-start: var(--thread-indent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+/* The thread line runs down the start edge of a reply group. */
+.ds-comments__branch::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.15rem 0.6rem;
+  inset-inline-start: calc(var(--comment-avatar) / 2);
+  width: 1px;
+  background: var(--thread-line);
+}
+
+.ds-comment {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--comment-avatar) minmax(0, 1fr);
+  gap: var(--ds-space-2);
+  align-items: start;
+  border-radius: var(--ds-radius-md);
+  transition: background-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-comment:hover {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.ds-comment__body {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.ds-comment__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem var(--ds-space-2);
+}
+
+.ds-comment__reply {
+  margin-inline-start: auto;
+}
+
+.ds-comment__author {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-comment__text {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.ds-comment__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+}
+
+.ds-comment__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ds-comment__action:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ── Compose ────────────────────────────────────────────────────────────── */
+
+.ds-compose {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--ds-space-2);
+  align-items: start;
+  padding-block-start: var(--ds-space-3);
+  border-block-start: 1px solid var(--border);
+}
+
+.ds-compose__box {
+  display: grid;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-compose__replying {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  padding: 0.3rem 0.35rem 0.3rem 0.65rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+}
+
+/* Rescaled to share the button scale's height, radius and inline padding
+   (§control heights, tokens.css) so the field and the send button beside it
+   read as one control instead of two mismatched widgets. */
+.ds-compose__field {
+  min-height: var(--ds-control-height);
+  padding: 0.55rem var(--ds-space-4);
+  border-radius: var(--ds-radius-lg);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  field-sizing: content;
+  max-height: 12rem;
+  resize: none;
+}
+
+.ds-compose__field:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ds-compose__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+}
+
+/* ── Scope switcher ─────────────────────────────────────────────────────── */
+
+.ds-scope-switcher {
+  position: relative;
+  display: none;
+}
+
+/* Deferred to 64rem alongside .ds-desktop-only — the 56rem–64rem band belongs
+   to the primary nav (up to 6 links since "My Space" was added), which left
+   no room for this before the wider layout gives it back (masthead overflow
+   audit). */
+@media (min-width: 64rem) {
+  .ds-scope-switcher {
+    display: block;
+  }
+}
+
+.ds-scope-switcher__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 9rem;
+  min-height: var(--ds-control-height-sm);
+  padding-inline: var(--ds-space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-pill);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ds-scope-switcher__trigger:hover,
+.ds-scope-switcher__trigger[aria-expanded="true"] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.ds-scope-switcher__trigger span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-scope-switcher__menu {
+  min-width: 14rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ds-scope-switcher__option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--ds-text-sm);
+  text-align: start;
+  cursor: pointer;
+}
+
+.ds-scope-switcher__option:hover {
+  background: var(--surface-muted);
+}
+
+.ds-scope-switcher__option[aria-selected="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Follow / subscribe control ─────────────────────────────────────────── */
+
+.ds-follow-hint {
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}

@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Ambient & decorative layers (§7, §39)
+
+   Decoration supports content; it never competes with it. Every layer here is
+   held under ~8% opacity, sits behind an opaque page surface, is inert to
+   pointer and assistive tech, and thins out on small screens.
+   ========================================================================== */
+
+.ds-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Composite once instead of repainting the pattern on every scroll frame. */
+  will-change: transform;
+  contain: strict;
+}
+
+.ds-ambient__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile carries the wash but not the line work (§39). */
+.ds-ambient__detail {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .ds-ambient__detail {
+    display: block;
+  }
+}
+
+/* ── Section-level decoration ───────────────────────────────────────────── */
+
+.ds-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: var(--ambient-line);
+  opacity: var(--ds-pattern-opacity, 0.08);
+}
+
+.ds-pattern svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ds-pattern--fade {
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.ds-pattern--fade-inline {
+  mask-image: linear-gradient(to var(--ds-mask-dir, right), black 30%, transparent);
+}
+
+/* Corner ornament — a single fine-line flourish, not a frame of them. */
+.ds-ornament {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--accent);
+  opacity: 0.16;
+}
+
+.ds-ornament--tl {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.ds-ornament--br {
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .ds-ornament--tl,
+[dir="rtl"] .ds-ornament--br {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .ds-ornament--br {
+  transform: scaleX(-1) rotate(180deg);
+}
+
+@media (max-width: 47.99rem) {
+  .ds-ornament {
+    display: none;
+  }
+}
+
+/* ── Section divider ────────────────────────────────────────────────────── */
+
+.ds-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  margin-block: var(--ds-space-7);
+  color: var(--border-strong);
+}
+
+.ds-divider::before,
+.ds-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+}
+
+.ds-divider__mark {
+  flex-shrink: 0;
+  color: var(--editorial);
+  opacity: 0.5;
+}
+
+.ds-divider--rule {
+  display: block;
+  height: 1px;
+  border: 0;
+  background: var(--border);
+  margin-block: var(--ds-space-6);
+}
+
+.ds-divider--rule::before,
+.ds-divider--rule::after {
+  content: none;
+}
+
+/* ── Editorial frame — a hairline double rule, manuscript-inspired ─────── */
+
+.ds-frame {
+  position: relative;
+  padding: var(--ds-space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+}
+
+.ds-frame::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--ds-radius-lg) - 3px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.ds-frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── A hosting surface for patterns ─────────────────────────────────────── */
+
+.ds-patterned {
+  position: relative;
+  isolation: isolate;
+}
+
+.ds-patterned > *:not(.ds-pattern):not(.ds-ornament) {
+  position: relative;
+  z-index: 1;
+}

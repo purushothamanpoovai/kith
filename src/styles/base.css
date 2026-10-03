@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Base / reset
+
+   The shell scrolls the document, not a nested pane. A locked 100dvh shell
+   with inner scroll containers breaks long-form reading, defeats mobile
+   address-bar collapse, and clips content below the fold — all of which the
+   audit found on every route. Everything here assumes normal document flow.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  /* Anchors and skip links should land below the sticky masthead. */
+  scroll-padding-block-start: calc(var(--ds-header-height) + var(--ds-space-4));
+  /* An in-page jump (e.g. an Explore dimension tile scrolling to its own
+     section further down the same page) glides there instead of snapping,
+     so it reads as "here's where that is" rather than a jarring cut.
+     Reduced-motion below forces this back to an instant jump. */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  color: var(--text-primary);
+  background: var(--background);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Never let a decorative layer create a horizontal scrollbar (§39). */
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+  border-radius: var(--ds-radius-sm);
+}
+
+/* Elements that already carry a radius keep it while focused. */
+.ds-btn:focus-visible,
+.ds-icon-btn:focus-visible,
+.ds-chip:focus-visible {
+  border-radius: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+  letter-spacing: var(--ds-tracking-tight);
+  margin: 0;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0 0 var(--ds-space-4);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Tables (used by admin views) shouldn't be able to widen the page. */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* Visually hidden, still announced. */
+.ds-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Belt-and-braces against a decorative or off-canvas layer widening the
+   page: overflow on the root propagates to the viewport, which also clips
+   fixed-position descendants that `overflow` on <body> cannot reach. */
+html {
+  overflow-x: clip;
+}

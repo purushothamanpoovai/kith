@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Motion (§37)
+
+   Calm and short. Entrances are a small rise and a fade — no bouncing, no
+   zoom, no gamified flourishes. `prefers-reduced-motion` removes all of it;
+   base.css also neutralises durations globally as a backstop.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .ds-animate-in {
+    animation: ds-fade-up var(--ds-duration-slow) var(--ds-ease-out) both;
+  }
+
+  .ds-animate-in--delay-1 {
+    animation-delay: 60ms;
+  }
+
+  .ds-animate-in--delay-2 {
+    animation-delay: 120ms;
+  }
+
+  .ds-animate-in--delay-3 {
+    animation-delay: 180ms;
+  }
+
+  /* Bookmark and reaction confirmation — one soft pulse, not a pop. */
+  .ds-pulse-once {
+    animation: ds-soft-pulse 420ms var(--ds-ease-out);
+  }
+}
+
+@keyframes ds-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ds-soft-pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+/* Expanding regions (comment threads, footer, disclosure panels) animate
+   their row track rather than max-height, so there is no measured guess. */
+.ds-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--ds-duration) var(--ds-ease);
+}
+
+.ds-collapse--open {
+  grid-template-rows: 1fr;
+}
+
+.ds-collapse__inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Cross-document view transitions where supported: the masthead and mobile
+   bar stay put while the page body cross-fades. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: var(--ds-duration);
+  }
+}

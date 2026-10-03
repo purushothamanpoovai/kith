@@ -1,0 +1,308 @@
+[
+  {
+    "id": "sub_member_hinduism",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "hinduism",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_shaivism",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "shaivism",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_member_shiva",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "shiva",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_member_topic_devotion",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "topic-devotion",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_topic_meditation",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "topic-meditation",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_region_tamil_nadu",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "region-tamil-nadu",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_lang_ta",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "lang-ta",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_buddhism",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "buddhism",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_topic_poetry",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "topic-poetry",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_author_kavitha",
+    "userId": "user_member",
+    "targetType": "author",
+    "authorId": "user_contrib_kavitha",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_member_author_ananda",
+    "userId": "user_member",
+    "targetType": "author",
+    "authorId": "user_contrib_ananda",
+    "active": true,
+    "notify": false,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_author_fatima",
+    "userId": "user_member",
+    "targetType": "author",
+    "authorId": "user_contrib_fatima",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_christianity",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "christianity",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_catholicism",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "catholicism",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_islam",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "islam",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_sikhism",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "sikhism",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_topic_festivals",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "topic-festivals",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_topic_heritage",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "topic-heritage",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_region_kerala",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "region-kerala",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_lang_en",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "lang-en",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_author_maria",
+    "userId": "user_admin",
+    "targetType": "author",
+    "authorId": "user_contrib_maria",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_admin_author_harpreet",
+    "userId": "user_admin",
+    "targetType": "author",
+    "authorId": "user_contrib_harpreet",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_author_james",
+    "userId": "user_admin",
+    "targetType": "author",
+    "authorId": "user_contrib_james",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_christianity",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "christianity",
+    "active": true,
+    "notify": false,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_topic_family",
+    "userId": "user_member",
+    "targetType": "scope",
+    "scopeId": "topic-family",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_admin_buddhism",
+    "userId": "user_admin",
+    "targetType": "scope",
+    "scopeId": "buddhism",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_admin_author_rajesh",
+    "userId": "user_admin",
+    "targetType": "author",
+    "authorId": "user_contrib_rajesh",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_org_ramana",
+    "userId": "user_member",
+    "targetType": "organization",
+    "organizationId": "org_ramana_ashram",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_member_org_velankanni",
+    "userId": "user_member",
+    "targetType": "organization",
+    "organizationId": "org_velankanni_basilica",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_member_org_nagore",
+    "userId": "user_member",
+    "targetType": "organization",
+    "organizationId": "org_nagore_dargah",
+    "active": true,
+    "notify": true,
+    "feedPriority": 1
+  },
+  {
+    "id": "sub_member_org_shirdi",
+    "userId": "user_member",
+    "targetType": "organization",
+    "organizationId": "org_shirdi_sai_temple",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  },
+  {
+    "id": "sub_kavitha_org_ramana",
+    "userId": "user_contrib_kavitha",
+    "targetType": "organization",
+    "organizationId": "org_ramana_ashram",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_maria_org_velankanni",
+    "userId": "user_contrib_maria",
+    "targetType": "organization",
+    "organizationId": "org_velankanni_basilica",
+    "active": true,
+    "notify": true,
+    "feedPriority": 3
+  },
+  {
+    "id": "sub_admin_org_harmandir",
+    "userId": "user_admin",
+    "targetType": "organization",
+    "organizationId": "org_harmandir_sahib",
+    "active": true,
+    "notify": true,
+    "feedPriority": 2
+  }
+]

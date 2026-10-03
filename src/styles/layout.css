@@ -1,0 +1,948 @@
+/* ==========================================================================
+   Shell & page layout (§9, §14, §15)
+
+   The document scrolls. The masthead is sticky, the mobile bar is fixed, and
+   everything between is ordinary flow — so long articles read normally, the
+   mobile address bar collapses, and nothing gets clipped at the fold.
+
+   Spacing here is tuned for comfortable density: whitespace separates groups
+   rather than padding out empty pages.
+   ========================================================================== */
+
+.ds-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--background);
+}
+
+/* Room for the fixed mobile bar, plus the mini player when one is playing. */
+@media (max-width: 47.99rem) {
+  .ds-shell {
+    padding-block-end: calc(
+      var(--ds-mobile-nav-height) + env(safe-area-inset-bottom) +
+        var(--ds-player-inset, 0px)
+    );
+  }
+}
+
+.ds-skip-link {
+  position: fixed;
+  inset-inline-start: var(--ds-space-4);
+  inset-block-start: var(--ds-space-2);
+  z-index: 300;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-250%);
+  transition: transform var(--ds-duration) var(--ds-ease);
+}
+
+.ds-skip-link:focus-visible {
+  transform: none;
+}
+
+/* ── Containers ─────────────────────────────────────────────────────────── */
+
+.ds-container {
+  width: 100%;
+  max-width: var(--ds-content-max);
+  margin-inline: auto;
+  padding-inline: var(--ds-gutter);
+}
+
+.ds-container--wide {
+  max-width: var(--ds-content-wide);
+}
+
+.ds-container--narrow {
+  max-width: var(--ds-content-narrow);
+}
+
+.ds-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-block: var(--ds-space-6) var(--ds-space-9);
+}
+
+@media (max-width: 47.99rem) {
+  .ds-main {
+    padding-block: var(--ds-space-5) var(--ds-space-7);
+  }
+}
+
+/* Directional icons (arrows, chevrons) must mirror in RTL (§13). */
+[dir="rtl"] .ds-flip-rtl {
+  transform: scaleX(-1);
+}
+
+/* ── Masthead (§15) ─────────────────────────────────────────────────────── */
+
+.ds-masthead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-block-end: 1px solid var(--border);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.ds-masthead__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  min-height: var(--ds-header-height);
+}
+
+/* Brand lockup — a wordmark with a small abstract mark. */
+.ds-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.ds-brand__mark {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.ds-brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.ds-brand__name {
+  font-family: var(--ds-font-display);
+  font-size: 1.3125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.ds-brand__tagline {
+  display: none;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  /* Every other caps-tracked micro-label in the app uses --ds-tracking-caps;
+     this one had drifted to its own hand-picked value (P3). */
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block-start: 0.2rem;
+}
+
+@media (min-width: 64rem) {
+  .ds-brand__tagline {
+    display: block;
+  }
+}
+
+.ds-masthead__nav {
+  display: none;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 0;
+  /* The links themselves are `nowrap`, so without this the nav refuses to
+     shrink and pushes the tools cluster off the bar — clipping a label
+     mid-word instead of degrading. Allowing it to shrink and scroll keeps
+     every item reachable at any width between the two breakpoints. */
+  flex: 0 1 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ds-masthead__nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Matches the mobile bottom bar's own hide breakpoint (48rem). They were
+   56rem and 48rem respectively, which left 48–56rem — the whole small-tablet
+   range — with the bottom bar already gone and the top nav not yet shown, so
+   those widths had no primary navigation at all. */
+@media (min-width: 48rem) {
+  .ds-masthead__nav {
+    display: flex;
+  }
+}
+
+.ds-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--ds-radius-md);
+  color: var(--text-secondary);
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color var(--ds-duration-fast) var(--ds-ease),
+    background-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+
+.ds-nav-link__icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.ds-nav-link:hover {
+  color: var(--text-primary);
+  background: var(--surface-muted);
+}
+
+/* Current page is marked by weight and a rule, not a filled block — a filled
+   accent pill on every route made the header the loudest thing on screen. */
+.ds-nav-link[aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 700;
+  background: var(--surface-muted);
+}
+
+.ds-nav-link[aria-current="page"] .ds-nav-link__icon {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.ds-masthead__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+.ds-masthead__search {
+  display: none;
+  width: clamp(9rem, 18vw, 15rem);
+}
+
+@media (min-width: 64rem) {
+  .ds-masthead__search {
+    display: flex;
+  }
+}
+
+.ds-masthead__auth {
+  display: none;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-inline-start: var(--ds-space-2);
+}
+
+@media (min-width: 34rem) {
+  .ds-masthead__auth {
+    display: flex;
+  }
+}
+
+/* Controls that only make sense with a pointer and room. Deferred to 64rem,
+   not 56rem where the primary nav itself first appears — "My Space" made the
+   nav row up to 6 links, and 56rem–64rem had no headroom left for these once
+   the nav claimed it (P — masthead overflow audit). */
+.ds-desktop-only {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .ds-desktop-only {
+    display: inline-flex;
+  }
+}
+
+.ds-mobile-only {
+  display: inline-flex;
+}
+
+@media (min-width: 56rem) {
+  .ds-mobile-only {
+    display: none;
+  }
+}
+
+/* Reading progress (§11). Fixed just under the sticky masthead — it is
+   rendered by the article, not the header, so it cannot be positioned
+   relative to it. */
+.ds-read-progress {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-start: var(--ds-header-height);
+  z-index: 99;
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.ds-read-progress__bar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+[dir="rtl"] .ds-read-progress__bar {
+  transform-origin: right center;
+}
+
+/* ── Header drawer (mobile menu) ────────────────────────────────────────── */
+
+.ds-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--scrim) 45%, transparent);
+  cursor: pointer;
+  animation: ds-fade-in var(--ds-duration) var(--ds-ease) both;
+}
+
+@keyframes ds-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.ds-drawer {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  width: min(20rem, 90vw);
+  padding: var(--ds-space-5) var(--ds-space-5)
+    calc(var(--ds-space-5) + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-inline-start: 1px solid var(--border);
+  box-shadow: var(--ds-shadow-overlay);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Logical translation so the drawer enters from the correct side in RTL. */
+  translate: 105% 0;
+  transition: translate var(--ds-duration) var(--ds-ease-out);
+}
+
+[dir="rtl"] .ds-drawer {
+  translate: -105% 0;
+}
+
+.ds-drawer--open,
+[dir="rtl"] .ds-drawer--open {
+  translate: 0 0;
+}
+
+.ds-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+}
+
+.ds-drawer__nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-drawer__link {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: 0.7rem 0;
+  border-block-end: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: var(--ds-text-base);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.ds-drawer__link:hover {
+  color: var(--accent);
+}
+
+.ds-drawer__link[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ds-drawer__icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.ds-drawer__section {
+  padding-block-start: var(--ds-space-3);
+  border-block-start: 1px solid var(--border);
+}
+
+.ds-drawer__appearance {
+  display: grid;
+  gap: var(--ds-space-3);
+}
+
+.ds-drawer__foot {
+  margin-block-start: auto;
+  display: grid;
+  gap: var(--ds-space-2);
+}
+
+/* ── Mobile bottom navigation (§14, §15) ────────────────────────────────── */
+
+.ds-mobile-nav {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 90;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(14px);
+  border-block-start: 1px solid var(--border);
+  padding-block: 0.3rem;
+  padding-block-end: calc(0.3rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 48rem) {
+  .ds-mobile-nav {
+    display: none;
+  }
+}
+
+.ds-mobile-nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  /* 44px minimum touch target. */
+  min-height: 2.75rem;
+  padding: 0.2rem 0.15rem;
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.ds-mobile-nav__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.ds-mobile-nav__label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-mobile-nav__link[aria-current="page"] {
+  color: var(--accent);
+}
+
+/* A quiet dot rather than a filled pill — the label already carries state. */
+.ds-mobile-nav__link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  width: 1.25rem;
+  height: 2px;
+  border-radius: var(--ds-radius-pill);
+  background: var(--accent);
+}
+
+.ds-mobile-nav__link {
+  position: relative;
+}
+
+/* ── Page masthead ──────────────────────────────────────────────────────── */
+
+.ds-page-mast {
+  display: grid;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-6);
+  padding-block-end: var(--ds-space-4);
+  border-block-end: 1px solid var(--border);
+}
+
+/* A tool page (the composer) wants the work surface as close to the top as
+   possible — the eyebrow/title/lede stack still orients the writer, but it
+   should not cost as much vertical space as a browsing page's masthead. */
+.ds-page-mast--compact {
+  gap: 0.2rem;
+  margin-block-end: var(--ds-space-4);
+  padding-block-end: var(--ds-space-3);
+}
+
+.ds-page-mast--compact .ds-page-mast__title {
+  font-size: var(--ds-text-2xl);
+}
+
+.ds-page-mast--compact .ds-page-mast__lede {
+  font-size: var(--ds-text-sm);
+}
+
+.ds-page-mast__title {
+  font-size: var(--ds-text-3xl);
+  margin: 0;
+}
+
+.ds-page-mast__lede {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-relaxed);
+  text-wrap: pretty;
+}
+
+.ds-page-mast__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  /* `.ds-page-mast`'s own grid `gap` already spaces this from the lede above
+     it — an extra margin here doubled up with that gap (P1), which the
+     --split variant below already had to zero out for the same reason. */
+}
+
+/* A masthead with the actions pulled to the end on wide screens. */
+@media (min-width: 56rem) {
+  .ds-page-mast--split {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: var(--ds-space-6);
+  }
+
+  .ds-page-mast--split .ds-page-mast__actions {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    margin: 0;
+  }
+}
+
+/* ── Section header ─────────────────────────────────────────────────────── */
+
+.ds-section + .ds-section {
+  margin-block-start: var(--ds-space-8);
+}
+
+.ds-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  margin-block-end: var(--ds-space-4);
+  padding-block-end: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+}
+
+.ds-section-head__text {
+  min-width: 0;
+}
+
+.ds-section-head__title {
+  font-size: var(--ds-text-xl);
+  margin: 0;
+}
+
+.ds-section-head__lede {
+  margin: var(--ds-space-2) 0 0;
+  max-width: 56ch;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+/* ── Two-column editorial grid ──────────────────────────────────────────── */
+
+.ds-columns {
+  display: grid;
+  gap: var(--ds-space-6);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .ds-columns {
+    grid-template-columns: minmax(0, 1fr) var(--ds-sidebar-width);
+    gap: var(--ds-space-8);
+  }
+
+  /* The rail tracks the reader instead of scrolling away immediately. */
+  .ds-columns__aside {
+    position: sticky;
+    inset-block-start: calc(var(--ds-header-height) + var(--ds-space-5));
+    max-height: calc(100dvh - var(--ds-header-height) - var(--ds-space-8));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}
+
+.ds-columns__main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-8);
+}
+
+/* Every direct child keeps the reading measure's own max-width (set on
+   .ds-article, .ds-section, etc.) but stretches to fill the column and
+   center within it — otherwise collapsing the rail (CollapsibleAside) frees
+   width on the right that a left-anchored, capped-width article could never
+   use, leaving a dead gap instead of a centered, balanced column. */
+.ds-columns__main > * {
+  width: 100%;
+}
+
+.ds-columns__aside {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+/* On phones the rail follows the article rather than preceding it — the
+   audit found it pinned above the content, pushing the story off-screen. */
+@media (max-width: 63.99rem) {
+  .ds-columns__aside {
+    order: 2;
+  }
+}
+
+/* ── Auth pages (sign in / register) ────────────────────────────────────── */
+
+.ds-auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Sits a little above optical centre — a form pinned dead-centre reads as
+     lower than centre once the masthead is accounted for. */
+  padding: var(--ds-space-9) var(--ds-space-4) var(--ds-space-8);
+}
+
+.ds-auth-page__inner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  max-width: 25rem;
+  padding: var(--ds-space-7) var(--ds-space-6) var(--ds-space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xl);
+  background: var(--surface);
+  box-shadow: var(--ds-shadow-card);
+}
+
+/* A hairline of accent across the top edge, so the card is anchored rather
+   than floating as a plain rectangle. */
+.ds-auth-page__inner::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 35%,
+    var(--accent) 65%,
+    transparent
+  );
+  opacity: 0.7;
+}
+
+.ds-auth-page__inner > *:not(.ds-pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-auth-page__head {
+  display: grid;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-6);
+}
+
+.ds-auth-page__title {
+  margin: 0;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-2xl);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-auth-page__lede {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.ds-auth-form {
+  display: grid;
+  gap: var(--ds-space-5);
+}
+
+/* The submit button carries more weight than a default control: this is the
+   single action on the surface. */
+.ds-auth-form .ds-btn {
+  min-height: var(--ds-control-height-lg);
+  margin-block-start: var(--ds-space-1);
+}
+
+.ds-auth-form__row {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ds-auth-form__row a {
+  color: var(--accent);
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+  transition: color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-auth-form__row a:hover {
+  color: var(--accent-hover);
+}
+
+.ds-auth-form__hint {
+  margin: 0;
+  padding-block-start: var(--ds-space-4);
+  border-block-start: 1px solid var(--border);
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+/* ── Sidebar widgets ────────────────────────────────────────────────────── */
+
+.ds-widget {
+  padding: var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+}
+
+.ds-widget__title {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin: 0 0 var(--ds-space-3);
+  padding-block-end: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-widget__text {
+  margin: 0 0 var(--ds-space-3);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.ds-widget-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-widget-list__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-widget-list__row:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.ds-widget-list__row a {
+  color: var(--text-primary);
+  text-decoration: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-widget-list__row a:hover {
+  color: var(--accent);
+}
+
+.ds-widget-list__count {
+  flex-shrink: 0;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-widget-list__row a {
+  transition: color var(--ds-duration-fast) var(--ds-ease),
+    transform var(--ds-duration-fast) var(--ds-ease);
+  display: inline-block;
+}
+
+.ds-widget-list__row a:hover {
+  transform: translateX(0.15rem);
+}
+
+/* The reader's own activity rail on /community (§18) — a warmer, slightly
+   more ornamented take on the plain widget, since this is personal space
+   rather than curated editorial content. */
+.ds-widget--activity {
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--ds-duration-fast) var(--ds-ease),
+    box-shadow var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-widget--activity:hover {
+  border-color: var(--accent-line);
+  box-shadow: 0 4px 16px -10px var(--accent);
+}
+
+.ds-follower-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ds-follower-row li {
+  transition: transform var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-follower-row li:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* The editorial dashboard's read-only preview of the discovery widgets
+   (Editor's Shelf, Traditions, Coming Up) that used to live on /community. */
+.ds-editorial-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--ds-space-4);
+  align-items: start;
+}
+
+/* ── Breadcrumbs ────────────────────────────────────────────────────────── */
+
+.ds-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem var(--ds-space-2);
+  list-style: none;
+  margin: 0 0 var(--ds-space-4);
+  padding: 0;
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}
+
+.ds-breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-breadcrumbs li + li::before {
+  content: "/";
+  color: var(--border-strong);
+}
+
+.ds-breadcrumbs a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-breadcrumbs a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.ds-breadcrumbs [aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Auth pages ─────────────────────────────────────────────────────────── */
+
+.ds-auth {
+  display: grid;
+  place-items: center;
+  min-height: calc(100dvh - var(--ds-header-height) - 8rem);
+  padding-block: var(--ds-space-7);
+}
+
+.ds-auth__panel {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.ds-auth__head {
+  text-align: center;
+  margin-block-end: var(--ds-space-6);
+}
+
+.ds-auth__title {
+  font-size: var(--ds-text-2xl);
+  margin: 0 0 var(--ds-space-2);
+}
+
+.ds-auth__lede {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+}
+
+.ds-auth__foot {
+  margin-block-start: var(--ds-space-5);
+  padding-block-start: var(--ds-space-4);
+  border-block-start: 1px solid var(--border);
+  text-align: center;
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+}
+

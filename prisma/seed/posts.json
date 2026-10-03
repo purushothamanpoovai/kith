@@ -1,0 +1,274 @@
+[
+  {
+    "id": "post_morning_prayer_ta",
+    "type": "post",
+    "slug": "morning-prayer-before-work",
+    "title": { "en": "Five minutes before the day starts", "ta": "நாள் தொடங்கும் முன் ஐந்து நிமிடம்" },
+    "body": {
+      "en": "I light a small lamp and sit quietly before checking messages. It helps me enter the day with less hurry.",
+      "ta": "சிறிய விளக்கு ஏற்றி, செய்திகளைப் பார்ப்பதற்கு முன் அமைதியாக அமருகிறேன். நாளை குறைந்த அவசரத்துடன் தொடங்க உதவுகிறது."
+    },
+    "authorId": "user_member",
+    "originalLanguage": "ta",
+    "scopeIds": ["topic-devotion", "topic-meditation", "shaivism", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "post_grandmother_recipe",
+    "type": "post",
+    "slug": "grandmother-festival-recipe",
+    "title": { "en": "Still making her Pongal recipe", "ta": "அவள் பொங்கல் recipe-ஐ இன்னும் செய்கிறேன்" },
+    "body": {
+      "en": "My grandmother's Pongal never had exact measures. This year I wrote down what I could remember.",
+      "ta": "என் பாட்டியின் பொங்கலுக்கு exact அளவுகள் இருந்ததில்லை. இந்த ஆண்டு நினைவில் இருந்ததை எழுதி வைத்தேன்."
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "scopeIds": ["topic-festivals", "topic-family", "topic-food", "hinduism", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "post_church_choir",
+    "type": "post",
+    "slug": "first-time-choir-practice",
+    "title": { "en": "First choir practice in years", "ta": "ஆண்டுகளுக்குப் பிறகு முதல் choir பயிற்சி" },
+    "body": {
+      "en": "Nervous at first, but the harmonies reminded me why we gather. Easter is around the corner.",
+      "ta": "முதலில் nervous, ஆனால் harmonies ஏன் கூடுகிறோம் என்பதை நினைவூட்டியது. Easter அருகில்."
+    },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "scopeIds": ["christianity", "catholicism", "topic-music", "topic-festivals", "region-kerala", "lang-en"]
+  },
+  {
+    "id": "post_quran_reflection",
+    "type": "post",
+    "slug": "evening-quran-reflection",
+    "title": { "en": "A verse that stayed with me today", "ta": "இன்று என்னோடு lingering ஒரு verse" },
+    "body": {
+      "en": "Read slowly after maghrib. No commentary needed — just letting the words settle.",
+      "ta": "maghrib-க்குப் பிறகு மெதுவாக படித்தேன். commentary தேவையில்லை — சொற்கள் settle ஆகட்டும்."
+    },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "scopeIds": ["islam", "topic-devotion", "topic-meditation", "lang-en"]
+  },
+  {
+    "id": "post_meditation_walk",
+    "type": "post",
+    "slug": "ten-steps-mindful-walk",
+    "title": { "en": "Ten steps on the balcony", "ta": "மாடியில் பத்து அடிகள்" },
+    "body": {
+      "en": "Rain paused. I walked ten steps back and forth, noticing each footfall. Simple and enough.",
+      "ta": "மழை நின்றது. பத்து அடிகள் முன்னும் பின்னும் நடந்தேன், ஒவ்வொரு footfall-ஐயும் கவனித்தேன். simple, போதும்."
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "scopeIds": ["buddhism", "topic-meditation", "buddha", "lang-en"]
+  },
+  {
+    "id": "post_langar_volunteer",
+    "type": "post",
+    "slug": "langar-volunteer-sunday",
+    "title": { "en": "Serving roti this Sunday", "hi": "इस रविवार रोटी परोस रहा हूँ" },
+    "body": {
+      "en": "Third time volunteering in the kitchen. Hands busy, mind calm.",
+      "hi": "रसोई में तीसरी बार सेवा। हाथ व्यस्त, मन शांत।"
+    },
+    "authorId": "user_contrib_harpreet",
+    "originalLanguage": "hi",
+    "scopeIds": ["sikhism", "sikh-khalsa", "topic-devotion", "topic-family", "region-punjab", "lang-hi"]
+  },
+  {
+    "id": "post_onam_flowers",
+    "type": "post",
+    "slug": "onam-flower-hunt",
+    "title": { "en": "Collecting petals for pookalam", "ml": "പൂക്കളത്തിന് ഇതൾ ശേഖരിക്കുന്നു" },
+    "body": {
+      "en": "Children gathered marigold and hibiscus from the garden. The design is theirs this year.",
+      "ml": "കുട്ടികൾ തോട്ടത്തിൽ നിന്ന് ചെമ്പരത്തിയും മുല്ലയും ശേഖരിച്ചു. ഈ വർഷം രൂപം അവരുടേതാണ്."
+    },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "ml",
+    "scopeIds": ["topic-festivals", "topic-family", "region-kerala", "lang-ml"]
+  },
+  {
+    "id": "post_scripture_question",
+    "type": "post",
+    "slug": "scripture-study-group-question",
+    "title": { "en": "Question from tonight's study group", "ta": "இன்றிரவு study group-ல் ஒரு கேள்வி" },
+    "body": {
+      "en": "We discussed forgiveness without forgetting. Honest disagreement, respectful listening.",
+      "ta": "மறப்பின்றி மன்னிப்பு பற்றி விவாதித்தோம். honest disagreement, respectful listening."
+    },
+    "authorId": "user_contrib_james",
+    "originalLanguage": "en",
+    "scopeIds": ["christianity", "topic-philosophy", "topic-family", "lang-en"]
+  },
+  {
+    "id": "post_temple_visit",
+    "type": "post",
+    "slug": "quiet-temple-visit-friday",
+    "title": { "en": "Quiet Friday at the temple", "ta": "கோவிலில் quiet வெள்ளிக்கிழமை", "hi": "मंदिर में शांत शुक्रवार" },
+    "body": {
+      "en": "Fewer crowds meant I could sit longer. Grateful for the stillness.",
+      "ta": "கூட்டம் குறைவாக இருந்ததால் நீண்ட நேரம் அமர்ந்தேன். அமைதிக்கு நன்றி.",
+      "hi": "भीड़ कम थी, इसलिए देर तक बैठ सका। शांति के लिए आभारी।"
+    },
+    "authorId": "user_contrib_rajesh",
+    "originalLanguage": "hi",
+    "scopeIds": ["hinduism", "topic-devotion", "topic-pilgrimage", "lang-hi", "lang-ta"]
+  },
+  {
+    "id": "post_sufi_poetry",
+    "type": "post",
+    "slug": "sufi-poetry-reading",
+    "title": { "en": "Reading Rabi'a tonight", "ta": "இன்றிரவு ராபியாவைப் படிக்கிறேன்" },
+    "body": {
+      "en": "Her words on love feel modern and ancient at once. Shared a line with a friend.",
+      "ta": "அன்பைப் பற்றிய அவள் சொற்கள் modern-ஆகவும் ancient-ஆகவும் ஒரே நேரம். ஒரு வரியை நண்பருடன் பகிர்ந்தேன்."
+    },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "scopeIds": ["sufism", "rabia", "topic-poetry", "topic-devotion", "lang-en"]
+  },
+  {
+    "id": "post_member_bookmark",
+    "type": "post",
+    "slug": "saved-article-gratitude",
+    "title": { "en": "Saved an article on gratitude", "ta": "நன்றி பற்றிய கட்டுரை bookmark செய்தேன்" },
+    "body": {
+      "en": "Reading across traditions helps me notice what I take for granted. Sharing in case it helps someone else.",
+      "ta": "மரபுகள் முழுவதும் படிப்பது granted-ஆக எடுத்துக்கொள்வதை கவனிக்க உதவுகிறது. வேறொருவருக்கும் உதவும் என்றால் பகிர்கிறேன்."
+    },
+    "authorId": "user_member",
+    "originalLanguage": "en",
+    "scopeIds": ["topic-gratitude", "topic-devotion", "lang-en", "lang-ta"]
+  },
+  {
+    "id": "post_gurpurab_prep",
+    "type": "post",
+    "slug": "gurpurab-preparations",
+    "title": { "en": "Gurpurab preparations begin", "hi": "गुरपुरब की तैयारी शुरू", "pa": "ਗੁਰਪੁਰਬ ਦੀ ਤਿਆਰੀ ਸ਼ੁਰੂ" },
+    "body": {
+      "en": "Cleaning the hall, arranging flowers, testing the sound system. Community work is devotion too.",
+      "hi": "हॉल की सफाई, फूल, साउंड सिस्टम। सामुदायिक काम भी भक्ति है।"
+    },
+    "authorId": "user_contrib_harpreet",
+    "originalLanguage": "hi",
+    "scopeIds": ["sikhism", "guru-nanak", "topic-festivals", "topic-devotion", "region-punjab", "lang-hi"]
+  },
+  {
+    "id": "post_kerala_rain",
+    "type": "post",
+    "slug": "rain-and-prayer",
+    "title": { "en": "Rain and evening prayer", "ml": "മഴയും സായാഹ്ന പ്രാർത്ഥനയും" },
+    "body": {
+      "en": "Monsoon rain on the roof while we prayed. A sound I associate with childhood.",
+      "ml": "പ്രാർത്ഥന ചെയ്യുമ്പോൾ മേൽക്കൂരയിൽ monsoon മഴ. ബാല്യത്തെ ഓർമ്മപ്പെടുത്തുന്ന ശബ്ദം."
+    },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "ml",
+    "scopeIds": ["topic-prayer", "topic-family", "region-kerala", "lang-ml"]
+  },
+  {
+    "id": "post_admin_welcome",
+    "type": "post",
+    "slug": "welcome-new-contributors",
+    "title": { "en": "Welcome to our new contributors", "ta": "புதிய contributors-க்கு வரவேற்பு" },
+    "body": {
+      "en": "Grateful for voices from many regions and traditions joining the platform this month.",
+      "ta": "பல பகுதிகள், மரபுகளிலிருந்து voices இந்த மாதம் platform-இல் இணைந்ததற்கு நன்றி."
+    },
+    "authorId": "user_admin",
+    "originalLanguage": "en",
+    "scopeIds": ["topic-heritage", "lang-en"]
+  },
+  {
+    "id": "post_buddhist_full_moon",
+    "type": "post",
+    "slug": "full-moon-uposatha",
+    "title": { "en": "Full moon uposatha observance", "ta": "நிலாமுறை uposatha observance" },
+    "body": {
+      "en": "Observed precepts quietly at home. Called an elder to ask about fasting details.",
+      "ta": "வீட்டில் quietly precepts observe செய்தேன். fasting details-க்கு மூத்தவரை அழைத்தேன்."
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "scopeIds": ["buddhism", "theravada", "topic-meditation", "topic-devotion", "region-sri-lanka", "lang-en"]
+  },
+  {
+    "id": "post_tirukkural_line",
+    "type": "post",
+    "slug": "tirukkural-line-today",
+    "title": { "en": "One kural for today", "ta": "இன்றைக்கு ஒரு குறள்", "hi": "आज के लिए एक कुरल" },
+    "body": {
+      "en": "Shared a couplet on hospitality with my students. Ethics before theology, always.",
+      "ta": "விருந்தோம்பல் பற்றிய couplet-ஐ மாணவர்களுடன் பகிர்ந்தேன். theology-க்கு முன் ethics, எப்போதும்."
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "scopeIds": ["tiruvalluvar", "topic-philosophy", "topic-heritage", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "post_mary_feast",
+    "type": "post",
+    "slug": "mary-feast-candle",
+    "title": { "en": "Lit a candle for Mary's feast", "ta": "மரியாள் feast-க்கு மெழுகுவர்த்தி ஏற்றினேன்" },
+    "body": {
+      "en": "Simple remembrance. My mother used to do this every year without explaining why.",
+      "ta": "Simple remembrance. என் அம்மா ஏன் என்று explain செய்யாமல் ஒவ்வொரு ஆண்டும் இதை செய்வார்."
+    },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "scopeIds": ["mary", "catholicism", "topic-devotion", "topic-family", "lang-en"]
+  },
+  {
+    "id": "post_exam_breath",
+    "type": "post",
+    "slug": "before-an-exam",
+    "title": {
+      "en": "Before an exam I only count the breath",
+      "ta": "தேர்வுக்கு முன் மூச்சை மட்டுமே எண்ணுகிறேன்",
+      "hi": "परीक्षा से पहले केवल श्वास गिनती हूँ"
+    },
+    "body": {
+      "en": "Ten slow breaths at the hostel desk. No playlist. Then I open the paper.",
+      "ta": "விடுதி மேசையில் பத்து மெல்லிய மூச்சு. பாடல் இல்லை. பிறகு தாள் திறக்கிறேன்.",
+      "hi": "छात्रावास की मेज पर दस धीमी साँसें। कोई गाना नहीं। फिर कापी खोलती हूँ।"
+    },
+    "authorId": "user_member",
+    "originalLanguage": "ta",
+    "scopeIds": ["topic-yoga", "topic-meditation", "region-tamil-nadu", "lang-ta", "lang-en"]
+  },
+  {
+    "id": "post_first_arangetram",
+    "type": "post",
+    "slug": "my-daughters-arangetram",
+    "title": {
+      "en": "Eight years of Tuesday classes led to tonight",
+      "ta": "எட்டு வருட செவ்வாய் வகுப்புகள் இன்றிரவுக்கு வழிநடத்தியது"
+    },
+    "body": {
+      "en": "My daughter's arangetram was tonight — her first full solo Bharatanatyam performance. She was three when she started. I cried during the invocation piece before she'd even finished the first line.",
+      "ta": "என் மகளின் அரங்கேற்றம் இன்றிரவு நடந்தது — அவளுடைய முதல் முழு தனி பரதநாட்டிய நிகழ்ச்சி. அவள் தொடங்கியபோது மூன்று வயது. அவள் முதல் வரியை முடிப்பதற்கு முன்பே நான் அழுதுவிட்டேன்."
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "en",
+    "scopeIds": ["topic-dance", "topic-family", "hinduism", "region-tamil-nadu", "lang-en", "lang-ta"]
+  },
+  {
+    "id": "post_kolam_before_dawn",
+    "type": "post",
+    "slug": "kolam-before-dawn",
+    "title": {
+      "en": "The kolam is gone by nine, and that's the point",
+      "ta": "ஒன்பது மணிக்குள் கோலம் மறைந்துவிடும், அதுதான் அதன் நோக்கம்"
+    },
+    "body": {
+      "en": "I wake before sunrise to draw the kolam at our doorstep with rice flour, knowing feet and rain will erase it by mid-morning. My grandmother taught me it isn't meant to last — welcoming the day is enough.",
+      "ta": "அரிசி மாவால் வாசலில் கோலம் போட சூரிய உதயத்திற்கு முன் எழுகிறேன், மதியத்திற்குள் கால்களும் மழையும் அதை அழித்துவிடும் என்று தெரிந்தே. அது நிலைத்திருக்க வேண்டியதில்லை என்று என் பாட்டி கற்றுத்தந்தார் — நாளை வரவேற்பது போதும்."
+    },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "en",
+    "scopeIds": ["topic-crafts", "topic-devotion", "hinduism", "region-tamil-nadu", "lang-en", "lang-ta"]
+  }
+]

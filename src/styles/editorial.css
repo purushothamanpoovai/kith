@@ -1,0 +1,890 @@
+/* ==========================================================================
+   Editorial surfaces (§10, §11, §21, §24)
+
+   The article reader, the verse reader, scope heroes, and the Quiet Moment.
+   Content leads: the title and the byline come before any decoration, the
+   measure is fixed at a comfortable character count, and blocks are given
+   deliberate rhythm rather than each being wrapped in its own white card.
+   ========================================================================== */
+
+/* ── Article masthead ───────────────────────────────────────────────────── */
+
+/* Capped at the reading measure so the cover, title and body all line up at
+   one consistent width instead of the cover running full-bleed while the
+   text sits narrower beside empty space (P9). */
+.ds-article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-6);
+  max-width: var(--ds-content-narrow);
+}
+
+.ds-article__mast {
+  display: grid;
+  gap: var(--ds-space-4);
+}
+
+.ds-article__title {
+  margin: 0;
+  font-size: var(--ds-text-4xl);
+  line-height: var(--ds-leading-tight);
+}
+
+.ds-article__standfirst {
+  margin: 0;
+  max-width: 52ch;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-xl);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+/* Byline: who published it, in what language, in what context (§10). */
+.ds-byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-3);
+  border-block: 1px solid var(--border);
+  /* The mast caps the title at the reading measure so a headline doesn't run
+     the full width. The byline rule, though, is a divider: capped with it, it
+     stopped halfway across and read as a broken border. */
+  width: 100%;
+  max-width: none;
+}
+
+/* Leading the masthead rather than sitting mid-article: only a rule beneath
+   it, so it introduces the headline instead of cutting the page in two. */
+.ds-byline--lead {
+  border-block-start: 0;
+  padding-block-start: 0;
+}
+
+.ds-byline__who {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  min-width: 0;
+}
+
+.ds-byline__names {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-byline__name {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.ds-byline__name:hover {
+  color: var(--accent);
+}
+
+.ds-byline__facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2) var(--ds-space-3);
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+.ds-byline__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-inline-start: auto;
+}
+
+/* ── Cover ──────────────────────────────────────────────────────────────── */
+
+/* A cover earns roughly a third of the first screen, not all of it. */
+.ds-article__cover {
+  aspect-ratio: 21 / 9;
+  max-height: 26rem;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+}
+
+.ds-article__cover-caption {
+  margin: var(--ds-space-2) 0 0;
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  max-width: var(--ds-content-narrow);
+}
+
+/* ── Body blocks ────────────────────────────────────────────────────────── */
+
+.ds-article__body {
+  max-width: var(--ds-read-measure);
+}
+
+/* ── Sign-in wall (§ preview gate) ──────────────────────────────────────── */
+
+/* The truncated body fades out over its last few lines rather than stopping
+   on a hard edge, so the cutoff reads as "there's more" instead of "broken". */
+.ds-article__body--teaser {
+  position: relative;
+  max-height: 34rem;
+  overflow: hidden;
+}
+
+.ds-article__body--teaser::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: 10rem;
+  background: linear-gradient(to bottom, transparent, var(--surface) 85%);
+  pointer-events: none;
+}
+
+.ds-signin-wall {
+  display: grid;
+  gap: var(--ds-space-3);
+  max-width: var(--ds-read-measure);
+  margin-block-start: calc(-1 * var(--ds-space-6));
+  padding: var(--ds-space-6) var(--ds-space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface-muted);
+  text-align: center;
+}
+
+.ds-signin-wall__title {
+  margin: 0;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-signin-wall__body {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-secondary);
+}
+
+.ds-signin-wall__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-3);
+}
+
+/* Replaces the player entirely for a signed-out visitor — no scrubber, no
+   clip, nothing to interact with — per the "no playback before sign-in"
+   media policy. */
+.ds-media-lock {
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-8) var(--ds-space-5);
+  border: 1px dashed var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ds-media-lock__title {
+  margin: 0;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-media-lock__body {
+  margin: 0;
+  max-width: 32rem;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+}
+
+/* A pull quote breaks the measure and the rhythm — the one moment of scale
+   change inside a long read. */
+.ds-pullquote {
+  margin-block: var(--ds-space-8);
+  padding-inline-start: var(--ds-space-5);
+  border-inline-start: 2px solid var(--accent);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-2xl);
+  font-weight: 500;
+  line-height: var(--ds-leading-snug);
+  color: var(--text-primary);
+}
+
+.ds-pullquote p {
+  margin: 0;
+}
+
+.ds-pullquote footer {
+  margin-block-start: var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+/* A highlighted passage — a devotional line the author wants dwelt on. */
+.ds-passage {
+  margin-block: var(--ds-space-7);
+  padding: var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-relaxed);
+}
+
+.ds-passage p:last-child {
+  margin-block-end: 0;
+}
+
+/* Figures. On wide screens an image may break out past the measure, which is
+   what gives a long read its full-width moments (§11). */
+.ds-figure {
+  margin-block: var(--ds-space-7);
+}
+
+.ds-figure__media {
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  /* A resized figure gets an explicit inline width/height (see image-node.tsx
+     and the sanitiser-preserved <img width height> attributes below); an
+     untouched one has neither and simply fills the column as before. Capped
+     so a size chosen on a wide screen while writing still fits a phone. */
+  max-width: 100%;
+}
+
+.ds-figure__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Once the writer has dragged a figure to a specific size, the stored pixel
+   width/height survive as real <img> attributes (allowed by the sanitiser).
+   The image then fills that exact box and crops to it — "auto fit with
+   crop" — rather than the default of stretching to the column and scaling
+   height freely, which is what happens above when no size was ever set. */
+.ds-figure__media img[width][height] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ds-figure figcaption,
+.ds-figure__caption {
+  margin-block-start: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  text-wrap: pretty;
+}
+
+@media (min-width: 64rem) {
+  .ds-figure--wide {
+    width: min(56rem, calc(100% + 12rem));
+    margin-inline-start: -6rem;
+  }
+
+  [dir="rtl"] .ds-figure--wide {
+    margin-inline-start: 0;
+    margin-inline-end: -6rem;
+  }
+}
+
+/* A supporting image, narrower than the reading column and centred — for a
+   detail or a secondary reference the writer doesn't want given full column
+   width. Centred rather than floated: floating an image next to reflowing
+   text behaves badly at the narrow widths this reads at on a phone, and
+   would need its own RTL-mirrored rule for no real gain in a mostly-mobile
+   readership. */
+.ds-figure--small {
+  width: min(60%, 24rem);
+  margin-inline: auto;
+}
+
+/* Left/right/centre alignment, chosen from the composer's per-image toolbar
+   (see image-node.tsx). Unlike `--small` above, left/right genuinely float
+   so body text wraps around the image — the writer asked for it explicitly
+   here, image by image, rather than it being the article's default
+   treatment, so the readability trade-off `--small` avoids is one the writer
+   opted into on purpose. `margin-inline-start`/`-end` (logical properties)
+   flip automatically in RTL, so no separate `[dir="rtl"]` override is
+   needed the way `--wide`'s physical offset requires one. */
+.ds-figure--align-left,
+.ds-figure--align-right {
+  width: min(45%, 22rem);
+  margin-block: 0 var(--ds-space-4);
+}
+
+.ds-figure--align-left {
+  float: inline-start;
+  margin-inline-end: var(--ds-space-5);
+}
+
+.ds-figure--align-right {
+  float: inline-end;
+  margin-inline-start: var(--ds-space-5);
+}
+
+.ds-figure--align-center {
+  width: min(60%, 26rem);
+  margin-inline: auto;
+}
+
+/* Matches `--small`'s reasoning: a float this narrow fights wrapped text on
+   a phone, so it drops back to a plain full-width block instead. */
+@media (max-width: 34rem) {
+  .ds-figure--align-left,
+  .ds-figure--align-right {
+    float: none;
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* ── Verse reader ───────────────────────────────────────────────────────── */
+
+/* Original, transliteration and translation are three registers, so they get
+   three treatments rather than three identical panels. */
+.ds-verse-stack {
+  display: grid;
+  gap: var(--ds-space-5);
+  max-width: var(--ds-content-narrow);
+}
+
+.ds-verse-panel {
+  position: relative;
+  padding: var(--ds-space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: linear-gradient(180deg, var(--editorial-soft), var(--surface) 70%);
+}
+
+.ds-verse-panel__label {
+  display: block;
+  margin-block-end: var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-verse-panel__original {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-2xl);
+  line-height: 1.9;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+.ds-verse-panel__translit {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  line-height: 1.85;
+  color: var(--text-secondary);
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.ds-verse-panel__translation {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-read-size);
+  line-height: var(--ds-read-leading);
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+.ds-verse-panel--plain {
+  background: var(--surface);
+}
+
+/* ── Scope / organization hero (§8, §24, §25) ───────────────────────────
+   Compact and editorial. A label, a title, a lede, up to two actions, and a
+   low-contrast pattern behind. Never half the viewport. */
+
+.ds-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: var(--ds-space-7) var(--ds-space-6);
+  margin-block-end: var(--ds-space-7);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xl);
+  background: linear-gradient(150deg, var(--accent-soft) 0%, var(--surface) 65%);
+}
+
+@media (max-width: 47.99rem) {
+  .ds-hero {
+    padding: var(--ds-space-5) var(--ds-space-4);
+    margin-block-end: var(--ds-space-6);
+  }
+}
+
+.ds-hero > *:not(.ds-pattern):not(.ds-ornament) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-hero__inner {
+  display: grid;
+  gap: var(--ds-space-3);
+  max-width: 44rem;
+}
+
+.ds-hero__title {
+  margin: 0;
+  font-size: var(--ds-text-4xl);
+  line-height: var(--ds-leading-tight);
+}
+
+.ds-hero__lede {
+  margin: 0;
+  max-width: 58ch;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.ds-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  margin-block-start: var(--ds-space-2);
+}
+
+.ds-hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-block-start: var(--ds-space-2);
+}
+
+/* An asymmetric variant: text on the start side, a cover on the end side. */
+@media (min-width: 64rem) {
+  .ds-hero--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--ds-space-8);
+    align-items: center;
+  }
+
+  .ds-hero--split .ds-hero__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--ds-radius-lg);
+    border: 1px solid var(--border);
+  }
+}
+
+.ds-hero__media {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .ds-hero--split .ds-hero__media {
+    display: block;
+  }
+}
+
+/* Organization cover strip.
+   The cover and the header beneath it are one card, so they must share a
+   width. Previously the cover was unconstrained while the header sat in the
+   page container, which is what made the image run past the card's edge. */
+.ds-org-cover {
+  position: relative;
+  aspect-ratio: 4 / 1;
+  min-height: 8rem;
+  max-height: 14rem;
+  width: 100%;
+  border-radius: var(--ds-radius-xl) var(--ds-radius-xl) 0 0;
+  border: 1px solid var(--border);
+  border-block-end: 0;
+}
+
+@media (max-width: 40rem) {
+  /* A 4:1 strip is a sliver on a phone; give it a usable height. */
+  .ds-org-cover {
+    aspect-ratio: 5 / 2;
+  }
+}
+
+.ds-org-head {
+  position: relative;
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-5) var(--ds-space-6) var(--ds-space-6);
+  border: 1px solid var(--border);
+  border-radius: 0 0 var(--ds-radius-xl) var(--ds-radius-xl);
+  background: var(--surface);
+  border-block-start: 3px solid var(--accent);
+  overflow-wrap: break-word;
+}
+
+.ds-org-head__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--ds-space-4);
+  align-items: start;
+}
+
+@media (max-width: 34rem) {
+  /* Below this the crest and the title fight for the same line; stack them. */
+  .ds-org-head__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-3);
+  }
+}
+
+/* Lift the crest over the cover seam. */
+.ds-org-head__crest {
+  margin-block-start: -3.25rem;
+  border: 3px solid var(--surface);
+  box-shadow: var(--ds-shadow-soft);
+}
+
+.ds-org-head__title {
+  margin: 0;
+  font-size: var(--ds-text-3xl);
+  line-height: var(--ds-leading-snug);
+  /* Long institutional names ("Basilica of Our Lady of Good Health,
+     Velankanni") must wrap rather than overflow the card. */
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+/* Prose in the header keeps a reading measure instead of running the full
+   width of a wide screen, which is what made the description hard to scan. */
+.ds-org-head__about {
+  margin: 0;
+  max-width: 68ch;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+/* Long source URLs in attribution text must not push the card wide. */
+.ds-org-head__about a,
+.ds-org-head__about {
+  word-break: break-word;
+}
+
+/* ── Visit information (§ visit info) ────────────────────────────────────
+   A card of practical facts, not prose — each fact gets an icon, a label
+   and a value, laid out as a responsive grid so it never turns into a wall
+   of text on a wide screen. */
+.ds-visit-info {
+  padding: var(--ds-space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  border-inline-start: 3px solid var(--accent);
+  display: grid;
+  gap: var(--ds-space-4);
+}
+
+.ds-visit-grid {
+  display: grid;
+  gap: var(--ds-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+
+.ds-visit-item {
+  display: flex;
+  gap: var(--ds-space-2);
+  align-items: start;
+  color: var(--text-secondary);
+}
+
+.ds-visit-item svg {
+  flex-shrink: 0;
+  margin-block-start: 0.2em;
+  color: var(--accent);
+}
+
+.ds-visit-item__label {
+  margin: 0;
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+.ds-visit-item__value {
+  margin: var(--ds-space-1) 0 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-primary);
+  overflow-wrap: break-word;
+}
+
+.ds-visit-services {
+  border-block-start: 1px solid var(--border);
+  padding-block-start: var(--ds-space-4);
+}
+
+.ds-visit-services__list {
+  list-style: none;
+  margin: var(--ds-space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+
+.ds-visit-services__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  font-size: var(--ds-text-sm);
+  flex-wrap: wrap;
+}
+
+.ds-visit-services__name {
+  color: var(--text-primary);
+}
+
+.ds-visit-services__time {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 34rem) {
+  .ds-visit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Product catalogue (§ products) ──────────────────────────────────────
+   Catalogue-only: every card ends at an external link, never a checkout. */
+.ds-product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ds-product-card__cover {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--ds-radius-lg) var(--ds-radius-lg) 0 0;
+}
+
+.ds-product-card__body {
+  padding: var(--ds-space-3) var(--ds-space-4) var(--ds-space-4);
+  display: grid;
+  gap: var(--ds-space-1);
+  flex: 1;
+}
+
+.ds-product-card__name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-product-card__price {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-product-card__desc {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+}
+
+.ds-product-card__cta {
+  margin-block-start: var(--ds-space-2);
+  justify-self: start;
+  text-decoration: none;
+}
+
+/* ── Ticketed events (§ events with ticket tiers) ────────────────────────
+   Structured access + headcount, never a purchase flow. */
+.ds-ticketed-event__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ds-space-2);
+  justify-content: space-between;
+}
+
+.ds-tier-list {
+  list-style: none;
+  margin: var(--ds-space-2) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ds-space-2);
+}
+
+.ds-tier-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-md);
+  flex-wrap: wrap;
+}
+
+.ds-tier-card[data-full] {
+  opacity: 0.7;
+}
+
+/* Takes the free space beside the book button, and `min-width: 0` lets a
+   long tier name or description wrap instead of forcing the button out of
+   the row (the children carry their own vertical spacing). */
+.ds-tier-card__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-tier-card__name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ds-tier-card__desc {
+  margin: 0.15rem 0 0;
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+}
+
+.ds-tier-card__capacity {
+  margin: 0.15rem 0 0;
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+@media (max-width: 34rem) {
+  .ds-tier-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ── Quiet Moment (§21) ─────────────────────────────────────────────────
+   Offered after a long read, never forced, dismissible, and it makes no
+   assumption about what the reader believes or should feel. */
+
+.ds-quiet {
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-space-4);
+  max-width: var(--ds-content-narrow);
+  margin-block: var(--ds-space-8);
+  padding: var(--ds-space-8) var(--ds-space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xl);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--accent-soft) 100%);
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.ds-quiet > *:not(.ds-pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-quiet__mark {
+  color: var(--accent);
+  opacity: 0.45;
+}
+
+.ds-quiet__text {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-xl);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-primary);
+}
+
+.ds-quiet__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-3);
+}
+
+.ds-quiet__dismiss {
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ── Content label chip ─────────────────────────────────────────────────── */
+
+.ds-label-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-sm);
+  background: var(--surface-muted);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ── Article footer rails ───────────────────────────────────────────────── */
+
+.ds-article__foot {
+  display: grid;
+  gap: var(--ds-space-7);
+  max-width: var(--ds-content-narrow);
+  margin-block-start: var(--ds-space-7);
+  padding-block-start: var(--ds-space-6);
+  border-block-start: 1px solid var(--border);
+}
+
+/* Everything you can do to this article, in one row: the reaction bar takes
+   the space it needs, and Report sits quietly at the far end rather than
+   alone at the bottom of the page where it read as an unexplained icon. */
+.ds-article__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+}
+
+/* When the row carries only the quiet action (no reaction bar beside it). */
+.ds-article__actions--end {
+  justify-content: flex-end;
+}

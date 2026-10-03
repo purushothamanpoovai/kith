@@ -1,0 +1,217 @@
+[
+  {
+    "id": "media_shiva_thiruvasagam",
+    "type": "audio",
+    "slug": "shiva-thiruvasagam-chant",
+    "title": { "en": "Thiruvasagam Chant", "ta": "திருவாசகம் பாடல்", "hi": "तिरुवाचगम गायन" },
+    "summary": { "en": "A traditional Shaiva hymn recorded at a temple in Madurai.", "ta": "மதுரை கோவிலில் பதிவு செய்யப்பட்ட சைவ hymn." },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "contentLabel": "archival",
+    "mediaUrl": "/media/audio/shiva-thiruvasagam-chant.mp3",
+    "durationSeconds": 342,
+    "transcript": {
+      "en": "Opening verses of the Thiruvasagam, sung in the classical Tamil mode.",
+      "ta": "திருவாசகத்தின் தொடக்க பாடல்கள், classical Tamil mode-இல்."
+    },
+    "scopeIds": ["shaivism", "shiva", "topic-music", "topic-devotion", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "media_mary_ave_maria",
+    "type": "audio",
+    "slug": "ave-maria-kerala-choir",
+    "title": { "en": "Ave Maria — Kerala Choir", "ta": "அவே மரியா — கேரள choir", "ml": "അവേ മരിയാ — കേരള കോയർ" },
+    "summary": { "en": "A gentle choral setting recorded during a parish retreat.", "ml": "പാരിഷ് retreat-ൽ രേഖപ്പെടുത്തിയ choral setting." },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "mediaUrl": "/media/audio/ave-maria-kerala-choir.mp3",
+    "durationSeconds": 198,
+    "transcript": { "en": "Ave Maria, gratia plena...", "ml": "അവേ മരിയാ, gratia plena..." },
+    "scopeIds": ["christianity", "catholicism", "mary", "topic-music", "topic-prayer", "region-kerala", "lang-en", "lang-ml"]
+  },
+  {
+    "id": "media_sufi_qawwali",
+    "type": "audio",
+    "slug": "sufi-qawwali-remembrance",
+    "title": { "en": "Qawwali of Remembrance", "ta": "நினைவூட்டலின் qawwali", "hi": "ज़िक्र की क़व्वाली" },
+    "summary": { "en": "Live recording from a small gathering, focused on dhikr themes.", "hi": "छोटे समारोह की live recording, dhikr विषयों पर." },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "mediaUrl": "/media/audio/sufi-qawwali-remembrance.mp3",
+    "durationSeconds": 456,
+    "transcript": { "en": "Refrains of praise and trust, alternating between lead and chorus." },
+    "scopeIds": ["islam", "sufism", "rabia", "topic-music", "topic-devotion", "lang-en", "lang-ar"]
+  },
+  {
+    "id": "media_buddha_metta_guided",
+    "type": "audio",
+    "slug": "metta-guided-meditation",
+    "title": { "en": "Guided Metta Meditation", "ta": "வழிகாட்டப்பட்ட மெத்தா தியானம்", "hi": "मार्गदर्शित मेत्ता ध्यान" },
+    "summary": { "en": "A fifteen-minute guided session for beginners.", "ta": "தொடக்கநிலையாளர்களுக்கு பதினைந்து நிமிட session." },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "mediaUrl": "/media/audio/metta-guided-meditation.mp3",
+    "durationSeconds": 912,
+    "transcript": {
+      "en": "Begin by sitting comfortably. Bring attention to the breath. Extend well-wishing to yourself, then outward in widening circles."
+    },
+    "scopeIds": ["buddhism", "theravada", "buddha", "topic-meditation", "topic-compassion", "lang-en"]
+  },
+  {
+    "id": "media_gurbani_kirtan",
+    "type": "audio",
+    "slug": "gurbani-kirtan-evening",
+    "title": { "en": "Evening Gurbani Kirtan", "hi": "संध्या गुरबानी कीर्तन", "pa": "ਸ਼ਾਮ ਗੁਰਬਾਣੀ ਕੀਰਤਨ" },
+    "summary": { "en": "Recorded during a Gurpurab evening program in Amritsar.", "hi": "अमृतसर में गुरपुरब शाम कार्यक्रम की recording." },
+    "authorId": "user_contrib_harpreet",
+    "originalLanguage": "pa",
+    "contentLabel": "community_tradition",
+    "mediaUrl": "/media/audio/gurbani-kirtan-evening.mp3",
+    "durationSeconds": 528,
+    "transcript": { "en": "Shabad verses with harmonium and tabla accompaniment.", "pa": "Harmonium, tabla accompaniment-உடன் shabad verses." },
+    "scopeIds": ["sikhism", "guru-nanak", "topic-music", "topic-devotion", "region-punjab", "lang-pa", "lang-hi"]
+  },
+  {
+    "id": "media_tevaram_poem",
+    "type": "poem",
+    "slug": "tevaram-verse-shiva",
+    "title": { "en": "Tevaram Verse to Shiva", "ta": "சிவனுக்கு தேவாரம் பாடல்", "hi": "शिव को तेवारम श्लोक" },
+    "summary": { "en": "A single Tevaram couplet with transliteration and translation.", "ta": "transliteration, translation-உடன் ஒரு தேவாரம் couplet." },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "contentLabel": "translation",
+    "mediaUrl": "/media/audio/tevaram-verse-shiva.mp3",
+    "durationSeconds": 45,
+    "originalText": {
+      "ta": "திருநாவுக்கரசர் பாடல் வரிகள் — சைவ பக்தி இலக்கியம்."
+    },
+    "transliteration": { "en": "Sample transliteration of the opening line." },
+    "translation": { "en": "O Lord who dwells at the sacred threshold, grant us clarity of heart." },
+    "scopeIds": ["shaivism", "shiva", "topic-poetry", "topic-devotion", "region-tamil-nadu", "lang-ta"]
+  },
+  {
+    "id": "media_rabia_poem",
+    "type": "poem",
+    "slug": "rabia-love-poem",
+    "title": { "en": "Poem of Love — after Rabi'a", "ta": "அன்பின் கவிதை — ராபியாவின் நினைவில்", "hi": "प्रेम की कविता — राबिया की स्मृति में" },
+    "summary": { "en": "A short poem inspired by Sufi teachings on selfless devotion." },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "contentLabel": "commentary",
+    "originalText": {
+      "en": "I love with a love that asks nothing back — only that the cup remain full."
+    },
+    "translation": { "ta": "திரும்ப எதுவும் கேட்காத அன்பு — குவியம் நிறைந்திருப்பதே போதும்.", "hi": "बिना माँगे प्रेम — प्याला भरा रहे, बस इतना।" },
+    "scopeIds": ["sufism", "rabia", "topic-poetry", "topic-devotion", "lang-en"]
+  },
+  {
+    "id": "media_tirukkural_couplet",
+    "type": "poem",
+    "slug": "tirukkural-hospitality",
+    "title": { "en": "Tirukkural on Hospitality", "ta": "விருந்தோம்பல் பற்றிய திருக்குறள்", "hi": "आतिथ्य पर तिरुक्कुरल" },
+    "summary": { "en": "Kural 81 with English gloss.", "ta": "Kural 81, English gloss-உடன்." },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "contentLabel": "translation",
+    "originalText": { "ta": "இறைவன் அடியவர் விருந்தோம்பல் செய்தல் — hospitality as sacred duty." },
+    "translation": { "en": "The ancients held that serving a guest is among the highest duties." },
+    "scopeIds": ["tiruvalluvar", "topic-philosophy", "topic-family", "region-tamil-nadu", "lang-ta", "lang-en"]
+  },
+  {
+    "id": "media_baptism_river",
+    "type": "video",
+    "slug": "baptism-river-documentary",
+    "title": { "en": "River Baptism — A Short Documentary", "ta": "ஆற்றில் baptism — short documentary" },
+    "summary": { "en": "Five-minute film on a community baptism ceremony in Kerala.", "ta": "கேரளத்தில் community baptism ceremony — ஐந்து நிமிட film." },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "contentLabel": "historical_account",
+    "mediaUrl": "/media/video/baptism-river-documentary.mp4",
+    "durationSeconds": 312,
+    "transcript": { "en": "Narration describes the preparation, prayer, and shared meal afterward." },
+    "scopeIds": ["christianity", "catholicism", "topic-heritage", "topic-family", "region-kerala", "lang-en"]
+  },
+  {
+    "id": "media_langar_kitchen",
+    "type": "video",
+    "slug": "langar-kitchen-morning",
+    "title": { "en": "Morning in the Langar Kitchen", "hi": "लंगर रसोई की सुबह", "pa": "ਲੰਗਰ ਰਸੋਈ ਦੀ ਸਵੇਰ" },
+    "summary": { "en": "Volunteers prepare dal and roti before the first visitors arrive.", "hi": "पहले visitors से पहले dal, roti तैयारी." },
+    "authorId": "user_contrib_harpreet",
+    "originalLanguage": "hi",
+    "contentLabel": "community_tradition",
+    "mediaUrl": "/media/video/langar-kitchen-morning.mp4",
+    "durationSeconds": 420,
+    "transcript": { "en": "Ambient sounds of chopping, stirring, and quiet conversation.", "hi": "काटने, हिलाने, शांत बातचीत की आवाज़ें." },
+    "scopeIds": ["sikhism", "sikh-khalsa", "topic-food", "topic-devotion", "region-punjab", "lang-hi", "lang-pa"]
+  },
+  {
+    "id": "media_meditation_garden",
+    "type": "video",
+    "slug": "meditation-garden-walk",
+    "title": { "en": "Walking Meditation in a Garden", "ta": "தோட்டத்தில் நடை தியானம்", "hi": "बगीचे में चलते हुए ध्यान" },
+    "summary": { "en": "Silent footage with on-screen guidance for mindful steps.", "ta": "mindful steps-க்கு on-screen guidance-உடன் silent footage." },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "mediaUrl": "/media/video/meditation-garden-walk.mp4",
+    "durationSeconds": 600,
+    "transcript": { "en": "Notice the heel touching earth. Lift. Move. Place. Pause." },
+    "scopeIds": ["buddhism", "buddha", "topic-meditation", "lang-en"]
+  },
+  {
+    "id": "media_onam_song",
+    "type": "audio",
+    "slug": "onam-folk-song",
+    "title": { "en": "Onam Folk Song", "ml": "ഓണം നാടൻ പാട്ട്", "ta": "ஓணம் folk song" },
+    "summary": { "en": "A traditional harvest melody sung during Onam preparations.", "ml": "ഓണം തയ്യാറെടുപ്പിൽ പാടുന്ന traditional harvest melody." },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "ml",
+    "contentLabel": "archival",
+    "mediaUrl": "/media/audio/onam-folk-song.mp3",
+    "durationSeconds": 186,
+    "originalText": { "ml": "Traditional Onam song verses celebrating harvest and welcome." },
+    "translation": { "en": "Welcome the season of plenty; open the door to neighbors and strangers alike." },
+    "scopeIds": ["topic-festivals", "topic-music", "topic-heritage", "region-kerala", "lang-ml", "lang-en"]
+  },
+  {
+    "id": "media_bhajan_evening",
+    "type": "audio",
+    "slug": "evening-bhajan-session",
+    "title": { "en": "Evening Bhajan Session", "hi": "संध्या भजन", "ta": "மாலை bhajan session" },
+    "summary": { "en": "Community singing recorded at a neighborhood temple in Varanasi.", "hi": "वाराणसी neighborhood temple-இல் community singing recording." },
+    "authorId": "user_contrib_rajesh",
+    "originalLanguage": "hi",
+    "contentLabel": "community_tradition",
+    "mediaUrl": "/media/audio/evening-bhajan-session.mp3",
+    "durationSeconds": 780,
+    "transcript": { "hi": "भजन refrains on devotion and surrender.", "en": "Bhajan refrains on devotion and surrender." },
+    "scopeIds": ["hinduism", "topic-music", "topic-devotion", "topic-family", "lang-hi", "lang-en"]
+  },
+  {
+    "id": "media_pranayama_short",
+    "type": "audio",
+    "slug": "four-minute-pranayama",
+    "title": {
+      "en": "Four-minute pranayama",
+      "ta": "நான்கு நிமிட பிராணாயாமம்",
+      "hi": "चार मिनट का प्राणायाम"
+    },
+    "summary": {
+      "en": "A seated breath guide you can play once before study or sleep.",
+      "ta": "படிப்பு அல்லது உறக்கத்துக்கு முன் ஒரு முறை கேட்கும் மூச்சு வழிகாட்டி."
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "mediaUrl": "/media/audio/guided-metta-meditation.mp3",
+    "durationSeconds": 240,
+    "transcript": {
+      "en": "Inhale four counts. Exhale six. Keep the shoulders quiet."
+    },
+    "scopeIds": ["topic-yoga", "topic-meditation", "lang-en", "lang-ta"]
+  }
+]

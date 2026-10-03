@@ -1,0 +1,272 @@
+/* ==========================================================================
+   Design tokens — the single source of truth.
+
+   Layer 1  primitives  : raw scales (space, radius, type, duration)
+   Layer 2  semantics   : --background, --surface, --text-primary, --accent …
+   Layer 3  aliases     : --ds-color-* names consumed by existing stylesheets
+
+   The DEFAULT palette is deliberately neutral ("Universal"): warm parchment
+   surfaces, deep charcoal ink, one restrained clay accent. Contextual and
+   organization themes override only the accent/ornament layer — never the
+   structure. See themes.css.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Untinted paper. Surfaces below mix a little of the current accent into
+     these, so a palette change is visible on every page — not only on buttons. */
+  --paper: #faf8f3;
+  --paper-muted: #f2efe7;
+  --paper-sunken: #ebe7dc;
+  --paper-elevated: #ffffff;
+  --paper-border: #e5e0d3;
+  --paper-border-strong: #c9c2b1;
+
+  /* ── Layer 2: semantic surfaces ─────────────────────────────────────── */
+  --background: color-mix(in srgb, var(--accent-soft) 42%, var(--paper));
+  --surface: color-mix(in srgb, var(--accent-soft) 16%, var(--paper-elevated));
+  --surface-elevated: var(--paper-elevated);
+  --surface-muted: color-mix(in srgb, var(--accent-soft) 58%, var(--paper-muted));
+  --surface-sunken: color-mix(in srgb, var(--accent-soft) 38%, var(--paper-sunken));
+
+  --text-primary: #1c1a16;
+  --text-secondary: #55504a;
+  --text-muted: #837c72;
+  --text-inverse: #fbfaf7;
+
+  /* Scrims sit on photographs, not on the page — they stay dark in both modes. */
+  --scrim: #17140f;
+  --scrim-ink: #fbfaf7;
+
+  --border: color-mix(in srgb, var(--accent-line) 40%, var(--paper-border));
+  --border-strong: color-mix(in srgb, var(--accent-line) 55%, var(--paper-border-strong));
+
+  /* Restrained clay — the only chromatic accent in the default theme. */
+  --accent: #8a3f24;
+  --accent-hover: #a04d2d;
+  --accent-soft: #f7eee8;
+  --accent-ink: #ffffff;
+  --accent-line: #d9c4b7;
+
+  /* Secondary calm accent, for informational rather than promotional use. */
+  --calm: #2f5750;
+  --calm-soft: #e9f0ed;
+
+  /* Editorial metadata tones — bronze, used sparingly for kickers/rules. */
+  --editorial: #7d5a2e;
+  --editorial-soft: #f5efe2;
+
+  --success: #2c5c3f;
+  --success-soft: #e8f1ea;
+  --warning: #8a5a12;
+  --warning-soft: #f9f0dd;
+  --danger: #8f2626;
+  --danger-soft: #f8eaea;
+  --focus: #1c4f8a;
+
+  /* Ambient decoration — must stay near-invisible. See ambient.css. */
+  --ambient-wash: #b9a988;
+  --ambient-line: #a08e6d;
+  --ambient-opacity: 0.055;
+  --ambient-line-opacity: 0.09;
+
+  /* ── Layer 1: type ──────────────────────────────────────────────────── */
+  /* Script-aware stacks. The per-locale webfont variables are set by
+     lib/fonts.ts; every stack degrades to a Noto family then to system UI. */
+  --font-latin-sans: var(--font-dm-sans);
+  --font-latin-serif: var(--font-source-serif);
+  --font-latin-display: var(--font-fraunces);
+
+  --font-fallback-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Noto Sans", sans-serif;
+  --font-fallback-serif: Georgia, "Times New Roman", "Noto Serif", serif;
+
+  --ds-font-sans: var(--font-latin-sans), var(--font-script-sans),
+    var(--font-fallback-sans);
+  --ds-font-serif: var(--font-latin-serif), var(--font-script-serif),
+    var(--font-fallback-serif);
+  --ds-font-display: var(--font-latin-display), var(--font-script-display),
+    var(--font-fallback-serif);
+  --ds-font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  /* Type scale. UI stays compact (§9 density); reading text is larger and
+     set separately in typography.css (§12 readability). */
+  --ds-text-2xs: 0.6875rem; /* 11px — badges, counts */
+  --ds-text-xs: 0.75rem; /* 12px — metadata, kickers */
+  --ds-text-sm: 0.8125rem; /* 13px — dense UI */
+  --ds-text-base: 0.9375rem; /* 15px — UI body */
+  --ds-text-md: 1rem; /* 16px — comfortable UI body */
+  --ds-text-lg: 1.0625rem; /* 17px */
+  --ds-text-xl: 1.1875rem; /* 19px */
+  --ds-text-2xl: clamp(1.3125rem, 1.1rem + 0.9vw, 1.625rem);
+  --ds-text-3xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.125rem);
+  --ds-text-4xl: clamp(1.875rem, 1.4rem + 2.4vw, 3rem);
+  --ds-text-5xl: clamp(2.25rem, 1.5rem + 3.6vw, 4rem);
+
+  /* Reading sizes — used by the long-form article/poetry surfaces. */
+  --ds-read-size: 1.0625rem;
+  --ds-read-leading: 1.75;
+  --ds-read-measure: 40rem;
+
+  --ds-leading-tight: 1.15;
+  --ds-leading-snug: 1.3;
+  --ds-leading-normal: 1.55;
+  --ds-leading-relaxed: 1.7;
+
+  --ds-tracking-tight: -0.02em;
+  --ds-tracking-normal: 0;
+  --ds-tracking-wide: 0.04em;
+  --ds-tracking-caps: 0.09em;
+
+  /* ── Layer 1: space ────────────────────────────────────────────────── */
+  --ds-space-1: 0.25rem;
+  --ds-space-2: 0.375rem;
+  --ds-space-3: 0.625rem;
+  --ds-space-4: 0.875rem;
+  --ds-space-5: 1.125rem;
+  --ds-space-6: 1.5rem;
+  --ds-space-7: 2rem;
+  --ds-space-8: 2.5rem;
+  --ds-space-9: 3.25rem;
+  --ds-space-10: 4rem;
+
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+  --ds-gutter: clamp(1rem, 3vw, 2rem);
+  --ds-content-max: 84rem;
+  --ds-content-wide: 76rem;
+  --ds-content-narrow: 44rem;
+  --ds-content-reading: 40rem;
+  --ds-sidebar-width: 19rem;
+  --ds-header-height: 3.5rem;
+  --ds-mobile-nav-height: 3.75rem;
+  --ds-mini-player-height: 3.5rem;
+
+  /* ── Shape ──────────────────────────────────────────────────────────── */
+  /* Raised across the board so nothing in the app reads as a sharp-cornered
+     box next to the rounder cards — every control shares one soft, consistent
+     family of curves rather than some corners looking rounded and others
+     looking clipped. */
+  --ds-radius-xs: 6px;
+  --ds-radius-sm: 9px;
+  --ds-radius: 11px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 18px;
+  --ds-radius-xl: 22px;
+  --ds-radius-pill: 999px;
+
+  --ds-control-height-sm: 1.875rem;
+  --ds-control-height: 2.375rem;
+  --ds-control-height-lg: 2.75rem;
+
+  /* ── Elevation — restrained; borders carry most of the structure. ──── */
+  --ds-shadow-none: none;
+  --ds-shadow-soft: 0 1px 2px color-mix(in srgb, var(--text-primary) 8%, transparent);
+  --ds-shadow-card: 0 1px 2px color-mix(in srgb, var(--text-primary) 6%, transparent),
+    0 2px 8px color-mix(in srgb, var(--text-primary) 6%, transparent);
+  --ds-shadow-lift: 0 2px 4px color-mix(in srgb, var(--text-primary) 8%, transparent),
+    0 8px 24px color-mix(in srgb, var(--text-primary) 10%, transparent);
+  --ds-shadow-overlay: 0 12px 40px color-mix(in srgb, var(--scrim) 28%, transparent);
+  --ds-focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus);
+
+  /* ── Motion — calm, short, never bouncy (§37). ─────────────────────── */
+  --ds-ease: cubic-bezier(0.3, 0, 0.2, 1);
+  --ds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ds-duration-fast: 120ms;
+  --ds-duration: 180ms;
+  --ds-duration-slow: 320ms;
+
+  /* ── Breakpoints (for reference; media queries use literals) ───────── */
+  --ds-bp-sm: 30rem;
+  --ds-bp-md: 48rem;
+  --ds-bp-lg: 64rem;
+  --ds-bp-xl: 80rem;
+
+  /* ── Layer 3: legacy --ds-color-* aliases ───────────────────────────
+     Existing stylesheets consume these. They resolve to the semantic layer
+     so a theme only has to redefine the semantic tokens above.            */
+  --ds-color-bg: var(--background);
+  --ds-color-surface: var(--surface);
+  --ds-color-surface-soft: var(--surface-muted);
+  --ds-color-bg-elevated: var(--surface-elevated);
+  --ds-color-bg-muted: var(--surface-sunken);
+  --ds-color-ink: var(--text-primary);
+  --ds-color-ink-muted: var(--text-secondary);
+  --ds-color-ink-subtle: var(--text-muted);
+  --ds-color-line: var(--border);
+  --ds-color-line-strong: var(--border-strong);
+
+  --ds-color-accent: var(--accent);
+  --ds-color-accent-bright: var(--accent-hover);
+  --ds-color-accent-soft: var(--accent-soft);
+  --ds-color-accent-ink: var(--accent-ink);
+  --ds-color-deep: var(--text-primary);
+  --ds-color-meta: var(--editorial);
+  --ds-color-kicker: var(--editorial);
+  --ds-color-green: var(--calm);
+  --ds-color-green-soft: var(--calm-soft);
+  --ds-color-gold: var(--editorial);
+  --ds-color-gold-soft: var(--editorial-soft);
+  --ds-color-saffron: var(--accent);
+  --ds-color-saffron-soft: var(--accent-soft);
+  --ds-color-danger: var(--danger);
+  --ds-color-success: var(--success);
+  --ds-shadow-header: 0 1px 0 var(--border);
+
+  --cover-base: color-mix(in srgb, var(--text-primary) 78%, var(--accent));
+  --cover-figure: var(--accent);
+  --cover-light: color-mix(in srgb, var(--accent-soft) 45%, var(--accent-ink));
+}
+
+/* ── Dark mode ───────────────────────────────────────────────────────────
+   A warm, low-glare dark: ink-brown rather than blue-black, so the palette
+   still reads as the same product at night.                              */
+:root[data-mode="dark"] {
+  color-scheme: dark;
+
+  --paper: #14120f;
+  --paper-muted: #24211b;
+  --paper-sunken: #100e0c;
+  --paper-elevated: #211e19;
+  --paper-border: #322d25;
+  --paper-border-strong: #474035;
+
+  --surface-elevated: var(--paper-elevated);
+
+  --text-primary: #f2eee5;
+  --text-secondary: #bdb5a7;
+  --text-muted: #8d867a;
+  --text-inverse: #14120f;
+
+  --accent: #e08b62;
+  --accent-hover: #eda078;
+  --accent-soft: #2e1e15;
+  --accent-ink: #1a0f08;
+  --accent-line: #4a3225;
+
+  --calm: #7fb3a5;
+  --calm-soft: #16241f;
+
+  --editorial: #cba871;
+  --editorial-soft: #241d10;
+
+  --success: #7fb894;
+  --success-soft: #17251b;
+  --warning: #d9a955;
+  --warning-soft: #251c0e;
+  --danger: #e28282;
+  --danger-soft: #2a1616;
+  --focus: #7fabdd;
+
+  --ambient-wash: #6f6146;
+  --ambient-line: #8a7a58;
+  --ambient-opacity: 0.075;
+  --ambient-line-opacity: 0.06;
+
+  --ds-shadow-soft: 0 1px 2px color-mix(in srgb, var(--scrim) 45%, transparent);
+  --ds-shadow-card: 0 1px 3px color-mix(in srgb, var(--scrim) 45%, transparent),
+    0 2px 10px color-mix(in srgb, var(--scrim) 35%, transparent);
+  --ds-shadow-lift: 0 4px 8px color-mix(in srgb, var(--scrim) 45%, transparent),
+    0 12px 32px color-mix(in srgb, var(--scrim) 40%, transparent);
+  --ds-shadow-overlay: 0 16px 48px color-mix(in srgb, var(--scrim) 62%, transparent);
+}

@@ -30,12 +30,22 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env
+.env.local
+.env.*.local
+
+# local media and backups (Compose volumes own these in production)
+/data/
+/backups/
+
+# local dev Postgres cluster (npm run db:start) — never source, often large
+/.data/
+
+# TypeScript incremental build caches
+*.tsbuildinfo
 
 # vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+/src/generated/

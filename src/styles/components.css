@@ -1,0 +1,1542 @@
+/* ==========================================================================
+   Core components (§16, §17, §34, §35, §36, §40)
+
+   One button system, one input system, one badge system. Every control shares
+   a height scale, a radius scale, and the same five states: rest, hover,
+   active, disabled, focus-visible — plus loading where an action is async.
+
+   Note on capitalisation: labels are *not* uppercased. `text-transform:
+   uppercase` is a Latin-only convention that is meaningless in Indic scripts
+   and destructive in Arabic; it is confined to the `.ds-caps` kicker role,
+   which opts out per script in typography.css.
+   ========================================================================== */
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  position: relative;
+  min-height: var(--ds-control-height);
+  padding-inline: var(--ds-space-5);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-md);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-ease),
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    color var(--ds-duration-fast) var(--ds-ease),
+    box-shadow var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-btn__icon {
+  flex-shrink: 0;
+}
+
+/* Primary — the single most important action on a surface. */
+.ds-btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.ds-btn--primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.ds-btn--primary:active {
+  background: var(--accent);
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--scrim) 22%, transparent);
+}
+
+/* Secondary — equal weight, lower emphasis. */
+.ds-btn--secondary {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.ds-btn--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ds-btn--secondary:active {
+  background: var(--surface-muted);
+}
+
+/* Tertiary — a filled but quiet control, for toolbars. */
+.ds-btn--tertiary {
+  background: var(--surface-muted);
+  border-color: transparent;
+  color: var(--text-primary);
+}
+
+.ds-btn--tertiary:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Ghost — text-level affordance that still has a hit area. */
+.ds-btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+  padding-inline: var(--ds-space-3);
+}
+
+.ds-btn--ghost:hover {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.ds-btn--danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--scrim-ink);
+}
+
+.ds-btn--danger:hover {
+  filter: brightness(1.08);
+}
+
+.ds-btn--sm {
+  min-height: var(--ds-control-height-sm);
+  padding-inline: var(--ds-space-3);
+  font-size: var(--ds-text-xs);
+  border-radius: var(--ds-radius);
+}
+
+.ds-btn--lg {
+  min-height: var(--ds-control-height-lg);
+  padding-inline: var(--ds-space-6);
+  font-size: var(--ds-text-base);
+}
+
+.ds-btn--block {
+  width: 100%;
+}
+
+.ds-btn:disabled,
+.ds-btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.ds-btn:disabled:hover,
+.ds-btn[aria-disabled="true"]:hover {
+  background: inherit;
+  border-color: inherit;
+  color: inherit;
+  filter: none;
+}
+
+/* Loading: the label stays in place so the button keeps its width, and the
+   spinner replaces it visually while `aria-busy` announces the state. */
+.ds-btn[data-loading="true"] {
+  cursor: progress;
+  color: transparent;
+}
+
+.ds-btn[data-loading="true"] .ds-btn__icon {
+  visibility: hidden;
+}
+
+.ds-btn[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  width: 0.9em;
+  height: 0.9em;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-block-start-color: transparent;
+  color: var(--accent-ink);
+  animation: ds-spin 620ms linear infinite;
+}
+
+.ds-btn--secondary[data-loading="true"]::after,
+.ds-btn--tertiary[data-loading="true"]::after,
+.ds-btn--ghost[data-loading="true"]::after {
+  color: var(--text-primary);
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-btn[data-loading="true"]::after {
+    animation: ds-pulse 1s ease-in-out infinite;
+  }
+}
+
+/* ── Icon buttons ───────────────────────────────────────────────────────── */
+
+.ds-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--ds-control-height);
+  height: var(--ds-control-height);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-ease),
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-icon-btn:hover,
+.ds-icon-btn[aria-expanded="true"] {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.ds-icon-btn--outlined {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.ds-icon-btn--outlined:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ds-icon-btn--round {
+  border-radius: var(--ds-radius-pill);
+}
+
+.ds-icon-btn--sm {
+  width: var(--ds-control-height-sm);
+  height: var(--ds-control-height-sm);
+}
+
+.ds-icon-btn--lg {
+  width: var(--ds-control-height-lg);
+  height: var(--ds-control-height-lg);
+}
+
+.ds-icon-btn[data-active="true"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+
+.ds-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ds-icon-btn:disabled:hover {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+/* ── Forms (§17) ────────────────────────────────────────────────────────── */
+
+.ds-form {
+  display: grid;
+  gap: var(--ds-space-5);
+}
+
+.ds-form--narrow {
+  max-width: 26rem;
+}
+
+/* A row of fields that sit side by side on wider screens and stack on
+   narrow ones — used to group a few short, related selects. */
+.ds-field-row {
+  display: grid;
+  gap: var(--ds-space-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 34rem) {
+  .ds-field-row {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+}
+
+.ds-fieldset {
+  display: grid;
+  gap: var(--ds-space-4);
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-fieldset__legend {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0;
+  margin: 0;
+}
+
+.ds-field {
+  display: grid;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+/* A real label, always. Placeholders are never the label (§17). */
+.ds-field__label {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-2);
+}
+
+.ds-field__optional {
+  font-size: var(--ds-text-xs);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.ds-field__required {
+  color: var(--danger);
+}
+
+.ds-field__hint {
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.ds-field__message {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-size: var(--ds-text-xs);
+  font-weight: 500;
+  margin: 0;
+}
+
+.ds-field__message--error {
+  color: var(--danger);
+}
+
+.ds-field__message--success {
+  color: var(--success);
+}
+
+.ds-input,
+.ds-textarea,
+.ds-select {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--ds-control-height);
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  line-height: 1.45;
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    box-shadow var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-textarea {
+  min-height: 6rem;
+  resize: vertical;
+  line-height: var(--ds-leading-relaxed);
+}
+
+.ds-select {
+  /* Room for the chevron; logical padding keeps RTL correct (§13). */
+  padding-inline-end: 2rem;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.05rem) calc(50% + 1px),
+    calc(100% - 0.75rem) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+[dir="rtl"] .ds-select {
+  background-position:
+    1.05rem calc(50% + 1px),
+    0.75rem calc(50% + 1px);
+}
+
+.ds-input::placeholder,
+.ds-textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.ds-input:hover,
+.ds-textarea:hover,
+.ds-select:hover {
+  border-color: var(--text-muted);
+}
+
+.ds-input:focus-visible,
+.ds-textarea:focus-visible,
+.ds-select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ds-input:disabled,
+.ds-textarea:disabled,
+.ds-select:disabled {
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  border-color: var(--border);
+}
+
+.ds-field[data-state="error"] .ds-input,
+.ds-field[data-state="error"] .ds-textarea,
+.ds-field[data-state="error"] .ds-select {
+  border-color: var(--danger);
+}
+
+.ds-field[data-state="error"] .ds-input:focus-visible,
+.ds-field[data-state="error"] .ds-textarea:focus-visible {
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+.ds-field[data-state="success"] .ds-input,
+.ds-field[data-state="success"] .ds-textarea,
+.ds-field[data-state="success"] .ds-select {
+  border-color: var(--success);
+}
+
+/* Choice cards — radio/checkbox groups that need a description. */
+.ds-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    background-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-choice:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.ds-choice:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ds-choice:has(input:focus-visible) {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.ds-choice input {
+  margin: 0.2rem 0 0;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+.ds-choice__text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-choice__title {
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-choice__desc {
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-muted);
+}
+
+/* Search input with a leading icon. */
+.ds-search-input {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-height: var(--ds-control-height);
+  padding-inline: 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--ds-radius-pill);
+  background: var(--surface);
+  color: var(--text-muted);
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    box-shadow var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-search-input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.ds-search-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-search-input input:focus {
+  outline: none;
+}
+
+/* ── Badges (§26) ───────────────────────────────────────────────────────── */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-sm);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-badge__icon {
+  flex-shrink: 0;
+}
+
+.ds-badge--neutral {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+/* Official vs community: visible, but never shouted (§26). */
+.ds-badge--official {
+  background: transparent;
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.ds-badge--community {
+  background: var(--surface-muted);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.ds-badge--verified {
+  background: var(--calm-soft);
+  border-color: color-mix(in srgb, var(--calm) 35%, transparent);
+  color: var(--calm);
+}
+
+.ds-badge--accent {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  color: var(--accent);
+}
+
+.ds-badge--success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.ds-badge--warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.ds-badge--danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ── Chips / filters (§33) ──────────────────────────────────────────────── */
+
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-height: var(--ds-control-height-sm);
+  padding-inline: var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-pill);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: var(--ds-text-xs);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-ease),
+    background-color var(--ds-duration-fast) var(--ds-ease),
+    color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-chip:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.ds-chip[aria-current="page"],
+.ds-chip[aria-pressed="true"],
+.ds-chip--active {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.ds-chip__count {
+  font-weight: 500;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subscriptions ("Following") render as a wrapping cloud of chips rather than
+   a bulleted column: the set is a flat collection of equal things, and pills
+   let a dozen of them sit in the space four stacked links used to take. */
+.ds-subscription-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+
+.ds-subscription-list .ds-chip {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  line-height: calc(var(--ds-control-height-sm) - 2px);
+}
+
+/* Horizontally scrollable filter rail — the mobile pattern for many chips. */
+.ds-chip-rail {
+  display: flex;
+  /* Used as both a <div> (search, ChipFilters) and a <ul> (Following) — the
+     rail is a flat row of equal pills either way, never a bulleted list. */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--ds-space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block-end: 2px;
+  margin-inline: calc(-1 * var(--ds-gutter));
+  padding-inline: var(--ds-gutter);
+  scroll-snap-type: x proximity;
+}
+
+.ds-chip-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.ds-chip-rail > * {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 48rem) {
+  .ds-chip-rail {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* ── Avatars ────────────────────────────────────────────────────────────── */
+
+.ds-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.ds-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ds-avatar--xs {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.5625rem;
+}
+
+.ds-avatar--sm {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.ds-avatar--lg {
+  width: 3rem;
+  height: 3rem;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-avatar--xl {
+  width: 4.5rem;
+  height: 4.5rem;
+  font-size: var(--ds-text-lg);
+}
+
+/* Organizations read as institutions, not people — squared, not round. */
+.ds-avatar--org {
+  border-radius: var(--ds-radius-md);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+
+.ds-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  min-width: 0;
+}
+
+.ds-card--pad {
+  padding: var(--ds-space-4);
+}
+
+.ds-card--flush {
+  overflow: hidden;
+}
+
+.ds-card--interactive {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color var(--ds-duration) var(--ds-ease),
+    box-shadow var(--ds-duration) var(--ds-ease),
+    transform var(--ds-duration) var(--ds-ease);
+}
+
+.ds-card--interactive:hover {
+  border-color: var(--accent-line);
+  box-shadow: var(--ds-shadow-lift);
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .ds-card--interactive:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Tabs (§40) ─────────────────────────────────────────────────────────
+   Rendered as links so tab state survives navigation and works without JS. */
+
+.ds-tabs {
+  display: flex;
+  gap: var(--ds-space-1);
+  list-style: none;
+  margin: 0 0 var(--ds-space-5);
+  padding: 0;
+  border-block-end: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ds-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ds-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  margin-block-end: -1px;
+  border-block-end: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color var(--ds-duration-fast) var(--ds-ease),
+    border-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-tabs__tab:hover {
+  color: var(--text-primary);
+  border-block-end-color: var(--border-strong);
+}
+
+.ds-tabs__tab[aria-current="page"],
+.ds-tabs__tab[aria-selected="true"] {
+  color: var(--text-primary);
+  border-block-end-color: var(--accent);
+}
+
+.ds-tabs__count {
+  font-size: var(--ds-text-2xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Dialog & sheet (§40) ───────────────────────────────────────────────── */
+
+.ds-dialog {
+  width: min(32rem, calc(100vw - 2 * var(--ds-gutter)));
+  max-height: min(80dvh, 44rem);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xl);
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: var(--ds-shadow-overlay);
+  overflow: hidden;
+}
+
+.ds-dialog::backdrop {
+  background: color-mix(in srgb, var(--scrim) 55%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.ds-dialog__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-5) var(--ds-space-5) var(--ds-space-3);
+}
+
+.ds-dialog__title {
+  font-size: var(--ds-text-xl);
+  margin: 0;
+}
+
+.ds-dialog__body {
+  padding: 0 var(--ds-space-5) var(--ds-space-5);
+  overflow-y: auto;
+}
+
+.ds-dialog__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border-block-start: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+/* On phones a dialog becomes a bottom sheet, which is the familiar mobile
+   pattern and keeps actions inside thumb reach (§14). */
+@media (max-width: 34rem) {
+  .ds-dialog--sheet {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 88dvh;
+    margin: auto 0 0;
+    border-radius: var(--ds-radius-xl) var(--ds-radius-xl) 0 0;
+    border-inline: 0;
+    border-block-end: 0;
+  }
+}
+
+/* ── Tooltip — CSS only, and never the sole source of a label ──────────── */
+
+.ds-tooltip {
+  position: relative;
+}
+
+.ds-tooltip__bubble {
+  position: absolute;
+  inset-block-start: calc(100% + 0.35rem);
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  z-index: 40;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--ds-radius-sm);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  font-size: var(--ds-text-2xs);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--ds-duration-fast) var(--ds-ease),
+    visibility var(--ds-duration-fast);
+}
+
+[dir="rtl"] .ds-tooltip__bubble {
+  translate: 50% 0;
+}
+
+.ds-tooltip:hover .ds-tooltip__bubble,
+.ds-tooltip:focus-within .ds-tooltip__bubble {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Toast ──────────────────────────────────────────────────────────────── */
+
+.ds-toast-region {
+  position: fixed;
+  inset-block-end: calc(var(--ds-mobile-nav-height) + var(--ds-space-4));
+  inset-inline: var(--ds-gutter);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  pointer-events: none;
+}
+
+@media (min-width: 48rem) {
+  .ds-toast-region {
+    inset-block-end: var(--ds-space-6);
+    inset-inline: auto var(--ds-space-6);
+    width: min(24rem, calc(100vw - 2 * var(--ds-gutter)));
+  }
+}
+
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  box-shadow: var(--ds-shadow-overlay);
+  font-size: var(--ds-text-sm);
+  pointer-events: auto;
+}
+
+.ds-toast--success {
+  border-inline-start: 3px solid var(--success);
+}
+
+.ds-toast--error {
+  border-inline-start: 3px solid var(--danger);
+}
+
+/* ── Skeletons (§34) ────────────────────────────────────────────────────── */
+
+.ds-skeleton {
+  display: block;
+  border-radius: var(--ds-radius-sm);
+  /* `--surface-muted` alone sat too close to the page background in dark
+     mode to read as a distinct shape (P9) — a touch of `--text-primary`
+     lifts its contrast in both themes without a dedicated token. */
+  background: color-mix(in srgb, var(--text-primary) 10%, var(--surface-muted));
+  /* Never announce placeholder geometry to a screen reader. */
+  color: transparent;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ds-skeleton {
+    /* The sweep must read as a highlight against the base, in both themes —
+       mixing toward the *text* colour (light in dark mode, dark in light
+       mode) instead of toward another surface token, which previously made
+       the "highlight" darker than the base it swept over and so invisible
+       against the dark theme's already-dark surfaces. */
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--text-primary) 16%, transparent),
+      transparent
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: ds-shimmer 1.6s var(--ds-ease) infinite;
+  }
+}
+
+@keyframes ds-shimmer {
+  from {
+    background-position: -100% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+[dir="rtl"] .ds-skeleton {
+  animation-direction: reverse;
+}
+
+.ds-skeleton--text {
+  height: 0.75em;
+  border-radius: var(--ds-radius-pill);
+  margin-block: 0.25em;
+}
+
+.ds-skeleton--title {
+  height: 1.4em;
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-skeleton--cover {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--ds-radius);
+}
+
+.ds-skeleton--avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+}
+
+@keyframes ds-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── Empty & error states (§35, §36) ────────────────────────────────────── */
+
+.ds-empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-7) var(--ds-space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  text-align: center;
+}
+
+.ds-empty__mark {
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+.ds-empty__title {
+  font-size: var(--ds-text-lg);
+  margin: 0;
+}
+
+.ds-empty__body {
+  max-width: 32ch;
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.ds-empty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-3);
+  margin-block-start: var(--ds-space-1);
+}
+
+/* A quieter inline variant for empty slots inside a populated page. */
+.ds-empty--inline {
+  padding: var(--ds-space-5) var(--ds-space-4);
+  background: transparent;
+  border-style: dashed;
+}
+
+/* ── Progress ───────────────────────────────────────────────────────────── */
+
+.ds-progress {
+  height: 2px;
+  border-radius: var(--ds-radius-pill);
+  background: var(--border);
+  overflow: hidden;
+}
+
+.ds-progress__bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width var(--ds-duration) var(--ds-ease);
+}
+
+/* ── Dropdown menu ──────────────────────────────────────────────────────── */
+
+.ds-menu {
+  position: absolute;
+  inset-block-start: calc(100% + 0.35rem);
+  inset-inline-end: 0;
+  z-index: 60;
+  min-width: 12rem;
+  max-width: min(20rem, calc(100vw - 2 * var(--ds-gutter)));
+  padding: var(--ds-space-1);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  box-shadow: var(--ds-shadow-overlay);
+}
+
+.ds-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--ds-text-sm);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ds-menu__item:hover {
+  background: var(--surface-muted);
+}
+
+.ds-menu__item[aria-current="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ds-menu__label {
+  padding: var(--ds-space-2) var(--ds-space-3) var(--ds-space-1);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-menu__sep {
+  height: 1px;
+  margin: var(--ds-space-1) 0;
+  background: var(--border);
+  border: 0;
+}
+
+/* ── Small shared utilities ─────────────────────────────────────────────── */
+
+.ds-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+.ds-stack--sm {
+  gap: var(--ds-space-2);
+}
+
+.ds-stack--lg {
+  gap: var(--ds-space-7);
+}
+
+.ds-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+
+.ds-row--tight {
+  gap: var(--ds-space-2);
+}
+
+.ds-row--between {
+  justify-content: space-between;
+}
+
+.ds-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2) var(--ds-space-3);
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}
+
+/* Dot separators that vanish when an item is missing. */
+.ds-meta-row > * + *::before {
+  content: "·";
+  margin-inline-end: var(--ds-space-3);
+  color: var(--border-strong);
+}
+
+.ds-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--ds-text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ds-text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ds-focus-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--accent-soft);
+}
+
+.ds-focus-prompt__text {
+  margin: 0;
+  flex: 1 1 14rem;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-secondary);
+}
+
+.ds-focus-prompt__link {
+  font-size: var(--ds-text-sm);
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ds-focus-prompt__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.ds-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ds-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Cover surface (used by ContentCover) ───────────────────────────────── */
+
+.ds-cover {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-sunken);
+  isolation: isolate;
+}
+
+.ds-cover__art,
+.ds-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ds-cover__img {
+  z-index: 1;
+  /* Held back until `load` fires, so a 404 never paints the broken-image
+     glyph and alt text over the artwork. */
+  opacity: 0;
+}
+
+.ds-cover__img[data-state="loaded"] {
+  opacity: 1;
+}
+
+/* A cover nested inside a sized cover fills it — heroes wrap a ContentCover
+   in their own sized frame so they can add an overlay and a caption. */
+.ds-cover .ds-cover {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ds-cover__img {
+    transition: opacity var(--ds-duration-slow) var(--ds-ease-out);
+  }
+}
+
+/* A card's cover scales very slightly on hover — a reveal, not a zoom (§37). */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .ds-card--interactive:hover .ds-cover__img,
+  .ds-card--interactive:hover .ds-cover__art {
+    transform: scale(1.03);
+    transition: transform var(--ds-duration-slow) var(--ds-ease-out);
+  }
+}
+
+.ds-cover__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--scrim) 82%, transparent) 0%,
+    color-mix(in srgb, var(--scrim) 45%, transparent) 42%,
+    color-mix(in srgb, var(--scrim) 5%, transparent) 78%
+  );
+}
+
+/* ── Language selector (§13) ────────────────────────────────────────────── */
+
+.ds-lang-switch {
+  position: relative;
+  display: inline-flex;
+}
+
+.ds-lang-switch__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ds-lang-switch__code {
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* The trigger holds an icon plus a short code, so it needs more than a
+   square icon button's width. */
+.ds-lang-switch .ds-icon-btn {
+  width: auto;
+  padding-inline: var(--ds-space-2);
+}
+
+.ds-lang-switch__menu {
+  min-width: 13rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ds-lang-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  text-align: start;
+}
+
+.ds-lang-option:hover {
+  background: var(--surface-muted);
+}
+
+.ds-lang-option[aria-selected="true"] {
+  color: var(--accent);
+}
+
+.ds-lang-option:disabled {
+  opacity: 0.5;
+}
+
+.ds-lang-option__text {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+/* Each endonym is set in its own script's face, at a size that keeps
+   Devanagari and Malayalam legible next to Latin. */
+.ds-lang-option__endonym {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ds-lang-option__exonym {
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+.ds-lang-switch--expanded {
+  display: grid;
+  gap: var(--ds-space-2);
+  width: 100%;
+}
+
+.ds-lang-switch--expanded .ds-lang-list {
+  gap: 0.1rem;
+}
+
+/* ── Segmented control & swatches ───────────────────────────────────────── */
+
+.ds-segmented {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface-muted);
+}
+
+.ds-segmented__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  flex: 1;
+  min-height: 1.75rem;
+  padding-inline: var(--ds-space-2);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ds-segmented__option:hover {
+  color: var(--text-primary);
+}
+
+.ds-segmented__option[aria-checked="true"] {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: var(--ds-shadow-soft);
+}
+
+.ds-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-1) var(--ds-space-3) var(--ds-space-2);
+}
+
+.ds-swatch {
+  width: 1.125rem;
+  height: 1.125rem;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--swatch);
+  transition: transform var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-swatch:hover {
+  transform: scale(1.12);
+}
+
+.ds-swatch[aria-checked="true"] {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--swatch);
+}
+
+.ds-swatch--lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.ds-theme-switcher {
+  position: relative;
+}
+
+.ds-theme-switcher__menu {
+  min-width: 14rem;
+}
+
+/* ── Account menu ───────────────────────────────────────────────────────── */
+
+.ds-account {
+  position: relative;
+}
+
+.ds-account__trigger {
+  display: grid;
+  place-items: center;
+  padding: 2px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.ds-account__trigger:hover .ds-avatar,
+.ds-account__trigger[aria-expanded="true"] .ds-avatar {
+  box-shadow: 0 0 0 2px var(--accent-line);
+}

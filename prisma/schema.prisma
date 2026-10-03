@@ -1,0 +1,878 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  user
+  content_publisher
+  super_admin
+  // Legacy roles — mapped in permission service; do not assign to new users
+  contributor
+  admin
+  global_moderator
+  scope_moderator
+  community_moderator
+}
+
+enum ProfileVisibility {
+  public
+  private
+}
+
+enum ContentFocusMode {
+  all
+  focused
+}
+
+enum ScopeType {
+  religion
+  tradition
+  sacred_entity
+  topic
+  region
+  language
+  sacred_text
+  festival
+  organization
+  community
+  cultural_group
+}
+
+model User {
+  id                   String                   @id
+  email                String                   @unique
+  passwordHash         String
+  name                 String
+  slug                 String                   @unique
+  role                 UserRole                 @default(user)
+  locale               String                   @default("en")
+  primaryLanguage      String                   @default("en")
+  additionalLanguages  String[]                 @default([])
+  contentFocusMode     ContentFocusMode         @default(all)
+  focusReligionScopeId String?
+  focusLanguageScopeId String?
+  focusRegionScopeId   String?
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  profile              Profile?
+  sessions             Session[]
+  subscriptions        Subscription[]
+  bookmarks            Bookmark[]
+  reactions            Reaction[]
+  comments             Comment[]
+  reposts              Repost[]
+  feedSignals          FeedSignal[]
+  organizedEvents      Event[]
+  rsvps                Rsvp[]
+  reportsFiled         Report[]                 @relation("Reporter")
+  moderationActions    ModerationAction[]
+  scopeModeratorOf     ScopeModerator[]
+  organizationMembers  OrganizationMembership[]
+  contentsCreated      Content[]                @relation("ContentCreatedBy")
+  contentsPublished    Content[]                @relation("ContentPublishedBy")
+  contentsOwned        Content[]                @relation("ContentOwnerUser")
+  auditLogs            AuditLog[]
+  organizationsCreated Organization[]           @relation("OrganizationCreatedBy")
+}
+
+model Profile {
+  id         String            @id @default(cuid())
+  userId     String            @unique
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio        String?           @db.Text
+  avatarPath String?
+  visibility ProfileVisibility @default(public)
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  ip        String?
+  userAgent String?
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Organization {
+  id              String                   @id
+  slug            String                   @unique
+  name            Json
+  description     Json?
+  kind            OrganizationKind
+  status          OrganizationStatus       @default(pending)
+  publishMode     OrganizationPublishMode  @default(admin_approval)
+  verifiedAt      DateTime?
+  logoPath        String?
+  coverImage      String?
+  contactEmail    String?
+  contactPhone    String?
+  website         String?
+  location        Json?
+  /// Institution's local timezone, used to compute "open now" / today's
+  /// services from OrganizationService wall-clock times.
+  timezone        String?                  @default("Asia/Kolkata")
+  /// Full postal address, localized.
+  address         Json?
+  /// Visit planning — the questions devotees actually arrive with.
+  howToReach      Json?
+  dressCode       Json?
+  /// Entry rules and restrictions, stated factually as institutional policy.
+  entryRules      Json?
+  accessibility   Json?
+  /// The institution's OWN official donation page. This platform links out to
+  /// it rather than taking money: fake temple-donation sites, forged QR codes
+  /// and bogus 80G receipts are a documented and active fraud in India, so
+  /// sending a devotee to the verified official channel is a defence, while
+  /// collecting on their behalf would make this platform another vector.
+  donationUrl     String?
+  createdById     String?
+  createdBy       User?                    @relation("OrganizationCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+  memberships     OrganizationMembership[]
+  services        OrganizationService[]
+  products        Product[]
+  scopes          OrganizationScope[]
+  contents        Content[]
+  events          Event[]
+  subscriptions   Subscription[]
+  auditLogs       AuditLog[]
+  scopeModerators ScopeModerator[]
+
+  @@index([status])
+  @@index([kind])
+}
+
+/// A catalogue item an institution sells through its own channels — prasad
+/// kits, publications, devotional music, handicrafts. Catalogue-only, same as
+/// `donationUrl` above: no cart, checkout or payment lives on this platform,
+/// so `purchaseUrl` sends the buyer to wherever the institution actually
+/// sells it.
+model Product {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  /// Localized product name.
+  name           Json
+  description    Json?
+  imageUrl       String?
+  /// Display string, not a transactable amount — e.g. "₹250" or "$12–18" —
+  /// since this platform never handles money (see Organization.donationUrl).
+  price          String?
+  purchaseUrl    String
+  sortOrder      Int          @default(0)
+  /// Lets an admin hide a product without losing its data.
+  active         Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+}
+
+/// A recurring service an institution offers — a mass, an aarti, a namaz, a
+/// darshan window.
+///
+/// `language` is a first-class field rather than presentation chrome: real
+/// institutions schedule *by* language (Velankanni says mass in Tamil at
+/// 06:00, Telugu at 08:00, Malayalam at 09:00, English at 10:00, Hindi at
+/// 11:00), so a devotee's question is not "when is mass" but "when is mass in
+/// my language". Collapsing that into one time would give the wrong answer.
+///
+/// Times are stored as local wall-clock strings ("06:00") plus the
+/// institution's timezone, not as absolute instants: a temple that opens at
+/// 6am opens at 6am local time regardless of when anyone reads the page.
+model OrganizationService {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  /// Localized service name, e.g. {"en": "Holy Mass", "ta": "திருப்பலி"}.
+  name           Json
+  /// BCP-47-ish language code the service is conducted in.
+  language       String       @default("en")
+  /// 0 = Sunday … 6 = Saturday. Null means it runs every day.
+  dayOfWeek      Int?
+  /// Local wall-clock "HH:MM".
+  startTime      String
+  endTime        String?
+  /// Free-text qualifier, e.g. {"en": "Except during Lent"}.
+  note           Json?
+  sortOrder      Int          @default(0)
+  /// When a human last confirmed this is still accurate. Wrong timings mean a
+  /// wasted pilgrimage, so the page shows this rather than implying freshness.
+  verifiedAt     DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+}
+
+model OrganizationMembership {
+  id             String                 @id @default(cuid())
+  organizationId String
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           OrganizationMemberRole
+  active         Boolean                @default(true)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+}
+
+model OrganizationScope {
+  organizationId String
+  scopeId        String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  scope          Scope        @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, scopeId])
+  @@index([scopeId])
+}
+
+model AuditLog {
+  id             String        @id @default(cuid())
+  actorId        String
+  actor          User          @relation(fields: [actorId], references: [id], onDelete: Cascade)
+  action         String
+  targetType     String
+  targetId       String
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  scopeId        String?
+  previousState  Json?
+  newState       Json?
+  createdAt      DateTime      @default(now())
+
+  @@index([actorId])
+  @@index([targetType, targetId])
+  @@index([organizationId])
+  @@index([createdAt])
+}
+
+model Scope {
+  id          String    @id
+  type        ScopeType
+  slug        String
+  parentId    String?
+  parent      Scope?    @relation("ScopeTree", fields: [parentId], references: [id])
+  children    Scope[]   @relation("ScopeTree")
+  title       Json
+  description Json?
+  icon        String?
+  coverImage  String?
+  modules     Json      @default("[]")
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  ancestorClosures   ScopeClosure[]      @relation("Ancestor")
+  descendantClosures ScopeClosure[]      @relation("Descendant")
+  contentScopes      ContentScope[]
+  subscriptions      Subscription[]
+  eventScopes        EventScope[]
+  scopeModerators    ScopeModerator[]
+  organizationScopes OrganizationScope[]
+  reactions          Reaction[]
+  comments           Comment[]
+
+  @@unique([type, slug])
+  @@index([type])
+  @@index([parentId])
+}
+
+/// One configurable band/tile on Explore (§23). The page used to hardcode
+/// this list; a super admin now owns it.
+model ExploreSection {
+  id         String     @id
+  /// Stable identifier the app keys its i18n fallback off — never edited.
+  key        String     @unique
+  /// Null for the sections that aren't backed by a Scope at all
+  /// (organizations, heritage), which the page special-cases.
+  scopeType  ScopeType?
+  /// Localized label override; empty means fall back to the i18n message.
+  label      Json?
+  imageUrl   String?
+  icon       String?
+  href       String
+  sortOrder  Int        @default(0)
+  /// Lets an admin hide a section without losing its configuration.
+  active     Boolean    @default(true)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@index([active, sortOrder])
+}
+
+model ScopeClosure {
+  ancestorId   String
+  descendantId String
+  depth        Int
+  ancestor     Scope  @relation("Ancestor", fields: [ancestorId], references: [id], onDelete: Cascade)
+  descendant   Scope  @relation("Descendant", fields: [descendantId], references: [id], onDelete: Cascade)
+
+  @@id([ancestorId, descendantId])
+  @@index([descendantId])
+}
+
+enum ContentType {
+  article
+  post
+  poem
+  audio
+  video
+  oral_history
+}
+
+enum ContentStatus {
+  draft
+  pending_review
+  published
+  hidden
+  archived
+  rejected
+  removed
+}
+
+enum ContentVisibility {
+  public
+  followers
+  community
+  family
+  private
+}
+
+enum ContentLabel {
+  personal_reflection
+  historical_account
+  community_tradition
+  translation
+  commentary
+  educational
+  archival
+  opinion
+}
+
+enum SubscriptionTargetType {
+  scope
+  author
+  organization
+}
+
+/**
+ * Discriminates what a Reaction or Comment is attached to — a piece of
+ * content, or a scope's own discovery page (a religion, tradition, topic,
+ * region or language). Mirrors the Subscription model's own polymorphic
+ * target pattern above.
+ */
+enum CommunityTargetType {
+  content
+  scope
+}
+
+enum OrganizationKind {
+  temple
+  church
+  mosque
+  monastery
+  ashram
+  trust
+  spiritual_center
+  religious_school
+  foundation
+  heritage_org
+  community
+  pilgrimage_org
+  devotional_music_org
+  other
+}
+
+enum OrganizationStatus {
+  pending
+  verified
+  rejected
+  suspended
+}
+
+enum OrganizationPublishMode {
+  immediate
+  admin_approval
+  editor_workflow
+}
+
+enum OrganizationMemberRole {
+  org_admin
+  content_moderator
+  event_manager
+  media_manager
+}
+
+enum ContentOrigin {
+  community
+  official
+}
+
+enum ScopeModeratorPermission {
+  publish
+  edit
+  moderate
+}
+
+enum ReactionKind {
+  heart
+  pray
+  sparkle
+  dove
+  blossom
+}
+
+enum FeedSignalKind {
+  less_author
+  less_topic
+  less_scope
+  less_region
+  broader
+}
+
+model Content {
+  id                  String            @id
+  type                ContentType
+  slug                String            @unique
+  status              ContentStatus     @default(published)
+  visibility          ContentVisibility @default(public)
+  contentLabel        ContentLabel?
+  origin              ContentOrigin     @default(community)
+  title               Json
+  summary             Json?
+  body                Json?
+  blocks              Json?
+  authorId            String
+  author              User              @relation("ContentCreatedBy", fields: [authorId], references: [id], onDelete: Cascade)
+  publishedById       String?
+  publishedBy         User?             @relation("ContentPublishedBy", fields: [publishedById], references: [id], onDelete: SetNull)
+  ownerUserId         String?
+  ownerUser           User?             @relation("ContentOwnerUser", fields: [ownerUserId], references: [id], onDelete: SetNull)
+  ownerOrganizationId String?
+  ownerOrganization   Organization?     @relation(fields: [ownerOrganizationId], references: [id], onDelete: SetNull)
+  originalLanguage    String
+  coverImage          String?
+  readingMinutes      Int?
+  mediaUrl            String?
+  durationSeconds     Int?
+  transcript          Json?
+  originalText        Json?
+  transliteration     Json?
+  translation         Json?
+  trendingScore       Int               @default(0)
+  /// Optional wide banner shown above the title, distinct from coverImage
+  /// (which is the thumbnail used in cards and rails).
+  bannerImage         String?
+  /// Name of a decorative pattern preset from domain/theme/theme-config.
+  /// Stored as a key, never as CSS, so it re-themes with light/dark.
+  backgroundPreset    String?
+  publishedAt         DateTime          @default(now())
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  scopes              ContentScope[]
+  tags                ContentTag[]
+  reactions           Reaction[]
+  comments            Comment[]
+  bookmarks           Bookmark[]
+  reposts             Repost[]
+  heritageLineage     HeritageLineage?
+
+  @@index([type, status])
+  @@index([authorId])
+  @@index([ownerOrganizationId])
+  @@index([ownerUserId])
+  @@index([origin])
+  @@index([publishedAt])
+}
+
+model ContentScope {
+  contentId String
+  scopeId   String
+  content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  scope     Scope   @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, scopeId])
+  @@index([scopeId])
+}
+
+/// Free-text tags a writer adds for search and categorisation.
+///
+/// Deliberately separate from Scope: scopes (region / religion / language)
+/// carry audience and authorisation, and are derived from the author rather
+/// than typed, so a free-text tag must never be able to widen who can see a
+/// piece. `slug` is the normalised, deduplicating key — "Bhakti", "bhakti "
+/// and "BHAKTI" all collapse onto one row — while `label` keeps the first
+/// spelling used, for display.
+model Tag {
+  id        String       @id
+  slug      String       @unique
+  label     String
+  createdAt DateTime     @default(now())
+  contents  ContentTag[]
+
+  @@index([slug])
+}
+
+model ContentTag {
+  contentId String
+  tagId     String
+  content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([contentId, tagId])
+  @@index([tagId])
+}
+
+model Subscription {
+  id             String                 @id @default(cuid())
+  userId         String
+  user           User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetType     SubscriptionTargetType
+  scopeId        String?
+  scope          Scope?                 @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  authorId       String?
+  organizationId String?
+  organization   Organization?          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  active         Boolean                @default(true)
+  notify         Boolean                @default(true)
+  feedPriority   Int                    @default(0)
+  createdAt      DateTime               @default(now())
+
+  @@unique([userId, scopeId])
+  @@unique([userId, organizationId])
+  @@index([userId])
+}
+
+model Bookmark {
+  userId    String
+  contentId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, contentId])
+}
+
+model Reaction {
+  id         String              @id @default(cuid())
+  userId     String
+  targetType CommunityTargetType @default(content)
+  contentId  String?
+  scopeId    String?
+  kind       ReactionKind        @default(heart)
+  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content    Content?            @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  scope      Scope?              @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  createdAt  DateTime            @default(now())
+
+  // One nullable-FK unique constraint per target, the same pattern
+  // Subscription already uses above: Postgres only enforces uniqueness
+  // among the *non-null* values of each, so a user reacting to a scope
+  // never collides with the same user reacting to a piece of content.
+  @@unique([userId, contentId])
+  @@unique([userId, scopeId])
+  @@index([contentId])
+  @@index([scopeId])
+}
+
+model Comment {
+  id         String              @id @default(cuid())
+  targetType CommunityTargetType @default(content)
+  contentId  String?
+  scopeId    String?
+  userId     String
+  body       String              @db.Text
+  parentId   String?
+  user       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content    Content?            @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  scope      Scope?              @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  createdAt  DateTime            @default(now())
+
+  @@index([contentId])
+  @@index([scopeId])
+}
+
+model Repost {
+  id        String   @id @default(cuid())
+  userId    String
+  contentId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, contentId])
+}
+
+model FeedSignal {
+  id        String         @id @default(cuid())
+  userId    String
+  kind      FeedSignalKind
+  scopeId   String?
+  authorId  String?
+  contentId String?
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+
+  @@index([userId])
+}
+
+enum EventKind {
+  festival
+  gathering
+  lecture
+  music
+  prayer
+  memorial
+  charity
+  online
+  other
+}
+
+enum EventVisibility {
+  public
+  community
+  invite_only
+  private
+}
+
+enum RsvpMode {
+  open
+  invite_only
+  closed
+}
+
+enum RsvpStatus {
+  going
+  maybe
+  not_going
+}
+
+enum HeritageArchiveTier {
+  private
+  family
+  community
+  public
+}
+
+enum MediaRights {
+  contributor_created
+  permission_granted
+  public_domain
+  traditional_knowledge
+  rights_uncertain
+}
+
+enum ReportTargetType {
+  content
+  event
+  user
+  comment
+}
+
+enum ReportReason {
+  harassment
+  hate
+  misinformation
+  spam
+  copyright
+  impersonation
+  inappropriate
+  dangerous_advice
+  privacy
+  other
+}
+
+enum ReportStatus {
+  open
+  reviewing
+  resolved
+  dismissed
+}
+
+enum ModerationActionKind {
+  hide
+  remove
+  warn
+  escalate
+  restore
+  dismiss_report
+}
+
+model Event {
+  id             String          @id
+  slug           String          @unique
+  kind           EventKind       @default(gathering)
+  title          Json
+  description    Json?
+  startsAt       DateTime
+  endsAt         DateTime?
+  timezone       String          @default("UTC")
+  venueName      Json?
+  venueAddress   Json?
+  onlineUrl      String?
+  coverImage     String?
+  language       String          @default("en")
+  organizerId    String
+  organizer      User            @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  organizationId String?
+  organization   Organization?   @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  visibility     EventVisibility @default(public)
+  rsvpMode       RsvpMode        @default(open)
+  cancelled      Boolean         @default(false)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  scopes         EventScope[]
+  invitation     Invitation?
+  rsvps          Rsvp[]
+  ticketTiers    EventTicketTier[]
+
+  @@index([startsAt])
+  @@index([organizerId])
+  @@index([organizationId])
+}
+
+/// A named access tier for an event — "General", "VIP", "Darshan Slot" — with
+/// an optional headcount cap. Still no payment: booking a tier is structured
+/// RSVP (who gets which kind of access, and whether it's full), not a
+/// purchase. Modelled as a small owned sub-entity the same way
+/// OrganizationService models a recurring timing.
+model EventTicketTier {
+  id          String   @id
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  /// Localized tier name, e.g. {"en": "VIP", "ta": "விஐபி"}.
+  name        Json
+  /// What the tier includes, localized.
+  description Json?
+  /// Null means uncapped.
+  capacity    Int?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  rsvps       Rsvp[]
+
+  @@index([eventId])
+}
+
+model EventScope {
+  eventId String
+  scopeId String
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  scope   Scope  @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, scopeId])
+  @@index([scopeId])
+}
+
+model Invitation {
+  id         String          @id
+  eventId    String          @unique
+  event      Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  slug       String          @unique
+  coverImage String?
+  hostName   String
+  message    Json?
+  shareToken String?         @unique
+  visibility EventVisibility @default(public)
+  createdAt  DateTime        @default(now())
+}
+
+model Rsvp {
+  id         String           @id @default(cuid())
+  eventId    String
+  event      Event            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status     RsvpStatus       @default(going)
+  guestCount Int              @default(1)
+  note       String?
+  /// The ticket tier this RSVP booked, when the event has tiers. Null for
+  /// events with no tiers (the pre-existing, ungated RSVP flow).
+  tierId     String?
+  tier       EventTicketTier? @relation(fields: [tierId], references: [id], onDelete: SetNull)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@unique([eventId, userId])
+  @@index([eventId])
+  @@index([tierId])
+}
+
+model HeritageLineage {
+  id                String              @id
+  contentId         String              @unique
+  content           Content             @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  recordedByName    String?
+  originallyToldBy  String?
+  location          Json?
+  approximatePeriod String?
+  sourceNote        String?             @db.Text
+  rights            MediaRights         @default(contributor_created)
+  archiveTier       HeritageArchiveTier @default(community)
+  contributorId     String?
+  createdAt         DateTime            @default(now())
+}
+
+model Report {
+  id          String             @id @default(cuid())
+  reporterId  String
+  reporter    User               @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetType  ReportTargetType
+  targetId    String
+  reason      ReportReason
+  explanation String?            @db.Text
+  status      ReportStatus       @default(open)
+  scopeIds    String[]           @default([])
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  actions     ModerationAction[]
+
+  @@index([status])
+  @@index([targetType, targetId])
+}
+
+model ModerationAction {
+  id          String               @id @default(cuid())
+  moderatorId String
+  moderator   User                 @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+  reportId    String?
+  report      Report?              @relation(fields: [reportId], references: [id], onDelete: SetNull)
+  targetType  ReportTargetType
+  targetId    String
+  kind        ModerationActionKind
+  note        String?              @db.Text
+  createdAt   DateTime             @default(now())
+
+  @@index([moderatorId])
+  @@index([reportId])
+}
+
+model ScopeModerator {
+  userId         String
+  scopeId        String
+  organizationId String?
+  permissions    ScopeModeratorPermission[] @default([publish, edit, moderate])
+  user           User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scope          Scope                      @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  organization   Organization?              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime                   @default(now())
+
+  @@id([userId, scopeId])
+  @@index([scopeId])
+  @@index([organizationId])
+}

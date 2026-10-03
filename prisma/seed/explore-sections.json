@@ -1,0 +1,58 @@
+[
+  {
+    "id": "explore-section-religions",
+    "key": "religions",
+    "scopeType": "religion",
+    "href": "/religions",
+    "sortOrder": 10
+  },
+  {
+    "id": "explore-section-traditions",
+    "key": "traditions",
+    "scopeType": "tradition",
+    "href": "/traditions",
+    "sortOrder": 20
+  },
+  {
+    "id": "explore-section-entities",
+    "key": "entities",
+    "scopeType": "sacred_entity",
+    "href": "/entities",
+    "sortOrder": 30
+  },
+  {
+    "id": "explore-section-topics",
+    "key": "topics",
+    "scopeType": "topic",
+    "href": "/topics",
+    "sortOrder": 40
+  },
+  {
+    "id": "explore-section-regions",
+    "key": "regions",
+    "scopeType": "region",
+    "href": "/regions",
+    "sortOrder": 50
+  },
+  {
+    "id": "explore-section-languages",
+    "key": "languages",
+    "scopeType": "language",
+    "href": "/languages",
+    "sortOrder": 60
+  },
+  {
+    "id": "explore-section-organizations",
+    "key": "organizations",
+    "scopeType": null,
+    "href": "/organizations",
+    "sortOrder": 70
+  },
+  {
+    "id": "explore-section-heritage",
+    "key": "heritage",
+    "scopeType": null,
+    "href": "/heritage",
+    "sortOrder": 80
+  }
+]

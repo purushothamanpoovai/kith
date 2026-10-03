@@ -1,0 +1,352 @@
+[
+  {
+    "id": "user_admin",
+    "email": "admin@kith.local",
+    "password": "ChangeMe_Admin_0",
+    "name": "Platform Admin",
+    "slug": "admin",
+    "role": "super_admin",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Bootstrap administrator. Change this password after first login."
+  },
+  {
+    "id": "user_member",
+    "email": "member@kith.local",
+    "password": "ChangeMe_Member_0",
+    "name": "Amara Devi",
+    "slug": "amara-devi",
+    "role": "user",
+    "locale": "ta",
+    "primaryLanguage": "ta",
+    "additionalLanguages": [
+      "en"
+    ],
+    "bio": "Demo member used to exercise the signed-in shell."
+  },
+  {
+    "id": "user_contrib_kavitha",
+    "email": "kavitha.m@kith.local",
+    "password": "ChangeMe_Contrib_1",
+    "name": "Kavitha Murugan",
+    "slug": "kavitha-murugan",
+    "role": "user",
+    "locale": "ta",
+    "primaryLanguage": "ta",
+    "additionalLanguages": [
+      "en"
+    ],
+    "bio": "Tamil Shaiva writer from Madurai. Explores devotion, temple poetry, and family traditions across Tamil Nadu."
+  },
+  {
+    "id": "user_contrib_maria",
+    "email": "maria.t@kith.local",
+    "password": "ChangeMe_Contrib_2",
+    "name": "Maria Thomas",
+    "slug": "maria-thomas",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [
+      "ml"
+    ],
+    "bio": "Catholic educator from Kochi. Writes on prayer, festivals, and intergenerational faith in Kerala homes."
+  },
+  {
+    "id": "user_contrib_rajesh",
+    "email": "rajesh.s@kith.local",
+    "password": "ChangeMe_Contrib_3",
+    "name": "Rajesh Sharma",
+    "slug": "rajesh-sharma",
+    "role": "user",
+    "locale": "hi",
+    "primaryLanguage": "hi",
+    "additionalLanguages": [
+      "en"
+    ],
+    "bio": "Hindi-language essayist on meditation, heritage sites, and devotional music across North India."
+  },
+  {
+    "id": "user_contrib_fatima",
+    "email": "fatima.k@kith.local",
+    "password": "ChangeMe_Contrib_4",
+    "name": "Fatima Khan",
+    "slug": "fatima-khan",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [
+      "ta",
+      "ar"
+    ],
+    "bio": "Researcher on Sufi poetry and community devotion. Writes in English with attention to Tamil Muslim heritage."
+  },
+  {
+    "id": "user_contrib_ananda",
+    "email": "ananda.p@kith.local",
+    "password": "ChangeMe_Contrib_5",
+    "name": "Ananda Perera",
+    "slug": "ananda-perera",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [
+      "ta"
+    ],
+    "bio": "Theravada practitioner from Colombo. Focuses on meditation guides, compassion, and Buddhist festival life."
+  },
+  {
+    "id": "user_contrib_harpreet",
+    "email": "harpreet.s@kith.local",
+    "password": "ChangeMe_Contrib_6",
+    "name": "Harpreet Singh",
+    "slug": "harpreet-singh",
+    "role": "user",
+    "locale": "pa",
+    "primaryLanguage": "pa",
+    "additionalLanguages": [
+      "hi",
+      "en"
+    ],
+    "bio": "Sikh community historian from Amritsar. Documents langar, Gurpurab celebrations, and oral family memory."
+  },
+  {
+    "id": "user_contrib_leela",
+    "email": "leela.n@kith.local",
+    "password": "ChangeMe_Contrib_7",
+    "name": "Leela Nair",
+    "slug": "leela-nair",
+    "role": "user",
+    "locale": "ml",
+    "primaryLanguage": "ml",
+    "additionalLanguages": [
+      "en",
+      "ta"
+    ],
+    "bio": "Malayalam poet and cultural writer from Thrissur. Covers Onam, temple arts, and household devotional practice."
+  },
+  {
+    "id": "user_contrib_james",
+    "email": "james.w@kith.local",
+    "password": "ChangeMe_Contrib_8",
+    "name": "James Williams",
+    "slug": "james-williams",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Protestant minister and writer on scripture, grief, gratitude, and ecumenical dialogue."
+  },
+  {
+    "id": "user_ravi_kumar",
+    "email": "ravi.k@kith.local",
+    "password": "ChangeMe_Ravi_0",
+    "name": "Ravi Kumar",
+    "slug": "ravi-kumar",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [
+      "hi",
+      "mr"
+    ],
+    "bio": "Organization administrator for Shirdi Sai Baba Temple."
+  },
+  {
+    "id": "user_priya_sharma",
+    "email": "priya.s@kith.local",
+    "password": "ChangeMe_Priya_0",
+    "name": "Priya Sharma",
+    "slug": "priya-sharma",
+    "role": "user",
+    "locale": "hi",
+    "primaryLanguage": "hi",
+    "additionalLanguages": [
+      "en"
+    ],
+    "bio": "Content moderator for Shirdi Sai Baba Temple."
+  },
+  {
+    "id": "user_org_velankanni_admin",
+    "email": "agnes.v@kith.local",
+    "password": "ChangeMe_Agnes_0",
+    "name": "Agnes Fernando",
+    "slug": "agnes-fernando",
+    "role": "user",
+    "locale": "ta",
+    "primaryLanguage": "ta",
+    "additionalLanguages": [
+      "en"
+    ],
+    "bio": "Parish coordinator supporting the Velankanni shrine community page."
+  },
+  {
+    "id": "user_dummy_shirdi_sai_baba_temple_admin",
+    "email": "shirdi-sai-baba-temple.admin@kith.local",
+    "password": "user@123",
+    "name": "Shirdi Sai Admin",
+    "slug": "shirdi-sai-baba-temple-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Shirdi Sai Baba Temple."
+  },
+  {
+    "id": "user_dummy_shirdi_sai_baba_temple_mod",
+    "email": "shirdi-sai-baba-temple.moderator@kith.local",
+    "password": "user@123",
+    "name": "Shirdi Sai Moderator",
+    "slug": "shirdi-sai-baba-temple-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Shirdi Sai Baba Temple."
+  },
+  {
+    "id": "user_dummy_sri_ramanasramam_admin",
+    "email": "sri-ramanasramam.admin@kith.local",
+    "password": "user@123",
+    "name": "Sri Ramanasramam Admin",
+    "slug": "sri-ramanasramam-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Sri Ramanasramam."
+  },
+  {
+    "id": "user_dummy_sri_ramanasramam_mod",
+    "email": "sri-ramanasramam.moderator@kith.local",
+    "password": "user@123",
+    "name": "Sri Ramanasramam Moderator",
+    "slug": "sri-ramanasramam-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Sri Ramanasramam."
+  },
+  {
+    "id": "user_dummy_velankanni_basilica_admin",
+    "email": "velankanni-basilica.admin@kith.local",
+    "password": "user@123",
+    "name": "Basilica Velankanni Admin",
+    "slug": "velankanni-basilica-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Basilica of Our Lady of Good Health, Velankanni."
+  },
+  {
+    "id": "user_dummy_velankanni_basilica_mod",
+    "email": "velankanni-basilica.moderator@kith.local",
+    "password": "user@123",
+    "name": "Basilica Velankanni Moderator",
+    "slug": "velankanni-basilica-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Basilica of Our Lady of Good Health, Velankanni."
+  },
+  {
+    "id": "user_dummy_nagore_dargah_admin",
+    "email": "nagore-dargah.admin@kith.local",
+    "password": "user@123",
+    "name": "Nagore Dargah Admin",
+    "slug": "nagore-dargah-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Nagore Dargah."
+  },
+  {
+    "id": "user_dummy_nagore_dargah_mod",
+    "email": "nagore-dargah.moderator@kith.local",
+    "password": "user@123",
+    "name": "Nagore Dargah Moderator",
+    "slug": "nagore-dargah-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Nagore Dargah."
+  },
+  {
+    "id": "user_dummy_harmandir_sahib_admin",
+    "email": "harmandir-sahib.admin@kith.local",
+    "password": "user@123",
+    "name": "Harmandir Sahib Admin",
+    "slug": "harmandir-sahib-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Harmandir Sahib."
+  },
+  {
+    "id": "user_dummy_harmandir_sahib_mod",
+    "email": "harmandir-sahib.moderator@kith.local",
+    "password": "user@123",
+    "name": "Harmandir Sahib Moderator",
+    "slug": "harmandir-sahib-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Harmandir Sahib."
+  },
+  {
+    "id": "user_dummy_mulagandha_kuti_vihara_admin",
+    "email": "mulagandha-kuti-vihara.admin@kith.local",
+    "password": "user@123",
+    "name": "Mulagandha Kuti Admin",
+    "slug": "mulagandha-kuti-vihara-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Mulagandha Kuti Vihara, Sarnath."
+  },
+  {
+    "id": "user_dummy_mulagandha_kuti_vihara_mod",
+    "email": "mulagandha-kuti-vihara.moderator@kith.local",
+    "password": "user@123",
+    "name": "Mulagandha Kuti Moderator",
+    "slug": "mulagandha-kuti-vihara-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Mulagandha Kuti Vihara, Sarnath."
+  },
+  {
+    "id": "user_dummy_paradesi_synagogue_admin",
+    "email": "paradesi-synagogue.admin@kith.local",
+    "password": "user@123",
+    "name": "Paradesi Synagogue Admin",
+    "slug": "paradesi-synagogue-admin",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy organization admin account for Paradesi Synagogue."
+  },
+  {
+    "id": "user_dummy_paradesi_synagogue_mod",
+    "email": "paradesi-synagogue.moderator@kith.local",
+    "password": "user@123",
+    "name": "Paradesi Synagogue Moderator",
+    "slug": "paradesi-synagogue-moderator",
+    "role": "user",
+    "locale": "en",
+    "primaryLanguage": "en",
+    "additionalLanguages": [],
+    "bio": "Dummy content moderator account for Paradesi Synagogue."
+  }
+]

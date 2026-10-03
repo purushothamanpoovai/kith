@@ -1,0 +1,186 @@
+/* Heritage archive — memory shelf, not museum database */
+
+.ds-heritage-grid {
+  display: grid;
+  gap: var(--ds-space-5);
+}
+
+@media (min-width: 48rem) {
+  .ds-heritage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ds-heritage-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-5);
+  background: var(--ds-color-bg-elevated);
+  border: 1px solid var(--ds-color-line);
+  border-radius: var(--ds-radius-lg);
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-heritage-card:hover {
+  border-color: var(--ds-color-line-strong);
+}
+
+.ds-heritage-card__tier {
+  font-size: var(--ds-text-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ds-color-ink-subtle);
+}
+
+.ds-heritage-card__title {
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-xl);
+  margin: 0;
+}
+
+.ds-heritage-card__teller {
+  font-size: var(--ds-text-sm);
+  color: var(--ds-color-ink-muted);
+}
+
+.ds-lineage-panel {
+  margin-block: var(--ds-space-6);
+  padding: var(--ds-space-5);
+  background: var(--ds-color-bg-muted);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-color-line);
+}
+
+.ds-lineage-panel__title {
+  font-size: var(--ds-text-sm);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--ds-color-ink-subtle);
+  margin-block-end: var(--ds-space-4);
+}
+
+.ds-lineage-dl {
+  display: grid;
+  gap: var(--ds-space-3);
+  margin: 0;
+}
+
+.ds-lineage-dl div {
+  display: grid;
+  gap: var(--ds-space-1);
+}
+
+.ds-lineage-dl dt {
+  font-size: var(--ds-text-xs);
+  color: var(--ds-color-ink-subtle);
+}
+
+.ds-lineage-dl dd {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-heritage-player {
+  margin-block: var(--ds-space-5);
+}
+
+.ds-heritage-player audio {
+  width: 100%;
+}
+
+.ds-report-form {
+  margin-block-start: var(--ds-space-5);
+  padding: var(--ds-space-4);
+  background: var(--ds-color-bg);
+  border: 1px solid var(--ds-color-line);
+  border-radius: var(--ds-radius);
+}
+
+/* Compact mode drops the card chrome — used inline next to other actions,
+   where the surrounding surface already provides it. */
+.ds-report-form--compact {
+  margin-block-start: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.ds-report-form select,
+.ds-report-form textarea {
+  font: inherit;
+  width: 100%;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border: 1px solid var(--ds-color-line);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-color-bg-elevated);
+  margin-block-end: var(--ds-space-2);
+}
+
+.ds-mod-queue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+.ds-mod-item {
+  padding: var(--ds-space-5);
+  background: var(--ds-color-bg-elevated);
+  border: 1px solid var(--ds-color-line);
+  border-radius: var(--ds-radius-lg);
+}
+
+.ds-mod-item__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-3);
+}
+
+.ds-mod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-block-start: var(--ds-space-3);
+}
+
+.ds-mod-actions button {
+  font: inherit;
+  font-size: var(--ds-text-sm);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-color-line);
+  background: var(--ds-color-bg);
+  cursor: pointer;
+}
+
+.ds-mod-actions button[data-kind="remove"] {
+  border-color: var(--ds-color-danger);
+  color: var(--ds-color-danger);
+}
+
+/* Provenance definition list inside a heritage card. */
+.ds-heritage-card__provenance > div {
+  display: flex;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.ds-heritage-card__provenance dt {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.ds-heritage-card__provenance dt::after {
+  content: ":";
+}
+
+.ds-heritage-card__provenance dd {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

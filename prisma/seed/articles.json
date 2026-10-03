@@ -1,0 +1,757 @@
+[
+  {
+    "id": "article_shiva_morning_lamp",
+    "type": "article",
+    "slug": "shiva-morning-lamp",
+    "title": {
+      "en": "The Morning Lamp in Shaiva Homes",
+      "ta": "சைவ வீடுகளில் காலை விளக்கு",
+      "hi": "शैव घरों में प्रातः दीप"
+    },
+    "summary": {
+      "en": "Hindu tradition that worships Shiva",
+      "ta": "குடும்பம் உறங்கியிருக்கும் போதே விளக்கு, நீர், அமைதியான நொடிகள் — தமிழ் சைவ வீடுகளின் காலை மரபு.",
+      "hi": "तमिल परिवार दिन की शुरुआत दीप, जल और कुछ शांत क्षणों से कैसे करते हैं।"
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "shaivism",
+      "shiva",
+      "hinduism",
+      "topic-devotion",
+      "topic-family",
+      "region-tamil-nadu",
+      "lang-ta"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Shaivism is an umbrella-term for a number of Hindu religious traditions, which worship Shiva as the supreme being. The followers of Shaivism are called Shaivas or Shaivites, numbering about 385 million people, across South Asia predominantly in India, Sri Lanka, and Nepal."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Shaivism,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Shaivism"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_mary_evening_rosary",
+    "type": "article",
+    "slug": "mary-evening-rosary",
+    "title": {
+      "en": "Evening Rosary Across Generations",
+      "ta": "தலைமுறைகள் சேரும் மாலை ரோசரி",
+      "hi": "पीढ़ियों की शाम की rosary"
+    },
+    "summary": {
+      "en": "Christian sacramental and Marian devotion",
+      "ta": "கேரள கத்தோலிக்க குடும்பத்தின் மாலை ஜெப வட்டம் — தாத்தா, பெற்றோர், குழந்தைகள் ஒரே லயத்தில்.",
+      "hi": "केरल के एक कैथोलिक परिवार की शाम की प्रार्थना, जहाँ तीन पीढ़ियाँ एक साथ बैठती हैं।"
+    },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "christianity",
+      "catholicism",
+      "mary",
+      "topic-prayer",
+      "topic-family",
+      "region-kerala",
+      "lang-en",
+      "lang-ml"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The Rosary, formally known as the Psalter of Jesus and Mary, also known as the Dominican Rosary, refers to a set of prayers used primarily in the Catholic Church, and to the physical string of knots or beads used to count the component prayers."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "When referring to the prayer, the word is usually capitalized ; when referring to the prayer beads as an object, it is written with a lower-case initial letter."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Rosary,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Rosary"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_sufi_breath_remember",
+    "type": "article",
+    "slug": "sufi-breath-remember",
+    "title": {
+      "en": "Breath and Remembrance in Sufi Practice",
+      "ta": "சூஃபி பயிற்சியில் மூச்சும் நினைவும்",
+      "hi": "सूफ़ी साधना में श्वास और ध्यान"
+    },
+    "summary": {
+      "en": "Remembrance of God in Islam",
+      "ta": "திக்ர் என்பது காட்சிக்கானது அல்ல; மீண்டும் மீண்டும் திரும்பும் தியான லயம்.",
+      "hi": "ज़िक्र को ध्यानात्मक लय के रूप में — प्रदर्शन नहीं, वापसी।"
+    },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "islam",
+      "sufism",
+      "rabia",
+      "topic-meditation",
+      "topic-devotion",
+      "topic-poetry",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Dhikr is a form of Islamic worship in which phrases or prayers are repeatedly recited for the purpose of remembering God. It plays a central role in Sufism, and each Sufi order typically adopts a specific dhikr, accompanied by specific posture, breathing, and movement."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "In Sufism, dhikr refers to both the act of this remembrance as well as the prayers used in these acts of remembrance. Dhikr usually includes the names of God or supplication from the Quran or hadith. It may be counted with either one's fingers or prayer beads, and may be performed alone or with a collective group."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "A person who recites dhikr is called a dhākir."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Dhikr,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Dhikr"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_buddha_walking_meditation",
+    "type": "article",
+    "slug": "buddha-walking-meditation",
+    "title": {
+      "en": "Walking Meditation in Everyday Life",
+      "ta": "தினசரி வாழ்வில் நடை தியானம்",
+      "hi": "दैनिक जीवन में चलते हुए ध्यान"
+    },
+    "summary": {
+      "en": "Buddhist meditative practice",
+      "ta": "தேரவாத பயிற்சியாளர்கள் தோட்டப் பாதை, பயணம், கோவில் வழியில் எப்படி விழிப்புணர்வுள்ள நட steps செய்கிறார்கள்.",
+      "hi": "थेरवाद अभ्यासी बगीचे, रास्ते और मंदिर में कैसे सचेत कदम रखते हैं।"
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "buddhism",
+      "theravada",
+      "buddha",
+      "topic-meditation",
+      "region-sri-lanka",
+      "lang-en",
+      "lang-ta"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Walking meditation is a meditation practice done while walking common in Buddhism. It can be done as a standalone practice or as a break in between long periods of sitting meditation. In different forms, the practice is common in various traditions of both Theravada and in Mahayana Buddhism."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The term kinhin consists of the Chinese words 經, meaning \"to go through \", with \"sutra\" as a secondary meaning, and 行, meaning \"walk\". Taken literally, the phrase means \"to walk straight back and forth."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Walking meditation,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Walking_meditation"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_langar_open_door",
+    "type": "article",
+    "slug": "langar-open-door",
+    "title": {
+      "en": "Langar: The Open Door Tradition",
+      "ta": "லங்கார்: திறந்த வாசல் மரபு",
+      "hi": "लंगर: खुले द्वार की परंपरा"
+    },
+    "summary": {
+      "en": "Topics referred to by the same term",
+      "ta": "கurudwara சமையலறையில் சமமான உணவும் மாற்று சேவையும் சமத்துவத்தை நடைமுறைப்படுத்துகிறது.",
+      "hi": "गुरुद्वारे की रसोई में साझा भोजन और बारी-बारी से सेवा समानता का अभ्यास है।"
+    },
+    "authorId": "user_contrib_harpreet",
+    "originalLanguage": "hi",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "sikhism",
+      "sikh-khalsa",
+      "guru-nanak",
+      "topic-family",
+      "topic-food",
+      "topic-devotion",
+      "region-punjab",
+      "lang-hi",
+      "lang-pa"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Langar may refer to:"
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Langar,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Langar"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_onam_pookalam",
+    "type": "article",
+    "slug": "onam-pookalam",
+    "title": {
+      "en": "Pookalam and the Spirit of Onam",
+      "ta": "பூக்கலம் மற்றும் ஓணம் உணர்வு",
+      "hi": "पूक्कलम और ओणम की भावना"
+    },
+    "summary": {
+      "en": "Harvest festival in Kerala, India",
+      "ta": "வாசலில் பூ வடிவமைப்புகள் — வரவேற்பும் பகிர்ந்த plenty-யும் கொண்ட harvest விழா.",
+      "hi": "दहलीज पर फूलों के रंग स्वागत और साझा समृद्धि का ओणम उत्सव दर्शाते हैं।"
+    },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "ml",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "hinduism",
+      "topic-festivals",
+      "topic-heritage",
+      "topic-family",
+      "region-kerala",
+      "lang-ml",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Onam, the national festival of Keralam, is an annual harvest and Hindu cultural festival celebrated mostly by the people of Kerala and is traditionally associated with the legend of the benevolent Asura King Mahabali, who once ruled Kerala, returning each year to visit his people."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "A major annual event for Malayalis, it is the official festival of the state and includes a spectrum of cultural events."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Onam,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Onam"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_ramadan_nights",
+    "type": "article",
+    "slug": "ramadan-community-nights",
+    "title": {
+      "en": "Community Nights in Ramadan",
+      "ta": "ரமலானில் சமூக இரவுகள்",
+      "hi": "रमज़ान की सामुदायिक रातें"
+    },
+    "summary": {
+      "en": "Ninth month of the Islamic calendar and month-long fasting event in Islam",
+      "ta": "பகிர்ந்த iftar முதல் இரவு ஜெபம் வரை — நோன்பு மாதத்தில் masjid-களும் வீடுகளும் விருந்தோம்பலை நீட்டிக்கின்றன.",
+      "hi": "साझा इफ्तार से रात की नमाज़ तक — रोज़े के महीने में मस्जिद और घर मेहमाननवाज़ी बढ़ाते हैं।"
+    },
+    "authorId": "user_contrib_fatima",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "islam",
+      "topic-festivals",
+      "topic-family",
+      "topic-devotion",
+      "topic-food",
+      "lang-en",
+      "lang-ar"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Ramadan is the ninth month of the Islamic calendar. It is observed by Muslims worldwide as a month of fasting (sawm), communal prayer (salah), reflection, study of the Quran, charity, and strengthening community ties."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "It is also the month in which the Quran is believed to have been revealed to the Islamic prophet Muhammad, known as Laylat al-Qadr. The annual observance of Ramadan is regarded as one of the five pillars of Islam and lasts 29 to 30 days, from one sighting of the crescent moon to the next."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Ramadan,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Ramadan"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_shabbat_table",
+    "type": "article",
+    "slug": "shabbat-table-heritage",
+    "title": {
+      "en": "The Shabbat Table as Living Heritage",
+      "ta": "உயிருள்ள மரபாக சபாத் மேசை",
+      "hi": "जीवंत विरासत के रूप में शब्बात की मेज"
+    },
+    "summary": {
+      "en": "Judaism's weekly day of rest",
+      "ta": "மெழுகுவர்த்திகள், ரொட்டி, ஓய்வு — யூத குடும்பங்கள் வாரத்தின் முடிவை எ意図적인 இடைவெளியாகக் குறிக்கின்றன.",
+      "hi": "मोमबत्तियाँ, रोटी और विश्राम — यहूदी परिवार सप्ताहांत को जानबूझकर रोककर चिह्नित करते हैं।"
+    },
+    "authorId": "user_contrib_james",
+    "originalLanguage": "en",
+    "contentLabel": "historical_account",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "judaism",
+      "sephardi",
+      "moses",
+      "topic-family",
+      "topic-heritage",
+      "topic-festivals",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Shabbat or the Sabbath, also called Shabbos by Ashkenazim, is Judaism's day of rest on the seventh day of the week—i.e., Saturday. On this day, religious Jews remember the biblical stories describing the creation of the heaven and earth in six days and the redemption from slavery and the Exodus from Egypt."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Since the Jewish religious calendar counts days from sunset to sunset, Shabbat begins in the evening of what on the civil calendar is Friday."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Shabbat,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Shabbat"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_tamil_bhakti_songs",
+    "type": "article",
+    "slug": "tamil-bhakti-songs-heritage",
+    "title": {
+      "en": "Tamil Bhakti Songs at Home",
+      "ta": "வீட்டில் தமிழ் பக்திப் பாடல்கள்",
+      "hi": "घर में तमिल भक्ति गीत"
+    },
+    "summary": {
+      "en": "Tamil Hindu text",
+      "ta": "தேவாரம் முதல் பாட்டியின் ம humming வரை — இசை வழி oral மரபு.",
+      "hi": "तेबारम से दादी की humming तक — संगीत से oral विरासत।"
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "ta",
+    "contentLabel": "archival",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "shaivism",
+      "shiva",
+      "topic-poetry",
+      "topic-music",
+      "topic-heritage",
+      "topic-oral-history",
+      "region-tamil-nadu",
+      "lang-ta"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The Tevaram, also spelled Thevaram, denotes the first seven volumes of the twelve-volume collection Tirumurai, a Shaiva narrative of epic and Puranic heroes, as well as a hagiographic account of early Shaiva saints set in devotional poetry."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The Tevaram volumes contain the works of the three most prominent Shaiva Tamil saints of the 7th and 8th centuries: Sambandar, Appar, and Sundarar. The three saints were not only involved in portraying their personal devotion to Shiva, but also engaged a community of believers through their songs."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Their work is an important source for understanding the Shaiva Bhakti movement in the early medieval South India."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Tevaram,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Tevaram"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_compassion_metta",
+    "type": "article",
+    "slug": "compassion-metta-practice",
+    "title": {
+      "en": "Metta: Extending Compassion Outward",
+      "ta": "மெத்தா: வெளியே நீட்டும் கருணை",
+      "hi": "मेत्ता: बाहर फैलती करुणा"
+    },
+    "summary": {
+      "en": "Topics referred to by the same term",
+      "ta": "தன்னையே தொடங்கி வட்டமாக விரியும் loving-kindness தியான வழிகாட்டி.",
+      "hi": "स्वयं से शुरू करके widening circles में loving-kindness ध्यान।"
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "buddhism",
+      "theravada",
+      "buddha",
+      "topic-compassion",
+      "topic-meditation",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Metta may refer to:"
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Metta,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Metta"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_pilgrimage_varanasi",
+    "type": "article",
+    "slug": "pilgrimage-varanasi-ghats",
+    "title": {
+      "en": "Morning at the Ghats: A Pilgrim's Notes",
+      "ta": "கhat-களில் காலை: யாத்திரிகர் குறிப்புகள்",
+      "hi": "घाटों पर सुबह: एक यात्री के नोट्स"
+    },
+    "summary": {
+      "en": "Metropolis in Uttar Pradesh, India",
+      "ta": "கங்கை along dawn நடை — ritual, commerce, quiet coexistence.",
+      "hi": "गंगा किनारे भोर की सैर — ritual, commerce, quiet सह-अस्तित्व।"
+    },
+    "authorId": "user_contrib_rajesh",
+    "originalLanguage": "hi",
+    "contentLabel": "personal_reflection",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "hinduism",
+      "topic-pilgrimage",
+      "topic-heritage",
+      "topic-devotion",
+      "lang-hi",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Varanasi, or Kashi, is a city on the Ganges river in northern India that has a central place in the traditions of pilgrimage, death, and mourning in the Hindu world. The city also has a syncretic tradition of Islamic artisanship that underpins its religious tourism."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Located in the middle-Ganges valley in the southeastern part of the state of Uttar Pradesh, Varanasi lies on the left bank of the river. It is 692 kilometres (430 mi) to the southeast of India's capital New Delhi and 320 kilometres (200 mi) to the southeast of the state capital, Lucknow."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "It lies 121 kilometres (75 mi) downstream of Prayagraj, where the confluence with the Yamuna river is another major Hindu pilgrimage site."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Varanasi,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Varanasi"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_gratitude_across_faiths",
+    "type": "article",
+    "slug": "gratitude-across-faiths",
+    "title": {
+      "en": "Gratitude Practices Across Traditions",
+      "ta": "மரபுகள் முழுவதும் நன்றி பயிற்சிகள்",
+      "hi": "परंपराओं में कृतज्ञता के अभ्यास"
+    },
+    "summary": {
+      "en": "Feeling or attitude in acknowledgement of a benefit that one has received or will receive",
+      "ta": "உ meals-க்கு முன், நாள் முடிவில், hardship-இல் — நன்றியின் ஒ comparative பார்வை.",
+      "hi": "भोजन से पहले, दिन के अंत में, कठिनाई में — कृतज्ञता की तुलनात्मक दृष्टि।"
+    },
+    "authorId": "user_contrib_james",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "christianity",
+      "islam",
+      "buddhism",
+      "sikhism",
+      "topic-gratitude",
+      "topic-devotion",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Gratitude, thankfulness, or gratefulness is a feeling of appreciation by a recipient of another's kindness. This kindness can be gifts, help, favors, or another form of generosity to another person."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Gratitude,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Gratitude"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_easter_kerala_traditions",
+    "type": "article",
+    "slug": "easter-kerala-traditions",
+    "title": {
+      "en": "Easter Traditions in Kerala Christian Homes",
+      "ta": "கேரள கிறிஸ்தவ வீடுகளில் ஈஸ்டர் மரபுகள்",
+      "hi": "केरल के ईसाई घरों में ईस्टर की परंपराएँ"
+    },
+    "summary": {
+      "en": "Commemoration of the resurrection of Jesus Christ",
+      "ta": "Holy Week processions, பகிர்ந்த appam, ஈஸ்டர் காலையின் quiet joy.",
+      "hi": "Holy Week processions, साझा appam, ईस्टर सुबह की शांत खुशी।"
+    },
+    "authorId": "user_contrib_maria",
+    "originalLanguage": "en",
+    "contentLabel": "community_tradition",
+    "readingMinutes": 3,
+    "scopeIds": [
+      "christianity",
+      "catholicism",
+      "topic-festivals",
+      "topic-family",
+      "region-kerala",
+      "lang-en",
+      "lang-ml"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Easter, also called Pasch or Pascha or Resurrection Sunday, is a Christian festival and cultural holiday commemorating the resurrection of Jesus from the dead, described in the Bible's New Testament as having occurred on the third day of his burial following his crucifixion by the Romans at Calvary c. 30 AD."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "It is the culmination of the Passion of Jesus, preceded by Lent, a 40-day period of fasting, prayer, and penance."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Easter,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Easter"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_pranayama_at_home",
+    "type": "article",
+    "slug": "four-minutes-of-breath",
+    "title": {
+      "en": "Four minutes of breath before the day",
+      "ta": "நாளுக்கு முன் நான்கு நிமிட மூச்சு",
+      "hi": "दिन से पहले चार मिनट की श्वास"
+    },
+    "summary": {
+      "en": "A short pranayama sequence that fits a hostel room or a city balcony — no mat required.",
+      "ta": "விடுதி அறை அல்லது மாடியில் செய்யும் சிறிய மூச்சுப் பயிற்சி.",
+      "hi": "छात्रावास या बालकनी में बैठकर किया जा सकने वाला छोटा प्राणायाम।"
+    },
+    "authorId": "user_contrib_ananda",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 4,
+    "trendingScore": 76,
+    "scopeIds": [
+      "topic-yoga",
+      "topic-meditation",
+      "buddhism",
+      "hinduism",
+      "lang-en",
+      "lang-ta",
+      "lang-hi"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Yoga is a group of physical, mental, and spiritual practices or disciplines that originated in ancient India. Sit, lengthen the spine, and count four breaths in and six out. That is enough for a beginning."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "This overview incorporates factual material from Wikipedia contributors, \"Yoga,\" licensed under CC BY-SA 4.0. Source: https://en.wikipedia.org/wiki/Yoga"
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_bharatanatyam_as_prayer",
+    "type": "article",
+    "slug": "bharatanatyam-as-prayer",
+    "title": {
+      "en": "Bharatanatyam: A Dance That Began in the Temple",
+      "ta": "பரதநாட்டியம்: கோவிலில் தொடங்கிய நடனம்",
+      "hi": "भरतनाट्यम: मंदिर से शुरू हुआ नृत्य"
+    },
+    "summary": {
+      "en": "One of India's oldest classical dance forms, and why its practitioners still call a performance an offering.",
+      "ta": "இந்தியாவின் பழமையான பாரம்பரிய நடன வடிவங்களில் ஒன்று, இன்றும் ஏன் ஒரு நிகழ்ச்சியை காணிக்கை என்று அழைக்கின்றனர்."
+    },
+    "authorId": "user_contrib_kavitha",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 4,
+    "scopeIds": [
+      "topic-dance",
+      "topic-devotion",
+      "hinduism",
+      "shaivism",
+      "region-tamil-nadu",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Bharatanatyam is one of the oldest classical dance forms of India, tracing its roots to the temples of Tamil Nadu, where it was performed by devadasis as an act of devotion rather than public entertainment. Its vocabulary of hand gestures (mudras), footwork (adavus), and facial expression (abhinaya) was codified centuries ago and is still taught largely unchanged, teacher to student, in the guru-shishya tradition."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "A traditional performance follows a fixed sequence — beginning with an invocation to the divine, moving through pieces of increasing complexity, and closing with a piece that dissolves technique back into stillness. Dancers describe the discipline itself as a form of prayer: years of repetition in service of a single gesture performed correctly, and offered rather than merely shown."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Today Bharatanatyam is performed on concert stages worldwide, in a form shaped by 20th-century revivalists who reclaimed it from colonial-era suppression. Temple courtyards, dance academies, and diaspora community halls all now teach the same core repertoire — a living art rather than a preserved one."
+        }
+      }
+    ]
+  },
+  {
+    "id": "article_temple_bronze_casting",
+    "type": "article",
+    "slug": "temple-bronze-casting",
+    "title": {
+      "en": "The Lost-Wax Bronzes of South Indian Temples",
+      "ta": "தென்னிந்திய கோவில்களின் இழந்த-மெழுகு வெண்கலங்கள்",
+      "hi": "दक्षिण भारतीय मंदिरों की खोई-मोम कांस्य मूर्तियां"
+    },
+    "summary": {
+      "en": "How Chola-era bronze casting techniques survive today in a handful of families who still work entirely by hand.",
+      "ta": "சோழர் கால வெண்கல வார்ப்பு நுட்பங்கள் இன்றும் கை வேலையாக மட்டுமே செய்யும் சில குடும்பங்களில் எப்படி தொடர்கின்றன."
+    },
+    "authorId": "user_contrib_leela",
+    "originalLanguage": "en",
+    "contentLabel": "educational",
+    "readingMinutes": 5,
+    "scopeIds": [
+      "topic-crafts",
+      "topic-devotion",
+      "hinduism",
+      "shaivism",
+      "region-tamil-nadu",
+      "lang-en"
+    ],
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The bronze processional icons carried out of South Indian temples during festivals are made using the cire perdue, or lost-wax, casting method — a technique largely unchanged since the Chola dynasty a thousand years ago. A wax model is sculpted by hand, encased in clay, and then melted out through a small channel, leaving a hollow mould that molten bronze is poured into. The mould is broken to reveal the finished piece, which means no two castings, even of the same figure, are ever perfectly identical."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "The craft is kept alive today by a small number of families in towns like Swamimalai, who trace their lineage of sculptors back many generations and train apprentices the same way their own teachers did: by watching, then doing, over years rather than months. Government recognition and museum interest have helped sustain demand, but the artisans themselves describe the work less as a business than as an inheritance — a set of hands passed down along with the technique."
+        }
+      },
+      {
+        "type": "paragraph",
+        "text": {
+          "en": "Alongside bronze work, related household and festival crafts — kolam floor drawings made fresh each morning from rice flour, hand-painted temple murals, and flower garland-making for daily worship — form a wider ecosystem of devotional craft that rarely gets written about with the same attention as the icons it surrounds."
+        }
+      }
+    ]
+  }
+]

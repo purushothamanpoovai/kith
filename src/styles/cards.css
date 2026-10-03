@@ -1,0 +1,973 @@
+/* ==========================================================================
+   Card patterns (§29)
+
+   Nine content types, nine intentionally different compositions. A poem does
+   not want a photograph; an event wants a date block; heritage wants an
+   archival frame; an organization wants a crest, not a hero image. Sharing a
+   single "white rectangle + shadow" across all of them is what makes a
+   platform look generic, so each type below states its own hierarchy.
+   ========================================================================== */
+
+/* ── Shared grids ───────────────────────────────────────────────────────── */
+
+.ds-grid {
+  display: grid;
+  gap: var(--ds-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  /* Grids are frequently <ul> so the set is announced as a list; the markers
+     are never wanted. */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Grid children stretch, so cards in a row share a height. */
+.ds-grid > li,
+.ds-grid > * {
+  min-width: 0;
+}
+
+.ds-grid > li {
+  display: flex;
+}
+
+.ds-grid > li > * {
+  flex: 1;
+}
+
+.ds-grid--2 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+}
+
+.ds-grid--3 {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+}
+
+/* Pills (compact scope tags) wrap left-to-right at their own content width
+   rather than stretching to fill a grid column — a grid track left a lone
+   trailing pill ("Heritage", "Tamil Nadu"…) stretched full-width on its own
+   row, which read as an odd extra button rather than the end of a short list. */
+.ds-grid--tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+
+.ds-grid--tiles > li {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.ds-grid--tiles > li > * {
+  flex: initial;
+}
+
+.ds-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.ds-list--flush {
+  gap: 0;
+}
+
+/* A horizontally scrolling rail — used for "continue reading" and other
+   personalisation strips, which read better as a rail than a wrapped grid. */
+.ds-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(72vw, 17rem);
+  gap: var(--ds-space-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  margin-inline: calc(-1 * var(--ds-gutter));
+  padding-inline: var(--ds-gutter);
+  padding-block-end: var(--ds-space-2);
+}
+
+.ds-rail > * {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 64rem) {
+  .ds-rail {
+    grid-auto-columns: 17rem;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* ── ArticleCard ────────────────────────────────────────────────────────── */
+
+.ds-article-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ds-article-card__cover {
+  aspect-ratio: 16 / 10;
+  border-block-end: 1px solid var(--border);
+}
+
+.ds-article-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-4);
+  flex: 1;
+}
+
+/* .ds-kicker carries its own bottom margin for use outside a gap layout;
+   here the parent's `gap` already spaces it from the title, so the two
+   were stacking into a doubled kicker→title gap (see article-reader.tsx /
+   verse-reader.tsx, which hit the same thing and reset it inline). */
+.ds-article-card__body > .ds-kicker {
+  margin-block-end: 0;
+}
+
+.ds-article-card__title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-card--interactive:hover .ds-article-card__title {
+  color: var(--accent);
+}
+
+.ds-article-card__summary {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.ds-article-card__foot {
+  margin-block-start: auto;
+  padding-block-start: var(--ds-space-2);
+}
+
+/* Lead — one per section at most. The cover carries the title. */
+.ds-article-card--lead .ds-article-card__cover {
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 48rem) {
+  .ds-article-card--lead {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .ds-article-card--lead .ds-article-card__cover {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 15rem;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--border);
+  }
+
+  .ds-article-card--lead .ds-article-card__body {
+    justify-content: center;
+    padding: var(--ds-space-6);
+    gap: var(--ds-space-3);
+  }
+
+  .ds-article-card--lead .ds-article-card__title {
+    font-size: var(--ds-text-2xl);
+  }
+
+  .ds-article-card--lead .ds-article-card__summary {
+    font-size: var(--ds-text-base);
+  }
+}
+
+/* Row — a thumbnail beside text. For rails, related lists and search results. */
+.ds-article-card--row {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--ds-space-3);
+  align-items: start;
+  padding: var(--ds-space-3);
+}
+
+.ds-article-card--row .ds-article-card__cover {
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius);
+}
+
+.ds-article-card--row .ds-article-card__body {
+  padding: 0;
+  gap: var(--ds-space-1);
+}
+
+.ds-article-card--row .ds-article-card__title {
+  font-size: var(--ds-text-base);
+}
+
+/* Minimal — no cover at all. A dense, typographic list, ruled not boxed. */
+.ds-article-card--minimal {
+  display: grid;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-4) 0;
+  border: 0;
+  border-block-end: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+
+.ds-article-card--minimal:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.ds-article-card--minimal:hover .ds-article-card__title {
+  color: var(--accent);
+}
+
+.ds-article-card--minimal .ds-article-card__title {
+  font-size: var(--ds-text-lg);
+}
+
+/* ── MediaCard ──────────────────────────────────────────────────────────── */
+
+.ds-media-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ds-media-card__cover {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.ds-media-card--video .ds-media-card__cover {
+  aspect-ratio: 16 / 9;
+}
+
+/* A quiet play affordance — a ring, not a giant coloured triangle. */
+.ds-media-card__play {
+  position: absolute;
+  inset-block-end: var(--ds-space-3);
+  inset-inline-start: var(--ds-space-3);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--scrim-ink) 60%, transparent);
+  background: color-mix(in srgb, var(--scrim) 55%, transparent);
+  color: var(--scrim-ink);
+  backdrop-filter: blur(4px);
+  transition: background-color var(--ds-duration) var(--ds-ease);
+}
+
+.ds-card--interactive:hover .ds-media-card__play {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.ds-media-card__duration {
+  position: absolute;
+  inset-block-end: var(--ds-space-3);
+  inset-inline-end: var(--ds-space-3);
+  z-index: 3;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--ds-radius-sm);
+  background: color-mix(in srgb, var(--scrim) 70%, transparent);
+  color: var(--scrim-ink);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-media-card__body {
+  display: grid;
+  gap: 0.1rem;
+  padding: var(--ds-space-3);
+}
+
+/* Same doubled-gap fix as .ds-article-card__body above. */
+.ds-media-card__body > .ds-kicker {
+  margin-block-end: 0;
+}
+
+.ds-media-card__title {
+  margin: 0;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-snug);
+}
+
+/* ── PoetryCard ─────────────────────────────────────────────────────────── */
+
+/* Verse is its own imagery. No cover; a manuscript-style double rule instead,
+   and the excerpt set in the poem's own script at reading size. */
+.ds-poetry-card {
+  position: relative;
+  /* No cover image means no fixed aspect ratio, so this card is naturally
+     shorter than a MediaCard/ArticleCard beside it in the same grid row — a
+     floor roughly matching MediaCard's square cover + body keeps a mixed
+     grid of media, poems and articles from reading as uneven rows (P9). */
+  min-height: 14rem;
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-5);
+  background: linear-gradient(
+    180deg,
+    var(--editorial-soft) 0%,
+    var(--surface) 60%
+  );
+}
+
+/* Same doubled-gap fix as .ds-article-card__body above — the kicker is a
+   direct grid child here, not wrapped in its own body element. */
+.ds-poetry-card > .ds-kicker {
+  margin-block-end: 0;
+}
+
+.ds-poetry-card::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--ds-radius-lg) - 4px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.ds-poetry-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-poetry-card__excerpt {
+  margin: 0;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-lg);
+  line-height: 1.85;
+  color: var(--text-primary);
+  white-space: pre-line;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ds-poetry-card__title {
+  margin: 0;
+  font-size: var(--ds-text-base);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.ds-card--interactive:hover .ds-poetry-card__title {
+  color: var(--accent);
+}
+
+/* ── OrganizationCard ───────────────────────────────────────────────────── */
+
+.ds-org-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--ds-space-3) var(--ds-space-4);
+  align-items: center;
+  padding: var(--ds-space-4);
+}
+
+.ds-org-card__body {
+  display: grid;
+  /* Matches the name+meta stack gap used elsewhere (.ds-byline__names,
+     .ds-rail-item__text) — was 0.2rem here, a one-off. */
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-org-card__name {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+  margin: 0;
+  font-size: var(--ds-text-base);
+}
+
+.ds-org-card__meta {
+  font-size: var(--ds-text-xs);
+  color: var(--text-muted);
+}
+
+/* ── EventCard (§32) ────────────────────────────────────────────────────── */
+
+.ds-event-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--ds-space-4);
+  align-items: start;
+  padding: var(--ds-space-4);
+}
+
+/* A strong date block, which is what a reader scans an event list for. */
+.ds-date-block {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  flex-shrink: 0;
+  width: 3.5rem;
+  padding: var(--ds-space-2) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-md);
+  background: var(--surface-muted);
+  text-align: center;
+  line-height: 1;
+}
+
+.ds-date-block__month {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ds-date-block__day {
+  font-family: var(--ds-font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  margin-block: 0.1rem;
+}
+
+.ds-date-block__weekday {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-date-block--past {
+  opacity: 0.6;
+}
+
+.ds-event-card__body {
+  display: grid;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-event-card__title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-event-card__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-event-card__title a:hover {
+  color: var(--accent);
+}
+
+.ds-event-card__facts {
+  display: grid;
+  gap: 0.3rem;
+  font-size: var(--ds-text-xs);
+  color: var(--text-secondary);
+}
+
+.ds-event-card__fact {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-event-card__fact svg {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.ds-event-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-block-start: var(--ds-space-1);
+}
+
+/* A month rule between groups of events. */
+.ds-month-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  margin-block: var(--ds-space-6) var(--ds-space-3);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-month-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.ds-month-rule:first-child {
+  margin-block-start: 0;
+}
+
+/* ── HeritageCard (§31) ─────────────────────────────────────────────────── */
+
+/* Archival: square corners, a warm paper ground, a provenance line, and a
+   corner tab standing in for an accession label. */
+.ds-heritage-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ds-radius-xs);
+  background: var(--editorial-soft);
+  overflow: hidden;
+}
+
+.ds-heritage-card__cover {
+  aspect-ratio: 4 / 3;
+  margin: var(--ds-space-3) var(--ds-space-3) 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  /* An old-photograph treatment, restrained enough to stay modern. */
+  filter: sepia(0.12) saturate(0.9);
+}
+
+.ds-heritage-card__body {
+  display: grid;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3);
+}
+
+/* Same doubled-gap fix as .ds-article-card__body above. */
+.ds-heritage-card__body > .ds-kicker {
+  margin-block-end: 0;
+}
+
+.ds-heritage-card__title {
+  margin: 0;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-heritage-card__provenance {
+  display: grid;
+  gap: 0.15rem;
+  padding-block-start: var(--ds-space-2);
+  border-block-start: 1px solid var(--border);
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-heritage-card__label {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  z-index: 2;
+  padding: 0.15rem 0.45rem;
+  border-start-end-radius: var(--ds-radius-xs);
+  border-end-start-radius: var(--ds-radius-sm);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── ScopeCard (§23) ────────────────────────────────────────────────────── */
+
+/* A discovery tile. The pattern behind it comes from the scope's contextual
+   theme, so religions, regions and languages are distinguishable at a glance
+   without any of them being given an emblem. The card leans into its accent
+   confidently — a two-stop gradient from the accent itself (not just its
+   pale "soft" tint) into the surface, so each tradition reads as its own
+   colour at a glance instead of every card washing out to the same near-white. */
+.ds-scope-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.2rem;
+  min-height: 6.5rem;
+  padding: var(--ds-space-4);
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--ds-radius-lg);
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--accent) 22%, var(--surface)) 0%, var(--surface) 78%);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--accent) 10%, transparent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ds-scope-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px -12px var(--accent);
+}
+
+.ds-scope-card__glow {
+  position: absolute;
+  inset: -30% -20% auto auto;
+  width: 65%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ds-scope-card > *:not(.ds-pattern):not(.ds-scope-card__glow):not(.ds-scope-card__art) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-scope-card__label {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-lg);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+  color: var(--text-primary);
+}
+
+.ds-scope-card__count {
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-scope-card:hover .ds-scope-card__label {
+  color: var(--accent);
+}
+
+/* A compact variant for long lists of children (traditions under a religion) —
+   a small pill, not a card, so it drops the shadow, the gradient and the
+   corner glow entirely: those are sized for the larger tile above, and on a
+   pill this small they bled across almost the whole shape as a smudgy blur
+   instead of reading as a considered highlight. */
+.ds-scope-card--compact {
+  min-height: 0;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-pill);
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.ds-scope-card--compact:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ds-scope-card--compact .ds-scope-card__glow {
+  display: none;
+}
+
+.ds-scope-card--compact .ds-scope-card__label {
+  font-size: var(--ds-text-sm);
+  white-space: nowrap;
+}
+
+/* ── CommunityPostCard (§18) ────────────────────────────────────────────── */
+
+.ds-post-card {
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  position: relative;
+  transition: background-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.ds-post-card::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: var(--ds-radius-pill);
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--ds-duration) var(--ds-ease);
+}
+
+.ds-card:hover .ds-post-card::before {
+  transform: scaleY(1);
+}
+
+.ds-card:hover .ds-post-card {
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+.ds-post-card__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--ds-space-3);
+  align-items: center;
+}
+
+.ds-post-card__who {
+  display: grid;
+  /* Matches the name+meta stack gap used elsewhere (.ds-byline__names,
+     .ds-rail-item__text) — was 0.05rem here, a one-off. */
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-post-card__author {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ds-post-card__author a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-post-card__author a:hover {
+  color: var(--accent);
+}
+
+.ds-post-card__when {
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+.ds-post-card__title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-post-card__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-post-card__title a:hover {
+  color: var(--accent);
+}
+
+.ds-post-card__body {
+  margin: 0;
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  overflow-wrap: break-word;
+}
+
+.ds-post-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding-block-start: var(--ds-space-3);
+  border-block-start: 1px solid var(--border);
+}
+
+/* ── Continue reading / listening (§22, §28) ────────────────────────────── */
+
+.ds-resume-card {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: var(--ds-space-3);
+  align-items: center;
+  padding: var(--ds-space-3);
+}
+
+.ds-resume-card__cover {
+  aspect-ratio: 1;
+  border-radius: var(--ds-radius);
+  border: 1px solid var(--border);
+}
+
+.ds-resume-card__body {
+  display: grid;
+  /* Matches the name+meta stack gap used elsewhere (.ds-byline__names,
+     .ds-rail-item__text, .ds-org-card__body) — was --ds-space-2 here,
+     a one-off that read looser than its siblings. */
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-resume-card__title {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-snug);
+}
+
+/* ── Attribution line (§26) ─────────────────────────────────────────────── */
+
+.ds-attribution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-width: 0;
+}
+
+.ds-attribution__org {
+  font-size: var(--ds-text-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.ds-attribution__org:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.ds-attribution__by {
+  font-size: var(--ds-text-2xs);
+  color: var(--text-muted);
+}
+
+/* ── Rail item (sidebar list with a thumbnail) ──────────────────────────── */
+
+.ds-rail-item {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--ds-space-3);
+  align-items: center;
+  padding-block: var(--ds-space-2);
+  border-block-end: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+}
+
+.ds-list > li:last-child .ds-rail-item {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.ds-rail-item__thumb {
+  aspect-ratio: 1;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--border);
+}
+
+.ds-rail-item__text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.ds-rail-item__title {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-sm);
+  font-weight: 600;
+  line-height: var(--ds-leading-snug);
+}
+
+.ds-rail-item:hover .ds-rail-item__title {
+  color: var(--accent);
+}
+
+.ds-scope-card__desc {
+  font-size: var(--ds-text-xs);
+  line-height: var(--ds-leading-normal);
+  color: var(--text-secondary);
+  margin-block-start: var(--ds-space-1);
+}
+
+/* ── A scope card showing its own cover image ──────────────────────────────
+   The card already anchors its text to the bottom edge over a gradient, so
+   cover art slots in behind that text rather than above it. The scrim is what
+   makes the label legible over an arbitrary photograph — it is the reason the
+   card can carry a real image at all — and it runs in `--scrim`, the token the
+   rest of the app uses for exactly this, so the treatment holds in both
+   themes. */
+.ds-scope-card--art {
+  min-height: 11rem;
+}
+
+.ds-scope-card__icon {
+  margin-inline-end: var(--ds-space-2);
+}
+
+.ds-scope-card__art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.ds-scope-card__art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Decorative: a failed image should reveal the card's own gradient, not an
+     alt-text box. */
+  color: transparent;
+}
+
+.ds-scope-card__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--scrim) 82%, transparent) 0%,
+    color-mix(in srgb, var(--scrim) 48%, transparent) 45%,
+    transparent 100%
+  );
+}
+
+/* Over the scrim the card's own text colours would be unreadable, so the
+   label and description switch to the scrim's paired ink. */
+.ds-scope-card--art .ds-scope-card__label,
+.ds-scope-card--art .ds-scope-card__count,
+.ds-scope-card--art .ds-scope-card__desc {
+  color: var(--scrim-ink);
+}
+
+.ds-scope-card--art:hover .ds-scope-card__label {
+  color: var(--scrim-ink);
+}
+
+/* The corner glow is tuned to sit on the flat gradient; over a photograph it
+   reads as a blown-out patch. */
+.ds-scope-card--art .ds-scope-card__glow {
+  display: none;
+}
+
+/* A resume card with a trailing control gets a third column. */
+.ds-resume-card--wide {
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+}

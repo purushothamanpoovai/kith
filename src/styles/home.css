@@ -1,0 +1,250 @@
+/* ==========================================================================
+   Home (§8, §9, §22, §43)
+
+   An editorial front page: a compact hero that states what the platform is
+   for and then gets out of the way, personalisation rails, and a lead story
+   grid. The previous hero spent two thirds of a 900px viewport on a gradient;
+   this one is bounded and asymmetric, and every band below it carries content.
+   ========================================================================== */
+
+.ds-home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-8);
+}
+
+/* ── Masthead hero ──────────────────────────────────────────────────────── */
+
+.ds-home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: var(--ds-space-6);
+  padding: var(--ds-space-7) var(--ds-space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-xl);
+  background: linear-gradient(
+    145deg,
+    var(--accent-soft) 0%,
+    var(--surface) 55%,
+    var(--editorial-soft) 100%
+  );
+}
+
+@media (max-width: 47.99rem) {
+  .ds-home-hero {
+    padding: var(--ds-space-5) var(--ds-space-4);
+    gap: var(--ds-space-5);
+  }
+}
+
+/* Asymmetric on wide screens: the statement leads, the featured story sits
+   beside it, so neither the hero nor the story is wasted space. Only when a
+   featured story actually exists, though — with no `.ds-home-hero__feature`
+   child (nothing published yet to feature), reserving that second column
+   anyway squeezed the statement into roughly half the hero for no reason,
+   which is what made its own text wrap early even after widening the
+   title's own max-width. */
+@media (min-width: 56rem) {
+  .ds-home-hero:has(.ds-home-hero__feature) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: var(--ds-space-8);
+    padding: var(--ds-space-8) var(--ds-space-7);
+  }
+
+  .ds-home-hero:not(:has(.ds-home-hero__feature)) {
+    padding: var(--ds-space-8) var(--ds-space-7);
+  }
+}
+
+.ds-home-hero > *:not(.ds-pattern):not(.ds-ornament) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-home-hero__statement {
+  display: grid;
+  gap: var(--ds-space-4);
+  align-content: center;
+  min-width: 0;
+}
+
+.ds-home-hero__title {
+  margin: 0;
+  font-size: var(--ds-text-4xl);
+  line-height: var(--ds-leading-tight);
+  /* Wide enough that the actual headline ("Explore, learn, remember and
+     belong.", 37 characters) sits on one line at this font size instead of
+     breaking mid-clause after "learn," — the previous 22ch cap was tighter
+     than the copy it was meant to hold. text-wrap: balance still keeps a
+     longer headline from ending in a single stray word if one is ever set. */
+  max-width: 34ch;
+  text-wrap: balance;
+}
+
+.ds-home-hero__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.ds-home-hero__lede {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--ds-font-serif);
+  font-size: var(--ds-text-lg);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.ds-home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+}
+
+.ds-home-hero__search {
+  max-width: 26rem;
+}
+
+/* The featured story inside the hero — a real card, not a decorative slab. */
+.ds-home-hero__feature {
+  position: relative;
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--ds-shadow-card);
+  transition:
+    box-shadow var(--ds-duration) var(--ds-ease),
+    border-color var(--ds-duration) var(--ds-ease);
+}
+
+.ds-home-hero__feature:hover {
+  border-color: var(--accent-line);
+  box-shadow: var(--ds-shadow-lift);
+}
+
+.ds-home-hero__feature-cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.ds-home-hero__feature-text {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: 3;
+  display: grid;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-5) var(--ds-space-4) var(--ds-space-4);
+}
+
+/* Composes with .ds-kicker/.ds-caps in the markup — this only overrides the
+   color, since the kicker sits on the cover's dark scrim overlay here rather
+   than the plain surface .ds-kicker assumes. */
+.ds-home-hero__feature-kicker {
+  color: color-mix(in srgb, var(--scrim-ink) 82%, transparent);
+  margin: 0;
+}
+
+.ds-home-hero__feature-title {
+  margin: 0;
+  font-size: var(--ds-text-2xl);
+  line-height: var(--ds-leading-snug);
+  color: var(--scrim-ink);
+}
+
+.ds-home-hero__feature-meta {
+  margin: 0;
+  font-size: var(--ds-text-xs);
+  color: color-mix(in srgb, var(--scrim-ink) 75%, transparent);
+}
+
+/* ── Personalisation bands (§22) ────────────────────────────────────────── */
+
+/* "Because you follow …" — the reason is stated so the reader stays in
+   control of what the platform shows them, rather than being nudged. */
+.ds-reason {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-size: var(--ds-text-2xs);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.ds-reason__scope {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.ds-reason__scope:hover {
+  text-decoration: underline;
+}
+
+/* ── Feed river ─────────────────────────────────────────────────────────── */
+
+.ds-river {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+/* Two-up on wide screens so a long feed doesn't become one endless column. */
+@media (min-width: 48rem) {
+  .ds-river--dense {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.ds-home-note {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--surface-muted);
+  font-size: var(--ds-text-sm);
+  color: var(--text-secondary);
+}
+
+/* ── Invitation panel ───────────────────────────────────────────────────── */
+
+.ds-invite {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-5);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--accent-soft);
+}
+
+.ds-invite > *:not(.ds-pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-invite__title {
+  margin: 0;
+  font-size: var(--ds-text-lg);
+}
+
+.ds-invite__text {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--text-secondary);
+}

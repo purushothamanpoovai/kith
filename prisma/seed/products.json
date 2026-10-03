@@ -1,0 +1,83 @@
+[
+  {
+    "id": "product_shirdi_udi_packet",
+    "organizationId": "org_shirdi_sai_temple",
+    "name": {
+      "en": "Sacred Udi Packet",
+      "hi": "पवित्र उदी पैकेट",
+      "ta": "புனித உதி பொட்டலம்"
+    },
+    "description": {
+      "en": "Blessed sacred ash from the temple's dhuni, packed for devotees who cannot visit in person.",
+      "hi": "मंदिर की धूनी से प्रसाद स्वरूप पवित्र भस्म, उन भक्तों के लिए जो स्वयं नहीं आ सकते।"
+    },
+    "price": "₹50",
+    "purchaseUrl": "https://online.sai.org.in/",
+    "sortOrder": 0,
+    "active": true
+  },
+  {
+    "id": "product_shirdi_sai_satcharitra",
+    "organizationId": "org_shirdi_sai_temple",
+    "name": {
+      "en": "Shri Sai Satcharitra (Book)",
+      "hi": "श्री साईं सच्चरित्र (पुस्तक)"
+    },
+    "description": {
+      "en": "The life and teachings of Sai Baba, available in Hindi, Marathi and English editions.",
+      "hi": "साईं बाबा के जीवन और उपदेशों का वर्णन, हिंदी, मराठी और अंग्रेज़ी संस्करणों में उपलब्ध।"
+    },
+    "price": "₹120–200",
+    "purchaseUrl": "https://online.sai.org.in/",
+    "sortOrder": 1,
+    "active": true
+  },
+  {
+    "id": "product_velankanni_candle_set",
+    "organizationId": "org_velankanni_basilica",
+    "name": {
+      "en": "Votive Candle Set",
+      "ta": "வேண்டுதல் மெழுகுவர்த்தி தொகுப்பு"
+    },
+    "description": {
+      "en": "A set of blessed votive candles for lighting at the shrine of Our Lady of Good Health.",
+      "ta": "நல்லாரோக்கிய அன்னை ஆலயத்தில் ஏற்றுவதற்கான ஆசீர்வதிக்கப்பட்ட மெழுகுவர்த்தி தொகுப்பு."
+    },
+    "price": "₹100",
+    "purchaseUrl": "https://velankannichurch.org/",
+    "sortOrder": 0,
+    "active": true
+  },
+  {
+    "id": "product_velankanni_rosary",
+    "organizationId": "org_velankanni_basilica",
+    "name": {
+      "en": "Basilica Rosary",
+      "ta": "பசிலிக்கா ஜெபமாலை"
+    },
+    "description": {
+      "en": "A rosary blessed at the Basilica, in wood or glass bead finishes.",
+      "ta": "பசிலிக்காவில் ஆசீர்வதிக்கப்பட்ட ஜெபமாலை, மரம் அல்லது கண்ணாடி மணி வடிவங்களில்."
+    },
+    "price": "₹80–250",
+    "purchaseUrl": "https://velankannichurch.org/",
+    "sortOrder": 1,
+    "active": true
+  },
+  {
+    "id": "product_nagore_dargah_perfume",
+    "organizationId": "org_nagore_dargah",
+    "name": {
+      "en": "Dargah Attar (Perfume Oil)",
+      "ta": "தர்கா அத்தர் (வாசனை எண்ணெய்)"
+    },
+    "description": {
+      "en": "Traditional alcohol-free attar sold near the dargah, a common offering for visiting devotees.",
+      "ta": "தர்காவின் அருகே விற்கப்படும் பாரம்பரிய மது இல்லாத அத்தர், வருகை தரும் பக்தர்களுக்கான வழக்கமான காணிக்கை."
+    },
+    "price": "₹150",
+    "purchaseUrl": "https://nagoredargah.org/",
+    "sortOrder": 0,
+    "active": true
+  }
+]
